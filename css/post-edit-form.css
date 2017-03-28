@@ -1,0 +1,48 @@
+/* CSS Document */
+
+/**
+Tab Form
+**/
+
+/* Tab Form
+------------------------------------------------------------ */
+.tab-form-ignite {
+	border-bottom: 2px solid #0085ba;
+	margin-top: 1rem;
+}
+.tab-form-ignite > a {
+	display: inline-block;
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+	text-decoration: none;
+	color: #555;
+	vertical-align: bottom;
+	position: relative;
+}
+.tab-form-ignite > a.active {
+	color: #0085ba;
+	font-weight: 600;
+}
+.tab-form-ignite > a.active:after {
+	display: block;
+	color: #0085ba;
+	content: '';
+	height: 5px;
+	background-color: #0085ba;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.tab-form-sections-ignite {
+	padding: 1.5rem 0;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #0085ba;
+}
+.tab-form-sections-ignite > div {
+	display: none;
+}
+.tab-form-sections-ignite > div.active {
+	display: block;
+}
+
