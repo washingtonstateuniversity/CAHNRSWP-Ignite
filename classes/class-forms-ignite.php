@@ -16,7 +16,7 @@ class Forms_Ignite {
 		'#d7dadb' => 'Gray Lightly', 
 		'#eff0f1' => 'Gray Lightest', 
 		'#3b4042' => 'Gray Dark', 
-		'#2a3033' => 'Gray Darker', 
+		'#23282B' => 'Gray Darker', 
 		'#b67233' => 'Orange', 
 		'#f6861f' => 'Orange-er', 
 		'#cb9b6e' => 'Orange Light', 
