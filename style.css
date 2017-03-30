@@ -5,7 +5,7 @@ Template: WSUWP-spine-parent-theme
 Author: CAHNRS Communications, Danial Bleile
 Author URI: http://cahnrs.wsu.edu/communications
 Description: Spine Child theme for CAHNRS Websites.
-Version: 0.1.0
+Version: 0.1.1
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -87,9 +87,6 @@ h6 {
 .site-article > footer{
 	margin-top: 3rem;
 }
-.site-article > header {
-	padding-top: 2rem;
-}
 /* Banners
 --------------------------------------------------------------- */
 #site-banner.static-image-wide-banner {
@@ -145,6 +142,7 @@ h6 {
 #site-content {
 	background: #fff;
 	position: relative;
+	padding-top: 2rem;
 }
 #site-content:after,
 #site-content:before {

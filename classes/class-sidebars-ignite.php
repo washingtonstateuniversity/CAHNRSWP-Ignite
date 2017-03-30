@@ -22,6 +22,14 @@ class Sidebars_Ignite {
 			'after_widget'  => '</div>',
 		) );
 		
+		register_sidebar( array(
+			'name' => 'Footer After',
+			'id' => 'footer_after',
+			'description' => 'Widgets in this area will be shown after the footer.',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+		) );
+		
 	} // end register_sidebars
 	
 }
