@@ -44,11 +44,16 @@ class Single_Post_Ignite {
 		
 		if ( isset( $this->settings[ $field ] ) ){
 			
-			return $this->settings[ $field ];
+			$value = $this->settings[ $field ];
+			
+		} else {
+			
+			$value = '';
 			
 		} // end if
 		
-		return '';
+		
+		return apply_filters( 'cahnrswp_ignite_post_settings', $value, $field, $this->post_id );
 		
 	} // end get_setting
 	
@@ -105,6 +110,8 @@ class Single_Post_Ignite {
 		foreach( $this->settings as $meta_key => $mvalue ){
 			
 			$value = get_post_meta( $post_id, $meta_key, true );
+			
+			$value = apply_filters( 'cahnrswp_ignite_post_settings', $value, $meta_key, $post_id );
 			
 			if ( $value !== '' ) {
 			

@@ -19,6 +19,8 @@ get_header();
 		
 		$page_banner->the_banner( 'parallax-banner', 'full' );
 		
+		//get_template_part( 'parts/banner');
+		
 	} else { // Use custom CAHNRS Header
 		
 		get_template_part( 'parts/headers' );
