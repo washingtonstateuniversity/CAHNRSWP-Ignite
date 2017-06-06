@@ -2,38 +2,58 @@
 
 class Template_Ignite {
 	
-	public $banner;
-	public $header;
-	public $template = 'generic';
+	protected $theme_options = false;
+	
+	protected $template_slug = 'base';
+	protected $site_title = '';
+	protected $site_description = '';
+	
+	
+	/***********************************************
+	 ** Public Methods **
+	************************************************/
 	
 	public function __construct(){
 		
-		require_once 'class-post-ignite.php';
-		require_once 'class-header-ignite.php';
-		require_once 'class-banner-ignite.php';
-
-		$this->header = new Header_Ignite();
-		$this->banner = new Banner_Ignite();
+		require_once 'class-theme-options-ignite.php';
+		
+		$this->theme_options = new Theme_Options_Ignite();
+		
+		$this->theme_options->set_theme_options();
 		
 	} // end __construct
 	
 	
-	public function get_the_banner(){
+	public function get_theme_option( $key, $default = array(), $context = '' ){
 		
-		$html = '';
+		return $this->theme_options->get_theme_option( $key, $default, $context );
 		
-		if ( is_singular() ){
+	} // end get_site_option
+	
+	
+	public function the_template(){
+		
+		ob_start();
+		
+		if ( method_exists( $this, 'render_template' ) ){
 			
-			$html .= $this->banner->get_the_banner();
-			
+			$this->render_template();
+			 
 		} // end if
 		
-		return $html;
+		$html = ob_get_clean();
 		
-	} //end get_the_banner
+		echo apply_filters( 'template_ignite_html' , $html, $this->template_slug );
+		
+	} // end render_template
 	
 	
-	public function get_the_content(){
+	/***********************************************
+	 ** Private/Protected Methods **
+	************************************************/
+	
+	
+	protected function the_content( $post_display_style = 'promo' ){
 		
 		$html = '<div id="site-content">';
 		
@@ -43,94 +63,138 @@ class Template_Ignite {
 			
 			$wp_post = get_post();
 			
-			//var_dump( $wp_post );
-			
-			$ignite_post = new Post_Ignite( $wp_post );
-			
-			$html .= $ignite_post->get_the_title(); 
-			
-			$html .= $ignite_post->get_the_content(); 
+			switch( $post_display_style ){
+				
+				case 'promo':
+					get_template_part( 'includes/content/promo' ); // in spine theme
+					break;
+				case 'single-page':
+					get_template_part( 'includes/content/single-page' ); // in spine theme
+					break;
+					
+			} // end switch
 			
 		} // end while
 		
 		$html .= '</div>';
 		
-		return $html;
+		echo $html;
 		
 	} // end get_the_content
 	
 	
-	public function get_the_html_footer(){
+	protected function the_content_main( $position, $add_classes = array() ){
 		
-		ob_start();
+		$html = '';
+		
+		if ( empty( $html ) ){
+		
+			switch( $position ){
+				
+				case 'start':
+				
+					$main_classes = $add_classes;
+					
+					$main_classes[] = 'spine-page-default';
+				
+					if ( true === spine_get_option( 'crop' ) && is_front_page() ) {
+						
+						$main_classes[] = 'is-cropped-spine';
+						
+					} // end if
+					
+					$main_classes = apply_filters( 'template_ignite_main_css', $main_classes, $this->template_slug );
+					
+					$html .= '<main id="wsuwp-main" class="' . implode( ' ', $main_classes ) . '">';
+					
+					break;
+					
+				case 'end':
+				
+					$html .= '</main>';
+					
+					break;
+				
+			} // end switch
+		
+		} // end if
+		
+		echo apply_filters( 'template_ignite_main_html', $html, $position, $this->template_slug );
+		
+	} // end the_content_main
+	
+	
+	protected function the_header( $header_type = false ){
+		
+		if ( ! $header_type ){
+		
+			$header_type = $this->get_theme_option( '_cahnrswp_header_type', 'cahnrs-college', $this->template_slug );
+		
+		} // end if
+		
+		switch( $header_type ){
+			
+			case 'spine':
+				$this->the_header_spine();
+				break;
+			case 'cahnrs-college':
+			default:
+				$this->the_header_cahnrs_college();
+				break;
+			
+		} // end switch
+		
+	} // end the_header
+	
+	
+	protected function the_header_spine(){
+			
+		get_template_part( 'parts/headers' ); // in spine theme
+	
+		get_template_part( 'parts/featured-images' ); // in spine theme
+		
+	} // end the_header_spine
+	
+	
+	protected function the_header_cahnrs_college(){
+		
+		$show_college_global = $this->get_theme_option( '_cahnrswp_header_show_college_global', 1, $this->template_slug );
+		$show_banner = $this->get_theme_option( '_cahnrswp_header_display_banner', 1, $this->template_slug );
+		$show_horz_nav = $this->get_theme_option( '_cahnrswp_header_horizontal_nav', 0, $this->template_slug );
+		
+		if ( $show_college_global ) {
+    
+			get_template_part( 'includes/headers/college-global-nav' );
+		
+		} // end if
+	
+		if ( $show_banner ) {
+		
+			get_template_part( 'includes/headers/college-banner' );
+		
+		} // end if 
+		
+		if ( $show_horz_nav ){
+			
+			get_template_part( 'includes/headers/college-horizontal-menu' );
+			
+		} // end if
+		
+	} // end the_header_cahnrs_college
+	
+	
+	protected function the_wp_footer(){
 		
 		get_footer();
 		
-		include CAHNRSIGNITEPATH . 'includes/footers/footer-after-widget-area.php';
-		
-		return ob_get_clean();
-		
-	} // end get_the_html_footer
+	} // end the_header
 	
 	
-	public function get_the_header(){
-		
-		$html = $this->header->get_the_header();
-		
-		return $html;
-		
-	} // end get_the_header
-
-	
-	public function get_the_html_header(){
-		
-		ob_start();
+	protected function the_wp_header(){
 		
 		get_header();
 		
-		return ob_get_clean();
-		
-	} // end get_the_header
-	
-	
-	public function get_the_main_html( $main_html ){
-		
-		$is_cropped = ( true === spine_get_option( 'crop' ) && is_front_page() ) ? ' is-cropped-spine':'';
-		
-		$html = '<main id="wsuwp-main" class="spine-page-default' . $is_cropped . '">';
-		
-		$html .= $main_html;
-		
-		ob_start();
-		
-		include CAHNRSIGNITEPATH . 'includes/footers/footer-before-widget-area.php';
-		
-		$html .= ob_get_clean();
-		
-		$html .= '</main>';
-		
-		return $html;
-		
-	} // end get_the_main_html
-	
-	
-	public function the_template(){
-		
-		$html = $this->get_the_html_header();
-		
-		$main_html = $this->get_the_header();
-		
-		$main_html .= $this->get_the_banner();
-		
-		$main_html .= $this->get_the_content();
-		
-		$html .= $this->get_the_main_html( $main_html );
-		
-		$html .= $this->get_the_html_footer();
-		
-		echo $html;
-		
-	} // end the_template
+	} // end the_header
 	
 	
 } // end Template_Ignite

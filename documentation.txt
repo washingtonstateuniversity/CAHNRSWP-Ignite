@@ -1,0 +1,30 @@
+/************************************************
+*** Filters ***
+*************************************************/
+
+template_ignite_html
+@var string $html
+@var string $template_slug
+Filter complete template html before rendering
+
+template_ignite_main_css
+in: classes/class-template-ignite.php
+@var array $css_classes
+@var string $template_slug
+Add or remove classes from main html tag.
+
+template_ignite_main_html
+in: classes/class-template-ignite.php
+@var string $main_html
+@var string $position
+@var string $template_slug
+Filter the html main tag that wraps the template content.
+
+theme_options_ignite_get
+in: classes/class-theme-options-ignite.php
+@var array $theme_options
+@var string $context
+@var array $default_options
+Fitler theme options
+
+
