@@ -1,6 +1,12 @@
 <?php 
 
-get_header();
+require_once 'classes/class-template-page-ignite.php';
+
+$template = new Template_Page_Ignite();
+
+$template->the_template(); 
+
+/*get_header();
 
  ?>
 

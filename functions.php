@@ -2,7 +2,7 @@
 
 class CAHNRSWP_Ignite {
 	
-	public static $version = '0.0.1';
+	public static $version = '0.0.2';
 	
 	private static $instance;
 	
@@ -32,8 +32,8 @@ class CAHNRSWP_Ignite {
 		define( 'CAHNRSIGNITEPATH' , get_stylesheet_directory() . '/' );
 		define( 'CAHNRSIGNITEURL' , get_stylesheet_directory_uri() . '/' );
 		
+		require_once 'classes/class-template-ignite.php';
 		require_once 'classes/class-post-editor-ignite.php';
-		require_once 'classes/class-single-post-ignite.php';
 		require_once 'classes/class-forms-ignite.php';
 		require_once 'classes/class-theme-options-ignite.php';
 		require_once 'classes/class-sidebars-ignite.php';
