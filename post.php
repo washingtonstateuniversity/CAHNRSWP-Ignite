@@ -8,7 +8,7 @@ include locate_template( 'includes/main/main-start.php', false );
 
 include locate_template( 'includes/headers/site-header.php', false );
 
-include locate_template( 'includes/banners/front-page-banner.php', false );
+include locate_template( 'includes/banners/post-banner.php', false );
 
 include locate_template( 'includes/content/single-content.php', false );
 

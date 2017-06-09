@@ -37,7 +37,9 @@ class Template_Ignite {
 		
 		if ( method_exists( $this, 'render_template' ) ){
 			
-			$this->render_template();
+			$theme_options = $this->theme_options->get_theme_options();
+			
+			$this->render_template( $theme_options );
 			 
 		} // end if
 		
@@ -53,6 +55,25 @@ class Template_Ignite {
 	************************************************/
 	
 	
+	protected function get_post_image( $post_id, $size ){
+		
+		$image_url = false;
+		
+		if ( has_post_thumbnail( $post_id ) ){
+		
+			$img_id = get_post_thumbnail_id( $post_id );
+				
+			$img_url_array = wp_get_attachment_image_src( $img_id, $size, true );
+				
+			$image_url = $img_url_array[0];
+		
+		} // end if
+		
+		return $image_url;
+		
+	} // end get_post_image
+	
+	
 	protected function the_content( $post_display_style = 'promo' ){
 		
 		$html = '<div id="site-content">';
@@ -63,16 +84,20 @@ class Template_Ignite {
 			
 			$wp_post = get_post();
 			
+			ob_start();
+			
 			switch( $post_display_style ){
 				
 				case 'promo':
-					get_template_part( 'includes/content/promo' ); // in spine theme
+					include CAHNRSIGNITEPATH . 'includes/content/promo.php';  
 					break;
 				case 'single-page':
-					get_template_part( 'includes/content/single-page' ); // in spine theme
+					include CAHNRSIGNITEPATH . 'includes/content/single-page.php'; 
 					break;
 					
 			} // end switch
+			
+			$html .= ob_get_clean();
 			
 		} // end while
 		
@@ -124,6 +149,28 @@ class Template_Ignite {
 	} // end the_content_main
 	
 	
+	protected function the_banner( $type, $post = false ){
+		
+		switch( $type ){
+			
+			case 'dynamic-scroll':
+				$this->the_banner_dynamic_scroll( $post );
+				break;
+			
+		} // end switch
+		
+	} // end the_frontpage_banner
+	
+	
+	protected function the_banner_dynamic_scroll( $post ){
+		
+		$image_url = $this->get_post_image( $post->ID, 'full' );
+		
+		include CAHNRSIGNITEPATH . '/includes/banners/dynamic-scroll.php';
+		
+	} // end the_banner_dynamic_scroll
+	
+	
 	protected function the_header( $header_type = false ){
 		
 		if ( ! $header_type ){
@@ -139,7 +186,9 @@ class Template_Ignite {
 				break;
 			case 'cahnrs-college':
 			default:
+				echo '<header id="site-header">';
 				$this->the_header_cahnrs_college();
+				echo '</header>';
 				break;
 			
 		} // end switch
