@@ -1,43 +1,21 @@
-<?php 
+<?php
 
-require_once 'classes/class-template-page-ignite.php';
+ob_start();
 
-$template = new Template_Page_Ignite();
+include locate_template( 'includes/headers/header.php', false );
 
-$template->the_template(); 
+include locate_template( 'includes/main/main-start.php', false );
 
-/*get_header();
+include locate_template( 'includes/headers/site-header.php', false );
 
- ?>
+include locate_template( 'includes/banners/page-banner.php', false );
 
-<main id="wsuwp-main" class="spine-page-default<?php if ( true === spine_get_option( 'crop' ) && is_front_page() ) echo ' is-cropped-spine';?>">
+include locate_template( 'includes/content/single-content.php', false );
 
-<?php 
+include locate_template( 'includes/main/main-end.php', false );
 
-	// if not set or set to default use WSU spine header
-	if ( get_theme_mod( '_cahnrswp_header_type', 'cahnrs-college' ) != 'spine' ){ // Use custom CAHNRS Header
-		
-		get_template_part( 'parts/headers', 'college' );
-		
-		require_once CAHNRSIGNITEPATH . 'classes/class-page-banner-ignite.php';
-		
-		$page_banner = new Page_Banner_Ignite();
-		
-		$page_banner->the_banner( 'parallax-banner', 'full' );
-		
-	} else { // Use custom CAHNRS Header
-		
-		get_template_part( 'parts/headers' );
-		
-		get_template_part( 'parts/featured-images' );
-		
-	} // end if
-	
-	get_template_part( 'parts/content/single', 'default' );
-	
-	get_template_part( 'parts/footers' );
-?>
+include locate_template( 'includes/footers/footer.php', false );
 
-</main>
+$html = ob_get_clean();
 
-<?php get_footer();?>
+echo apply_filters( 'cahnrs_ignite_page_html', $html );
