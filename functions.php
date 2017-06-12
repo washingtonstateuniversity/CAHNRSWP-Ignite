@@ -29,6 +29,8 @@ class Functions_Ignite {
 		
 		include_once CAHNRSIGNITEPATH . 'classes/class-css-cahnrs-ignite.php';
 		
+		include_once CAHNRSIGNITEPATH . 'classes/class-post-editor-cahnrs-ignite.php';
+		
 	} // end init_theme_functions
 
 	
