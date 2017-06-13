@@ -1,0 +1,35 @@
+/*---------------------------------------------
+Hooks
+**
+Post Editor
+**
+Media Queries
+---------------------------------------------*/
+
+/* Post Editor
+--------------------------------------------------------------- */
+.ignite-edit-form {
+	margin: 24px 0;
+}
+.ignite-edit-form .ignite-field {
+	display: inline-block;
+	padding: 8px 10px;
+	box-sizing: border-box;
+}
+
+.ignite-edit-form .ignite-field select {
+	display: block;
+	width: 100%;
+}
+
+.ignite-edit-form .ignite-field label {
+	font-weight: bold;
+	display: block;
+}
+
+.ignite-edit-form .post-editor-section-ignite {
+	background: #f5f5f5;
+	border: 1px solid #ddd;
+	padding: 5px;
+	box-sizing: border-box;
+}

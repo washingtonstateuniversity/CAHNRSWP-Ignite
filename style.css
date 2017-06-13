@@ -8,8 +8,10 @@
  Version:        0.1.4
 */
 
-/*
+/*---------------------------------------------
+Hooks
 Document
+**
 Articles
 Banners
 - Static Image Wide
@@ -20,10 +22,21 @@ Headers
 - Gollege Global Nav
 - College Header Banner
 - College Header Horizontal Menu
-Media Queries
+Post Editor
 Spine Overrides
+- Disabled Spine
+**
+Media Queries
+---------------------------------------------*/
 
-*/
+/* Hooks
+--------------------------------------------------------------- */
+.hidden-element {
+	position: absolute !important;
+	top: -9999rem !important;
+}
+
+
 /* Document
 --------------------------------------------------------------- */
 html {
@@ -286,6 +299,8 @@ h1, h2, h3, h4, h5, h6 {
 .yellow-darker-back.full-bleed:before, .yellow-darker-back.full-bleed:after { background-color: #77580c; }
 
 .yellow-darkest-back.full-bleed:before, .yellow-darkest-back.full-bleed:after { background-color: #4f3a08; }
+
+
 /* Headers
 --------------------------------------------------------------- */
 #site-header {
@@ -597,6 +612,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 0.7rem;
 	background-color: #fff;
 }
+
 /* Spine Overrides
 --------------------------------------------------------------- */
 body {
@@ -615,6 +631,7 @@ body:not(.has-background-image) {
     margin-left: -2rem;
 	margin-right: -2rem;
 }
+
 /* Disabled Spine 
 ------------------------------------*/
 body.disable-spine #spine {

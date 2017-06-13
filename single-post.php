@@ -10,7 +10,7 @@ include locate_template( 'includes/headers/site-header.php', false );
 
 include locate_template( 'includes/banners/post-banner.php', false );
 
-include locate_template( 'includes/content/single-content.php', false );
+include locate_template( 'includes/content/single-post.php', false );
 
 include locate_template( 'includes/main/main-end.php', false );
 
