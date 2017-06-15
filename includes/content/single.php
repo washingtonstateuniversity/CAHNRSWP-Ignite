@@ -1,5 +1,7 @@
 <div id="site-content">
 	<?php while( have_posts() ): the_post();
+	
+	do_action( 'before_page_content_ignite', $post );
     
     $show_title = get_post_meta( get_the_ID(), '_show_title_single_ignite', true );
     
