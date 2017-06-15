@@ -7,6 +7,9 @@ class CSS_CAHNRS_Ignite {
 		
 		add_action( 'wp_head', array( $this, 'wp_head'), 98 );
 		
+		add_filter( 'body_class', array( $this, 'filter_body_class' ) ); 
+		
+		
 	} // end __construct
 	
 	
@@ -76,6 +79,21 @@ class CSS_CAHNRS_Ignite {
 		return $css_array;
 		
 	} // end get_header_css
+	
+	
+	public function filter_body_class( $classes ){
+		
+		$cahnrswp_theme_use_spine = get_theme_mod( '_cahnrswp_theme_use_spine', '' );
+		
+		if ( $cahnrswp_theme_use_spine == 'disable' ){
+			
+			$classes[] = 'disable-spine';
+			
+		} // end if
+		
+		return $classes;
+		
+	} // end filter_body_class
 	
 	
 	private function add_theme_css( $css_array ){
