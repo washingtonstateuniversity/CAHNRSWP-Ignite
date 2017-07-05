@@ -1,6 +1,6 @@
 <?php
 
-$banner_image = get_theme_mod( '_cahnrswp_front_page_banner_image', '' );
+$banner_image = get_theme_mod( '_cahnrswp_ignite_fronpage_feature_image', '' );
 
 if ( empty( $banner_image ) &&  get_the_ID() ){
 	
