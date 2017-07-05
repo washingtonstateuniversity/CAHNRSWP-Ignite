@@ -15,6 +15,7 @@ Document
 Articles
 Banners
 - Static Image Wide
+- Wide Static Slides
 Colors
 - Full Bleeds
 Content
@@ -156,7 +157,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #site-banner.static-image-wide-banner .banner-image {
-
 	left: 0;
 	right: 0;
 	top: -30%;
@@ -166,6 +166,112 @@ h1, h2, h3, h4, h5, h6 {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+/* Content wide-static-slide ----- */
+
+#site-banner.wide-static-slide {
+	position: static;
+}
+
+#site-banner.wide-static-slide, 
+#site-banner.wide-static-slide .ci-slide-image,
+#site-banner.wide-static-slide .ci-slide-caption-wrapper {
+	height: 70vh;
+	min-height: 400px;
+}
+
+#site-banner.wide-static-slide .ci-slide-image {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#site-banner.wide-static-slide .ci-slide-image .ci-slide-thumbs {
+	position: absolute;
+	bottom: 20px;
+	right: 0;
+	z-index: 10;
+	width: 300px;
+}
+
+#site-banner.wide-static-slide .ci-slide-image .ci-slide-thumbs a.ci-slide-thumb {
+	width: 50px;
+	height: 30px;
+	display: inline-block;
+	margin-right: 6px;
+	border: 1px solid #ccc;
+}
+#site-banner.wide-static-slide .ci-slide-image .ci-slide-thumbs a.ci-more {
+	display: block;
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #777;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption-wrapper {
+	position: relative;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: 50px;
+	background-color: rgba(70,70,70,0.9);
+}
+
+#site-banner.wide-static-slide .ci-slide-caption:before,
+#site-banner.wide-static-slide .ci-slide-caption:after {
+	content:'';
+	display: block;
+	position: absolute;
+	right: 100%;
+	width: 600%;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(70,70,70,0.9);
+}
+#site-banner.wide-static-slide .ci-slide-caption:after{
+	left: 100%;
+	right: auto;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption .ci-caption-title h2 {
+	display: inline-block;
+	background-color: #777;
+	color: #fff;
+	font-size: 22px;
+	padding: 12px 2rem;
+	margin-left: -2rem;
+	position: relative;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption .ci-caption-title .ci-read-more {
+	display: inline-block;
+	color: #ccc;
+	font-size: 16px;
+	padding: 12px;
+	text-transform: uppercase;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption h2:before {
+	content:'';
+	position: absolute;
+	bottom: 100%;
+	width: 0; 
+  	height: 0; 
+  	border-left: 60px solid transparent;
+  	border-right: 60px solid transparent;
+  	border-bottom: 18px solid #777;
+}
+
+#site-banner.wide-static-slide .ci-slide-caption .ci-summary {
+	color: #fff;
+	padding: 18px 0;
+	font-size: 14px;
+}
+
 /* Content
 --------------------------------------------------------------- */
 #site-content {

@@ -82,11 +82,139 @@ class Customizer_CAHNRS_Ignite {
 		
 		$this->customize_header( $wp_customize, $panel );
 		
+		$this->customize_frontpage( $wp_customize, $panel );
+		
 		$this->customize_layout_options( $wp_customize, $panel );
 		
 		$this->customize_footer( $wp_customize, $panel );
 		
 	} // end customize_register 
+	
+	
+	private function customize_frontpage( $wp_customize, $panel ){
+		
+		$section_id = '_cahnrswp_frontpage_options';
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature', 
+			array(
+				'default'   => 'default',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_image', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_category', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_slide_count', 
+			array(
+				'default'   => '3',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_section( 
+			$section_id, 
+			array(
+				'title'    	=> 'Front Page Settings',
+				'panel' 	=> $panel,
+			)
+		); // end add_section
+		
+		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_control', 
+			array(
+				'label'    => 'Primary Feature Type',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' 				=> 'Not Set',
+					'dynamic-scroll' 		=> 'Parallax Image',
+					'wide-static-slides' => 'Wide Static Slideshow',
+				),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'_cahnrswp_ignite_fronpage_feature_image',
+			   	array(
+				   	'label'      		=> 'Parallax Image',
+				   	'section'    		=> $section_id,
+				   	'settings'   		=> '_cahnrswp_ignite_fronpage_feature_image',
+					'active_callback' 	=> function() use ( $wp_customize ){
+						
+						return 'dynamic-scroll' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+						
+					}
+			   	)
+		   	)
+	   	);
+		
+		$cats = array( 0 => 'None' );
+		
+		foreach ( get_categories() as $categories => $category ){
+			
+			$cats[$category->term_id] = $category->name;
+			
+		} // End foreach
+ 
+		
+		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_category_control', 
+			array(
+				'label'    => 'Feature Category',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature_category',
+				'type'     => 'select',
+				'choices'  => $cats,
+				'active_callback' 	=> function() use ( $wp_customize ){
+					return 'wide-static-slides' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+				}
+			)
+		); // end control
+		
+		$count_options = array( 
+			1 => 1, 
+			2 => 2,
+			3 => 3,
+			4 => 4,
+			5 => 5,
+			6 => 6,
+			7 => 7,
+			8 => 8 );
+		
+		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_slide_count_control', 
+			array(
+				'label'    => 'Number of Slides',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature_slide_count',
+				'type'     => 'select',
+				'choices'  => $count_options,
+				'active_callback' 	=> function() use ( $wp_customize ){
+					return 'wide-static-slides' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+				}
+			)
+		); // end control
+		
+	} // end customize_frontpage
 	
 	
 	private function customize_theme( $wp_customize, $panel ) {
