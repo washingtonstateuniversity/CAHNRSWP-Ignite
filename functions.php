@@ -21,8 +21,6 @@ class Functions_Ignite {
 		define( 'CAHNRSIGNITEPATH' , get_stylesheet_directory() . '/' );
 		define( 'CAHNRSIGNITEURL' , get_stylesheet_directory_uri() . '/' );
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-sidebars-cahnrs-ignite.php';
-		
 		include_once CAHNRSIGNITEPATH . 'classes/class-scripts-cahnrs-ignite.php';
 		
 		include_once CAHNRSIGNITEPATH . 'classes/class-customizer-cahnrs-ignite.php';
@@ -31,7 +29,34 @@ class Functions_Ignite {
 		
 		include_once CAHNRSIGNITEPATH . 'classes/class-post-editor-cahnrs-ignite.php';
 		
+		$this->add_sidebars();
+		
+		$this->add_post_types();
+		
+		$this->add_shortcodes();
+		
 	} // end init_theme_functions
+	
+	
+	protected function add_shortcodes(){
+		
+		include_once CAHNRSIGNITEPATH . 'shortcodes/cahnrs-news/class-cahnrs-news-shortcode-ignite.php';
+		
+	} // End add_shortcodes
+	
+	
+	protected function add_post_types(){
+		
+		include_once CAHNRSIGNITEPATH . 'classes/class-news-cahnrs-ignite.php';
+		
+	} // End add_post_types
+	
+	
+	protected function add_sidebars(){
+		
+		include_once CAHNRSIGNITEPATH . 'classes/class-sidebars-cahnrs-ignite.php';
+		
+	} // End add_sidebars
 
 	
 } // end Functions_Ignite
