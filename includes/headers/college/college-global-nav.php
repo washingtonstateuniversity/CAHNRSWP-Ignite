@@ -5,9 +5,8 @@
     <nav id="college-global-nav">
         <ul>
             <li>
-                <a href="" class="active">
-                    <span class="mobile">CAHNRS</span>
-                    <span class="desktop">College of Agricultural, Human, and Natural Resource Sciences</span>
+                <a href="//cahnrs.wsu.edu">
+					<i class="fa fa-home" aria-hidden="true"></i>C<span>ollege of </span>A<span>gricultural, </span>H<span>uman, and </span>N<span>atural </span>R<span>esource </span>S<span>ciences</span><i class="fa fa-angle-down" aria-hidden="true"></i>
                 </a>
             </li>
         </ul>
