@@ -2,13 +2,14 @@ var ignite = {
 	
 	init:function(){
 		
-		ignite.banners.events();
+		ignite.banners.bind_events();
+		ignite.headers.bind_events();
 		
 	},
 	
 	banners: {
 		
-		events:function(){
+		bind_events:function(){
 			
 			jQuery( window ).scroll(
 				function( e ){
@@ -63,6 +64,50 @@ var ignite = {
 		}, // end parallax_banner
 		
 	}, // end banners
+	
+	headers:{
+		
+		bind_events:function(){
+			
+			ignite.headers.college_global.bind_events();
+			
+		}, // End init
+		
+		college_global:{
+			
+			bind_events:function(){
+
+				jQuery('body').on( 
+					'click', 
+					'#college-global-nav > ul > li > a', 
+					function( event ){
+						
+						var p = jQuery( this ).closest('li');
+						
+						if ( p.hasClass('active') ){
+							
+							p.removeClass('active' );
+							
+						} else {
+							
+							p.addClass('active' );
+							
+						}// End if
+						
+						if ( 'absolute' === jQuery('#college-global-navigation .college-global').css('position') ){
+							event.preventDefault();
+							jQuery('#college-global-navigation .college-global').slideToggle();
+							
+						} // end if
+						
+					} 
+				); // End on click
+				
+			} // End init
+			
+		} // End college_global
+		
+	} // End headers
 	
 } // end ignite
 

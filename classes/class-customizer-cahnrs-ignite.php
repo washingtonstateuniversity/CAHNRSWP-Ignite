@@ -112,6 +112,14 @@ class Customizer_CAHNRS_Ignite {
 		); // end add_setting
 		
 		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_source', 
+			array(
+				'default'   => 'remote',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
 			'_cahnrswp_ignite_fronpage_feature_category', 
 			array(
 				'default'   => '',
@@ -151,6 +159,35 @@ class Customizer_CAHNRS_Ignite {
 		); // end control
 		
 		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_source_control', 
+			array(
+				'label'    => 'Feature Content Source',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature_source',
+				'type'     => 'select',
+				'choices'  => array(
+					'remote' 			=> 'Remote',
+					'local' 			=> 'Local',
+					'select_remote' 	=> 'Select Remote',
+					'select_local' 		=> 'Select Local',
+				),
+				'active_callback' 	=> function() use ( $wp_customize ){
+					
+					$show_with = array('wide-static-slides');
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		$wp_customize->add_control(
 			new WP_Customize_Image_Control(
 				$wp_customize,
 				'_cahnrswp_ignite_fronpage_feature_image',
@@ -179,13 +216,27 @@ class Customizer_CAHNRS_Ignite {
 		$wp_customize->add_control(
 			'_cahnrswp_ignite_fronpage_feature_category_control', 
 			array(
-				'label'    => 'Feature Category',
+				'label'    => 'Category (local site)',
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_ignite_fronpage_feature_category',
 				'type'     => 'select',
 				'choices'  => $cats,
 				'active_callback' 	=> function() use ( $wp_customize ){
-					return 'wide-static-slides' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$show_type = array('wide-static-slides');
+					
+					$show_source = array('local');
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$source = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature_source' )->value();
+					
+					$show = ( in_array( $type, $show_type ) && in_array( $source, $show_source ) ) ? true : false;
+						
+					return $show;
+					
 				}
 			)
 		); // end control
@@ -209,7 +260,17 @@ class Customizer_CAHNRS_Ignite {
 				'type'     => 'select',
 				'choices'  => $count_options,
 				'active_callback' 	=> function() use ( $wp_customize ){
-					return 'wide-static-slides' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$show_with = array('wide-static-slides');
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+				
 				}
 			)
 		); // end control
@@ -279,6 +340,14 @@ class Customizer_CAHNRS_Ignite {
 	
 	
 	private function customize_header( $wp_customize, $panel ){
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_header_show_college_global_nav', 
+			array(
+				'default'   => 0,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
 		
 		$wp_customize->add_setting( 
 			'_cahnrswp_header_bg_color', 
@@ -437,6 +506,16 @@ class Customizer_CAHNRS_Ignite {
 		); // end add_section
 		
 		// Add Controls
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_show_college_global_nav_control', 
+			array(
+				'label'    => 'Show College Global Nav',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_show_college_global_nav',
+				'type'     => 'checkbox',
+			)
+		); // end control
 		
 		$wp_customize->add_control(
 			'_cahnrswp_header_bg_color_control', 

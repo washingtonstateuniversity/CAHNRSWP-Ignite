@@ -5,6 +5,12 @@ if ( get_theme_mod( '_cahnrswp_header_show_college_global', 1 ) ) {
 	include locate_template( 'includes/headers/college/college-global-nav.php', false );
 
 } // end if
+
+if ( get_theme_mod( '_cahnrswp_header_show_college_global_nav', 1 ) ) {
+	
+	include locate_template( 'includes/headers/college/college-global-navigation.php', false );
+
+} // end if
 	
 if ( get_theme_mod( '_cahnrswp_header_display_banner', 1 ) ) {
 	

@@ -1,13 +1,8 @@
-<section id="site-banner" class="cahnrs-ignite-feature wide-static-slide">
+<section id="site-banner" class="cahnrs-ignite-feature wide-static-slide parallax-banner">
 	<div class="ci-slide">
-    	<div class="ci-slide-image" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;">
-        	<nav class="ci-slide-thumbs">
-            	<a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
-                <a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
-                <a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
-                <a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
-                <a href="#" class="ci-more">More Featured Stories <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-            </nav>
+    	<div class="ci-slide-image-wrapper">
+        	<div class="ci-slide-image banner-image" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;">
+        	</div>
         </div>
         <div class="ci-slide-caption-wrapper">
         	<div class="ci-slide-caption">
@@ -20,4 +15,11 @@
             </div>
     	</div>
     </div>
+	<nav class="ci-slide-thumbs">
+		<a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
+		<a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
+		<a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
+		<a href="#" class="ci-slide-thumb" style="background-image:url(http://local-cahnrs.wsu.edu/people/wp-content/uploads/sites/8/2017/06/crisp.jpg);background-position: center; background-size: cover;"></a>
+		<a href="#" class="ci-more">More Featured Stories <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+	</nav>
 </section>
