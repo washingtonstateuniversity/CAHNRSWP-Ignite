@@ -159,15 +159,15 @@ class CAHNRS_News_Shortcode_Ignite {
 		
 		$query_params = array();
 		
-		$remote_url = 'http://cahnrs.wsu.edu/wp-json/wp/v2/news-release';
+		$remote_url = 'http://stage.cahnrs.wsu.edu/wp-json/wp/v2/news-release';
 		
-		if ( isset( $atts['per_page'] ) ){
+		if ( ! empty( $atts['per_page'] ) ){
 			
 			$query_params['per_page'] = $atts['per_page'];
 			
 		} // End if
 		
-		if ( isset( $atts['remote_category'] ) ){
+		if ( ! empty( $atts['remote_category'] ) ){
 			
 			$query_params['categories'] = $atts['remote_category'];
 			

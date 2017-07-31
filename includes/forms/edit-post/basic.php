@@ -1,5 +1,5 @@
 <?php
-$show_title = get_post_meta( $post_id, '_show_post_title_ignite', true );
+$show_title = get_post_meta( $post_id, '_show_title_single_ignite', true );
 ?>
 <div class="post-editor-section-ignite">
 	<div class="ignite-field select-field">

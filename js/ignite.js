@@ -75,9 +75,27 @@ var ignite = {
 		
 		college_global:{
 			
+			timer:false,
+			
 			bind_events:function(){
+				
+				jQuery( 'body' ).on(
+					'click',
+					'.college-name-logo',
+					function( event ){
+						
+						if ( ignite.check_mobile() ){
+							
+							event.preventDefault();
+							
+							jQuery('#college-global-navigation').slideToggle('fast');
+							
+						} // end if
+						
+					}
+				);
 
-				jQuery('body').on( 
+				/*jQuery('body').on( 
 					'click', 
 					'#college-global-nav > ul > li > a', 
 					function( event ){
@@ -102,12 +120,59 @@ var ignite = {
 						
 					} 
 				); // End on click
+				*/
 				
-			} // End init
+				jQuery('#college-global-navigation .top-menu-item').hover(
+					function(){ 
+						var menu = jQuery( this ).find('.drop-down-menu');
+						if ( ! ignite.check_mobile() ) {
+							ignite.headers.college_global.timer = setTimeout(function(){ 
+								menu.slideDown('fast') ; }, 
+								200
+							);
+						} // End if
+					},
+					function(){
+						clearTimeout( ignite.headers.college_global.timer );
+						var menu = jQuery( this ).find('.drop-down-menu');
+						menu.stop();
+						menu.slideUp('fast');
+					}
+				);
+				
+			}, // End init
+			
+			show_drop:function( parent, menu ){
+				menu.stop();
+				menu.delay(1000).slideDown('fast') 
+			} // show_drop
 			
 		} // End college_global
 		
-	} // End headers
+	}, // End headers
+	
+	check_mobile:function(){
+		
+		var spine_header = jQuery( '#spine .spine-header');
+						
+		if ( 'fixed' == spine_header.css('position') ){
+			
+			return true;
+			
+		} // end if
+		
+		return false;
+		
+	}, // End check_mobile
+	
+	slideshow:{
+		
+		init:function(){
+		}, // End init
+		
+		
+		
+	}, // End slideshow
 	
 } // end ignite
 

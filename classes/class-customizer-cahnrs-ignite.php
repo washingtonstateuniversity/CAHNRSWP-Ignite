@@ -82,6 +82,8 @@ class Customizer_CAHNRS_Ignite {
 		
 		$this->customize_header( $wp_customize, $panel );
 		
+		$this->customize_pagebanners( $wp_customize, $panel );
+		
 		$this->customize_frontpage( $wp_customize, $panel );
 		
 		$this->customize_layout_options( $wp_customize, $panel );
@@ -89,6 +91,66 @@ class Customizer_CAHNRS_Ignite {
 		$this->customize_footer( $wp_customize, $panel );
 		
 	} // end customize_register 
+	
+	
+	private function customize_pagebanners( $wp_customize, $panel ){
+		
+		$args = array(
+		   'public'   => true,
+		);
+		
+		$post_types = get_post_types( $args, 'objects');
+		
+		foreach( $post_types as $index => $post_type ){
+			
+			$name = str_replace( '-', '_', $post_type->name );
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_type', 
+				array(
+					'default'   => 'default',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+		} // End foreach
+		
+		$section_id = '_cahnrswp_pagebanners_options';
+		
+		$wp_customize->add_section( 
+			$section_id, 
+			array(
+				'title'    	=> 'Page Banners',
+				'panel' 	=> $panel,
+			)
+		); // end add_section
+		
+		$options = array(
+			'default' 				=> 'Not Set',
+			'none' 					=> 'No Banner',
+			'dynamic-scroll-short' 	=> 'Parallax Image (Short)',
+			'dynamic-scroll' 		=> 'Parallax Image (Medium)',
+			'dynamic-scroll-tall' 	=> 'Parallax Image (Tall)',
+		);
+		
+		foreach( $post_types as $index => $post_type ){
+			
+			$name = str_replace( '-', '_', $post_type->name );
+		
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $post_type->name . '_type_control', 
+				array(
+					'label'    => $post_type->label . ' Banner',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_type',
+					'type'     => 'select',
+					'choices'  => $options,
+				)
+			); // end control
+			
+		} // End Foreach
+		
+	} // End customize_pagebanners
 	
 	
 	private function customize_frontpage( $wp_customize, $panel ){
@@ -350,6 +412,14 @@ class Customizer_CAHNRS_Ignite {
 		); // end add_setting
 		
 		$wp_customize->add_setting( 
+			'_cahnrswp_header_show_college_global_nav_active', 
+			array(
+				'default'   => 0,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
 			'_cahnrswp_header_bg_color', 
 			array(
 				'default'   => '',
@@ -514,6 +584,33 @@ class Customizer_CAHNRS_Ignite {
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_header_show_college_global_nav',
 				'type'     => 'checkbox',
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_show_college_global_nav_active_control', 
+			array(
+				'label'    => 'Global Nav Active Tab',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_show_college_global_nav_active',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' 	=> 'Not Set',
+					'home' 		=> 'Home',
+					'about' 	=> 'About',
+					'academics' => 'Academics',
+					'research' 	=> 'Research',
+					'extension'	=> 'Extension',
+					'alumni'	=> 'Alumni',
+					'fs' 		=> 'Faculty & Staff',  
+				),
+				'active_callback' 	=> function() use ( $wp_customize ){
+					
+					$value = $wp_customize->get_setting( '_cahnrswp_header_show_college_global_nav' )->value();
+						
+					return ( ! empty( $value ) )? true : false;
+				
+				} // End active_callback
 			)
 		); // end control
 		
@@ -786,7 +883,7 @@ class Customizer_CAHNRS_Ignite {
 				'type'     => 'select',
 				'choices'  => array(
 					'default'  => 'Not Set',
-					'college'  => 'College',
+					'college-global'  => 'College Global',
 				),
 			)
 		); // end control

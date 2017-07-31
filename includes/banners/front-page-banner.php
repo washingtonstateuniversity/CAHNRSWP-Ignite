@@ -5,7 +5,7 @@ $banner_type = get_theme_mod( '_cahnrswp_ignite_fronpage_feature', 'dynamic-scro
 switch( $banner_type ){
 	
 	case 'wide-static-slides':
-		include locate_template( 'includes/banners/types/wide-static-slides.php', false );
+		include locate_template( 'includes/banners/types/wide-static-slides/wide-static-slides.php', false );
 		break;
 		
 	case 'dynamic-scroll':
