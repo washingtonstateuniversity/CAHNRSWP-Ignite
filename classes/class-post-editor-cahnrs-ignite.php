@@ -9,7 +9,30 @@ class Post_Editor_CAHNRS_Ignite {
 		
 		add_action( 'save_post', array( $this, 'save_post') );
 		
+		add_filter( 'cahnrswp_pagebuilder_header_tags', array( $this, 'add_h1_tags') );
+		
 	} // end __construct
+	
+	
+	public function add_h1_tags( $tags ){
+		
+		$post_id = get_the_ID();
+			
+		if ( $post_id ){
+			
+			$meta = get_post_meta( $post_id, '_show_title_single_ignite', true );
+			
+			if ( 'remove' === $meta ){
+				
+				$tags = array_merge( array( 'h1' => 'H1' ), $tags );
+				
+			} // End if
+			
+		} // End if
+		
+		return $tags;
+		
+	} // End add_h1_tags
 	
 	
 	public function edit_form_after_title( $post ){

@@ -7,6 +7,8 @@ class Theme_Setup_CAHNRS_Ignite {
 		
 		add_action( 'init', array( $this, 'set_default_template' ), 9999 );
 		
+		add_filter( 'cahnrs_ignite_page_html', array( $this, 'check_cropped_spine' ) );
+		
 	} // End __construct
 	
 	
@@ -28,6 +30,29 @@ class Theme_Setup_CAHNRS_Ignite {
 		return false;
 		
 	} // End $setting
+	
+	
+	public function check_cropped_spine( $html ){
+		
+		//$is_cropped = get_theme_mod( '_cahnrs_ignite_global_cropped_spine', false );
+		
+		$is_cropped = true;
+		
+		if ( $is_cropped ){
+			
+			$html = preg_replace_callback( 
+				'/id="spine"(.*?)class="/', 
+				function( $match ){ 
+					return $match[0] . 'cropped '; 
+				}, 
+				$html
+			); 
+			
+		} // End if
+		
+		return $html;
+		
+	} // End check_cropped_spine
 	
 	
 	

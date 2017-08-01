@@ -52,6 +52,27 @@ class Customizer_CAHNRS_Ignite {
 		'#4f3a08' => 'Yellow Darkest',
 	);
 	
+	protected $menus = array();
+	
+	protected $banners = array(
+		'default' 				=> 'Not Set',
+		'none' 					=> 'No Banner',
+		'dynamic-scroll' 		=> 'Wide Banner',
+	);
+		
+	protected $heights = array(
+		''					=> 'Not Set',
+		'short' 			=> 'Short (20vw)',
+		'medium' 			=> 'medium (25vw)',
+		'tall' 				=> 'Tall (30vw)',
+		'extra-tall' 		=> 'Extra Tall (40vw)',
+		'height-short' 		=> 'Short (30vh - fixed height)',
+		'height-medium' 	=> 'medium (45vh - fixed height)',
+		'height-tall' 		=> 'Tall (60vh - fixed height)',
+		'height-extra-tall' => 'Extra Tall (80vh - fixed height)',
+		'full' 				=> 'Full Height (100vh)'
+	);
+	
 	
 	public function __construct(){
 		
@@ -61,6 +82,16 @@ class Customizer_CAHNRS_Ignite {
 	
 	
 	public function customize_register( $wp_customize ){
+		
+		$menu_objs = get_terms('nav_menu');
+		
+		$this->menus = array( 0 => 'No Menu' );
+		
+		foreach( $menu_objs as $menu ){
+			
+			$this->menus[ $menu->term_id ] = $menu->name;
+			
+		} // end foreach
 		
 		$panel = 'cahnrs_spine_child';
 		
@@ -86,11 +117,86 @@ class Customizer_CAHNRS_Ignite {
 		
 		$this->customize_frontpage( $wp_customize, $panel );
 		
+		$this->customize_secondary_nav( $wp_customize, $panel );
+		
 		$this->customize_layout_options( $wp_customize, $panel );
 		
 		$this->customize_footer( $wp_customize, $panel );
 		
-	} // end customize_register 
+	} // end customize_register
+	
+	
+	private function customize_secondary_nav( $wp_customize, $panel ){
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_secondary_menu', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_secondary_menu_font_color', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_secondary_menu_bg_color', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$section_id = '_cahnrswp_secondary_menu_options';
+		
+		$wp_customize->add_section( 
+			$section_id, 
+			array(
+				'title'    	=> 'Secondary Menu',
+				'panel' 	=> $panel,
+			)
+		); // end add_section
+		
+		
+		$wp_customize->add_control(
+			'_cahnrswp_secondary_menu_control', 
+			array(
+				'label'    => 'Secondary Menu',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_secondary_menu',
+				'type'     => 'select',
+				'choices'  => $this->menus,
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_secondary_menu_bg_color_control', 
+			array(
+				'label'    => 'Menu Background Color',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_secondary_menu_bg_color',
+				'type'     => 'select',
+				'choices'  => $this->get_colors('_cahnrswp_theme_bg_color'),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_secondary_menu_font_color_control', 
+			array(
+				'label'    => 'Menu Font Color',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_secondary_menu_font_color',
+				'type'     => 'select',
+				'choices'  => $this->get_colors('_cahnrswp_theme_bg_color'),
+			)
+		); // end control
+		
+	} // End customize_secondary_nav
 	
 	
 	private function customize_pagebanners( $wp_customize, $panel ){
@@ -113,6 +219,30 @@ class Customizer_CAHNRS_Ignite {
 				) 
 			); // end add_setting
 			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_image', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_height', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_parallax', 
+				array(
+					'default'   => 1,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
 		} // End foreach
 		
 		$section_id = '_cahnrswp_pagebanners_options';
@@ -125,28 +255,93 @@ class Customizer_CAHNRS_Ignite {
 			)
 		); // end add_section
 		
-		$options = array(
-			'default' 				=> 'Not Set',
-			'none' 					=> 'No Banner',
-			'dynamic-scroll-short' 	=> 'Parallax Image (Short)',
-			'dynamic-scroll' 		=> 'Parallax Image (Medium)',
-			'dynamic-scroll-tall' 	=> 'Parallax Image (Tall)',
-		);
-		
 		foreach( $post_types as $index => $post_type ){
 			
 			$name = str_replace( '-', '_', $post_type->name );
 		
 			$wp_customize->add_control(
-				'_cahnrswp_ignite_banner_' . $post_type->name . '_type_control', 
+				'_cahnrswp_ignite_banner_' . $name . '_type_control', 
 				array(
 					'label'    => $post_type->label . ' Banner',
 					'section'  => $section_id,
 					'settings' => '_cahnrswp_ignite_banner_' . $name . '_type',
 					'type'     => 'select',
-					'choices'  => $options,
+					'choices'  => $this->banners,
 				)
 			); // end control
+			
+			$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'_cahnrswp_ignite_banner_' . $name . '_image_control',
+			   	array(
+				   	'label'      		=> 'Default ' . $post_type->label . ' Banner Image',
+				   	'section'    		=> $section_id,
+				   	'settings'   		=> '_cahnrswp_ignite_banner_' . $name . '_image',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+			   	)
+		   	)
+	   	);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_height_control', 
+				array(
+					'label'    => 'Banner Height',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_height',
+					'type'     => 'select',
+					'choices'  => $this->heights,
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+							$show = false;
+							
+							$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+							
+							$show = ( in_array( $type, $show_with ) ) ? true : false;
+								
+							return $show;
+						
+					}
+				)
+			);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_parallax_control', 
+				array(
+					'label'    => 'Parallax Effect',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_parallax',
+					'type'     => 'checkbox',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
 			
 		} // End Foreach
 		
@@ -154,6 +349,10 @@ class Customizer_CAHNRS_Ignite {
 	
 	
 	private function customize_frontpage( $wp_customize, $panel ){
+		
+		$banners = $this->banners;
+		
+		$banners['wide-static-slides'] = 'College Slideshow';
 		
 		$section_id = '_cahnrswp_frontpage_options';
 		
@@ -169,6 +368,22 @@ class Customizer_CAHNRS_Ignite {
 			'_cahnrswp_ignite_fronpage_feature_image', 
 			array(
 				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_height', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_fronpage_feature_parallax', 
+			array(
+				'default'   => 1,
 				'transport' => 'refresh',
 			) 
 		); // end add_setting
@@ -212,11 +427,7 @@ class Customizer_CAHNRS_Ignite {
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_ignite_fronpage_feature',
 				'type'     => 'select',
-				'choices'  => array(
-					'default' 				=> 'Not Set',
-					'dynamic-scroll' 		=> 'Parallax Image',
-					'wide-static-slides' => 'Wide Static Slideshow',
-				),
+				'choices'  => $banners,
 			)
 		); // end control
 		
@@ -254,17 +465,73 @@ class Customizer_CAHNRS_Ignite {
 				$wp_customize,
 				'_cahnrswp_ignite_fronpage_feature_image',
 			   	array(
-				   	'label'      		=> 'Parallax Image',
+				   	'label'      		=> 'Front Page Image',
 				   	'section'    		=> $section_id,
 				   	'settings'   		=> '_cahnrswp_ignite_fronpage_feature_image',
 					'active_callback' 	=> function() use ( $wp_customize ){
 						
-						return 'dynamic-scroll' === $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+						$show_with = array('dynamic-scroll');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
 						
 					}
 			   	)
 		   	)
 	   	);
+		
+		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_height_control', 
+			array(
+				'label'    => 'Banner Height',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature_height',
+				'type'     => 'select',
+				'choices'  => $this->heights,
+				'active_callback' 	=> function() use ( $wp_customize ){
+					
+					$show_with = array('dynamic-scroll');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+					
+				}
+			)
+		);
+		
+		$wp_customize->add_control(
+			'_cahnrswp_ignite_fronpage_feature_parallax_control', 
+			array(
+				'label'    => 'Parallax Effect',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_ignite_fronpage_feature_parallax',
+				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize ){
+					
+					$show_with = array('dynamic-scroll');
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+			
 		
 		$cats = array( 0 => 'None' );
 		
@@ -337,6 +604,7 @@ class Customizer_CAHNRS_Ignite {
 			)
 		); // end control
 		
+		
 	} // end customize_frontpage
 	
 	
@@ -352,6 +620,14 @@ class Customizer_CAHNRS_Ignite {
 		
 		$wp_customize->add_setting( 
 			'_cahnrswp_theme_use_spine', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrs_ignite_global_cropped_spine', 
 			array(
 				'default'   => '',
 				'transport' => 'refresh',
@@ -395,6 +671,16 @@ class Customizer_CAHNRS_Ignite {
 					'enable' 	=> 'Enable',
 					'disable' 	=> 'Disable', 
 				),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrs_ignite_global_cropped_spine_control', 
+			array(
+				'label'    => 'Sitewide Cropped Spine',
+				'section'  => $section_id,
+				'settings' => '_cahnrs_ignite_global_cropped_spine',
+				'type'     => 'checkbox',
 			)
 		); // end control
 		
@@ -748,16 +1034,6 @@ class Customizer_CAHNRS_Ignite {
 		   	)
 	   	);
 		
-		$menu_objs = get_terms('nav_menu');
-		
-		$menus = array( 0 => 'No Menu' );
-		
-		foreach( $menu_objs as $menu ){
-			
-			$menus[ $menu->term_id ] = $menu->name;
-			
-		} // end foreach
-		
 		$wp_customize->add_control(
 			'_cahnrswp_header_horizontal_nav_control', 
 			array(
@@ -765,7 +1041,7 @@ class Customizer_CAHNRS_Ignite {
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_header_horizontal_nav',
 				'type'     => 'select',
-				'choices'  => $menus,
+				'choices'  => $this->menus,
 			)
 		); // end control
 		

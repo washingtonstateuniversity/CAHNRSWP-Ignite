@@ -12,7 +12,11 @@ $header->the_header( 'page' );
 
 include_once CAHNRSIGNITEPATH . 'theme-parts/page-banners/class-page-banner-cahnrs-ignite.php';
 $page_banner = new Page_Banner_CAHNRS_Ignite();
-$page_banner->the_banner( 'single' );
+$page_banner->the_banner( 'page' );
+
+include_once CAHNRSIGNITEPATH . 'theme-parts/secondary-menu/class-secondary-menu-ignite.php';
+$secondary_menu = new Secondary_Menu_Ignite();
+$secondary_menu->the_menu( 'page' );
 
 include locate_template( 'includes/content/single-page.php', false );
 

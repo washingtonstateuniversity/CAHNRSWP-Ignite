@@ -14,7 +14,9 @@ include_once CAHNRSIGNITEPATH . 'theme-parts/page-banners/class-page-banner-cahn
 $page_banner = new Page_Banner_CAHNRS_Ignite();
 $page_banner->the_banner( 'single' );
 
-include locate_template( 'includes/banners/single-banner.php', false );
+include_once CAHNRSIGNITEPATH . 'theme-parts/secondary-menu/class-secondary-menu-ignite.php';
+$secondary_menu = new Secondary_Menu_Ignite();
+$secondary_menu->the_menu( 'single' );
 
 include locate_template( 'includes/content/single.php', false );
 
