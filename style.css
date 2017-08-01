@@ -28,6 +28,7 @@ Headers
 - College Header Horizontal Menu
 Pagebuilder Overrides
 Post Editor
+Secondary Menu
 Spine Overrides
 - Disabled Spine
 **
@@ -163,6 +164,7 @@ a:hover {
 	left: 0;
 	right: 0;
 	position: absolute;
+	overflow: hidden;
 }
 
 #site-banner.static-image-wide-banner .banner-image {
@@ -175,13 +177,37 @@ a:hover {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-#site-banner.static-image-wide-banner.short-banner,
-#site-banner.static-image-wide-banner.short-banner .banner-image-wrap {
+#site-banner.static-image-wide-banner.banner-short,
+#site-banner.static-image-wide-banner.banner-short .banner-image-wrap {
 	height: 20vw;
 }
-#site-banner.static-image-wide-banner.tall-banner,
-#site-banner.static-image-wide-banner.tall-banner .banner-image-wrap {
+#site-banner.static-image-wide-banner.banner-tall,
+#site-banner.static-image-wide-banner.banner-tall .banner-image-wrap {
 	height: 30vw;
+}
+#site-banner.static-image-wide-banner.banner-extra-tall,
+#site-banner.static-image-wide-banner.banner-extra-tall .banner-image-wrap {
+	height: 50vw;
+}
+#site-banner.static-image-wide-banner.banner-height-short,
+#site-banner.static-image-wide-banner.banner-height-short .banner-image-wrap {
+	height: 30vh;
+}
+#site-banner.static-image-wide-banner.banner-height-medium,
+#site-banner.static-image-wide-banner.banner-height-medium .banner-image-wrap {
+	height: 45vh;
+}
+#site-banner.static-image-wide-banner.banner-height-tall,
+#site-banner.static-image-wide-banner.banner-height-tall .banner-image-wrap {
+	height: 60vh;
+}
+#site-banner.static-image-wide-banner.banner-height-extra-tall,
+#site-banner.static-image-wide-banner.banner-height-extra-tall .banner-image-wrap {
+	height: 80vh;
+}
+#site-banner.static-image-wide-banner.banner-full,
+#site-banner.static-image-wide-banner.banner-full .banner-image-wrap {
+	height: 100vh;
 }
 
 /* Content wide-static-slide ----- */
@@ -1158,6 +1184,50 @@ body .cpb-action-button:after {
 	margin-left: 8px;
 }
 
+/* Secondary Menu
+--------------------------------------------------------------- */
+#secondary-menu {
+	position: relative;
+	background-color: #23282b;
+	color: #fff;
+}
+#secondary-menu:before,
+#secondary-menu:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 100%;
+	width: 9999rem;
+	background-color: #23282b;
+}
+#secondary-menu:after {
+	right: auto;
+	left: 100%;
+}
+#secondary-menu .menu {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#secondary-menu .menu:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#secondary-menu .menu > .menu-item {
+	float: left;
+}
+#secondary-menu .menu > .menu-item a {
+	display: block;
+	padding: 8px 18px;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+#secondary-menu .menu .sub-menu {
+	display: none;
+}
 /* Spine Overrides
 --------------------------------------------------------------- */
 body {

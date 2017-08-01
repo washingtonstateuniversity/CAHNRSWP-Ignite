@@ -21,9 +21,35 @@ class CSS_CAHNRS_Ignite {
 		
 		$css_array = $this->add_theme_css( $css_array );
 		
+		$css_array = $this->add_secondary_menu_css( $css_array );
+		
 		echo '<style>' . $this->css_to_string( $css_array ) . '</style>';
 		
 	} // end wp_footer
+	
+	
+	private function add_secondary_menu_css( $css_array ){
+		
+		$cahnrswp_secondary_menu_bg_color = get_theme_mod( '_cahnrswp_secondary_menu_bg_color', '' );
+		$cahnrswp_secondary_menu_font_color = get_theme_mod( '_cahnrswp_secondary_menu_font_color', '' );
+		
+		$css = array(
+			array( '#secondary-menu', 'background-color', $cahnrswp_secondary_menu_bg_color ),
+			array( '#secondary-menu:before', 'background-color', $cahnrswp_secondary_menu_bg_color ),
+			array( '#secondary-menu:after', 'background-color', $cahnrswp_secondary_menu_bg_color ),
+			array( '#secondary-menu .menu > .menu-item a', 'color', $cahnrswp_secondary_menu_font_color ),
+		);
+		
+		foreach( $css as $instance ){
+			
+			$css_array = $this->add_css_property( $css_array, $instance[0], $instance[1], $instance[2] );
+			
+		} // end foreach
+		
+		
+		return $css_array;
+		
+	} // End add_secondary_menu_css
 	
 	
 	private function add_header_css( $css_array ){

@@ -16,6 +16,10 @@ include_once CAHNRSIGNITEPATH . 'theme-parts/page-banners/class-page-banner-cahn
 $page_banner = new Page_Banner_CAHNRS_Ignite();
 $page_banner->the_banner( 'front-page' );
 
+include_once CAHNRSIGNITEPATH . 'theme-parts/secondary-menu/class-secondary-menu-ignite.php';
+$secondary_menu = new Secondary_Menu_Ignite();
+$secondary_menu->the_menu( 'front-page' );
+
 include locate_template( 'includes/content/single-page.php', false );
 
 include_once CAHNRSIGNITEPATH . 'theme-parts/footers/class-footer-ignite.php';

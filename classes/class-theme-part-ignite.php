@@ -54,4 +54,23 @@ class Theme_Part_Ignite {
 		
 	} // End settings
 	
+	
+	protected function get_post_image( $post_id, $size = 'full', $args = array(), $context = 'single'  ) {
+		
+		$image = '';
+		
+		if ( $post_id && has_post_thumbnail( $post_id ) ){
+				
+			$img_id = get_post_thumbnail_id( $post_id );
+				
+			$img_url_array = wp_get_attachment_image_src( $img_id, $size, true );
+				
+			$image = $img_url_array[0];
+			
+		} // End if
+		
+		return $image;
+		
+	} // End get_post_image
+	
 } // End Theme_Part_Ignite
