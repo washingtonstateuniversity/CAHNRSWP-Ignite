@@ -12,19 +12,37 @@ class Footer_Ignite extends Theme_Part_Ignite {
 	
 	public function the_footer( $context = 'single', $args = array() ){
 		
-		include locate_template( 'includes/widget-areas/footer-after-widget-area.php', false );
-		
 		$html = '';
+		
+		if ( is_active_sidebar( 'footer_before' ) ) {
+			
+			ob_start();
+			
+			dynamic_sidebar( 'footer_before' );
+			
+			$html .= '<div id="footer-before-widget-area">' . ob_get_clean() .'</div>';
+			
+		} // End if
 		
 		$args = $this->get_customizer_args( $args );
 		
 		switch( $args['type'] ){
 			
 			case 'college-global':
-				$html = $this->get_college_global_footer( $context, $args );
+				$html .= $this->get_college_global_footer( $context, $args );
 				break;
 			
 		} // End switch
+		
+		if ( is_active_sidebar( 'footer_after' ) ) {
+			
+			ob_start();
+			
+			dynamic_sidebar( 'footer_after' );
+			
+			$html .= '<div id="footer-after-widget-area">' . ob_get_clean() .'</div>';
+			
+		} // End if
 		
 		echo $html;
 		

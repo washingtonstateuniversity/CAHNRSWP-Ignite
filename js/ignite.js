@@ -1,3 +1,23 @@
+var cahnrs_ignite = function(){
+	
+	this.slideshows = [];
+	
+	var self = this;
+	
+	this.init = function(){
+	} // End init
+	
+	this.spotlight_slideshow = function( wrapper ) {
+	} // End spotlight_slideshow
+	
+	this.init();
+	
+} // End cahnrs_ignite
+
+var instance_cahnrs_ignite = new cahnrs_ignite();
+
+
+
 var ignite = {
 	
 	init:function(){

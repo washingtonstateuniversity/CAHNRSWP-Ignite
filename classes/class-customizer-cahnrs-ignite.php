@@ -58,6 +58,7 @@ class Customizer_CAHNRS_Ignite {
 		'default' 				=> 'Not Set',
 		'none' 					=> 'No Banner',
 		'dynamic-scroll' 		=> 'Wide Banner',
+		'basic-slideshow'		=> 'Basic Slideshow',
 	);
 		
 	protected $heights = array(
@@ -111,6 +112,8 @@ class Customizer_CAHNRS_Ignite {
 		
 		$this->customize_theme( $wp_customize, $panel );
 		
+		$this->customize_post_types( $wp_customize, $panel );
+		
 		$this->customize_header( $wp_customize, $panel );
 		
 		$this->customize_pagebanners( $wp_customize, $panel );
@@ -121,9 +124,101 @@ class Customizer_CAHNRS_Ignite {
 		
 		$this->customize_layout_options( $wp_customize, $panel );
 		
+		$this->customize_sidebars( $wp_customize, $panel );
+		
 		$this->customize_footer( $wp_customize, $panel );
 		
 	} // end customize_register
+	
+	
+	private function customize_post_types( $wp_customize, $panel ){
+		
+		$post_types = array(
+			'publications' 	=> "Publications" ,
+			'theme_parts' 	=> "Theme Parts",
+			'slides' 		=> "Slides" 
+		);
+		
+		foreach( $post_types as $post_type => $label ){
+			
+			$wp_customize->add_setting( 
+				"_cahnrswp_enable_{$post_type}", 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+		} // End foreach
+		
+		
+		$section_id = '_cahnrswp_ignite_enable_post_types';
+		
+		$wp_customize->add_section( 
+			$section_id, 
+			array(
+				'title'    	=> 'Add Post Types',
+				'panel' 	=> $panel,
+			)
+		); // end add_section
+		
+		foreach( $post_types as $post_type => $label ){
+			
+			$wp_customize->add_control(
+				"_cahnrswp_enable_{$post_type}_control", 
+				array(
+					'label'    => "Enable {$label}",
+					'section'  => $section_id,
+					'settings' => "_cahnrswp_enable_{$post_type}",
+					'type'     => 'checkbox',
+				)
+			); // end control
+			
+		} // End foreach
+		
+	} // End customize_post_types
+	
+	
+	private function customize_sidebars( $wp_customize, $panel ){
+		
+		for( $i = 0; $i < 10; $i++ ){
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_sidebars[' . $i . ']', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+		} // End For
+		
+		$section_id = '_cahnrswp_ignite__sidebar_options';
+		
+		$wp_customize->add_section( 
+			$section_id, 
+			array(
+				'title'    	=> 'Add Sidebars',
+				'panel' 	=> $panel,
+			)
+		); // end add_section
+		
+		for( $i = 0; $i < 10; $i++ ){
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_sidebars_' . $i . '_control',
+				array(
+					'label' => 'Sidebar Name',
+					'section' => $section_id,
+					'type' => 'text',
+					'settings' => '_cahnrswp_ignite_sidebars[' . $i . ']',
+				)
+			);
+			
+		} // End For
+		
+		
+	} // End customize_secondary_nav
 	
 	
 	private function customize_secondary_nav( $wp_customize, $panel ){
@@ -205,11 +300,145 @@ class Customizer_CAHNRS_Ignite {
 		   'public'   => true,
 		);
 		
+		$page_types = array(
+			'404' => array( 
+				'label' => '404', 
+				'banners' => array(
+					'404' => '404',
+				)
+			),
+		);
+		
+		$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
+		
+		foreach( $taxonomies as $index => $taxonomy ){
+			
+			$page_types[ $taxonomy->name ] = array( 
+				'label' => $taxonomy->label . ' Taxonomy', 
+			);
+			
+		} // End foreach
+		
 		$post_types = get_post_types( $args, 'objects');
 		
 		foreach( $post_types as $index => $post_type ){
 			
 			$name = str_replace( '-', '_', $post_type->name );
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_type', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_image', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_height', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_parallax', 
+				array(
+					'default'   => 1,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_override', 
+				array(
+					'default'   => 0,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_inherit_image', 
+				array(
+					'default'   => 0,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+		} // End foreach
+		
+		/**********************************************
+		 * Add Post Type Archive Archive Sections
+		***********************************************/
+		
+		foreach( $post_types as $index => $post_type ){
+			
+			$name = str_replace( '-', '_', $post_type->name );
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_archive_banner', 
+				array(
+					'default'   => false,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_archive_type', 
+				array(
+					'default'   => 'default',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_archive_image', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_archive_height', 
+				array(
+					'default'   => '',
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_archive_parallax', 
+				array(
+					'default'   => 1,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
+			
+		} // End foreach
+		
+		
+		/**********************************************
+		 * Custom Type Sections
+		***********************************************/
+		
+		foreach( $page_types as $name => $label ){
+			
+			$wp_customize->add_setting( 
+				'_cahnrswp_ignite_banner_' . $name . '_banner', 
+				array(
+					'default'   => false,
+					'transport' => 'refresh',
+				) 
+			); // end add_setting
 			
 			$wp_customize->add_setting( 
 				'_cahnrswp_ignite_banner_' . $name . '_type', 
@@ -342,6 +571,280 @@ class Customizer_CAHNRS_Ignite {
 				)
 			); // end control
 			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_override_control', 
+				array(
+					'label'    => 'Block Featured Image Override',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_override',
+					'type'     => 'checkbox',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_inherit_image_control', 
+				array(
+					'label'    => 'Inherit Parent Image',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_inherit_image',
+					'type'     => 'checkbox',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
+			
+		} // End Foreach
+		
+		
+		/**********************************************
+		 * Add Post Type Archive Archive Sections
+		***********************************************/
+		
+		foreach( $post_types as $index => $post_type ){
+			
+			$name = str_replace( '-', '_', $post_type->name );
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_archive_banner_control', 
+				array(
+					'label'    => $post_type->label . ': Add Archive Banner',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_archive_banner',
+					'type'     => 'checkbox',
+				)
+			); // end control
+		
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_archive_type_control', 
+				array(
+					'label'    => $post_type->label . ' Archive Banner',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_archive_type',
+					'type'     => 'select',
+					'choices'  => $this->banners,
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+					
+						$show = false;
+						
+						$has_banner = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_archive_banner' )->value();
+						
+						$show = ( $has_banner ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
+			$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'_cahnrswp_ignite_banner_' . $name . '_archive_image_control',
+			   	array(
+				   	'label'      		=> 'Default ' . $post_type->label . ' Archive Banner Image',
+				   	'section'    		=> $section_id,
+				   	'settings'   		=> '_cahnrswp_ignite_banner_' . $name . '_archive_image',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_archive_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+			   	)
+		   	)
+	   	);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_archive_height_control', 
+				array(
+					'label'    => 'Archive Banner Height',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_archive_height',
+					'type'     => 'select',
+					'choices'  => $this->heights,
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+							$show = false;
+							
+							$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_archive_type' )->value();
+							
+							$show = ( in_array( $type, $show_with ) ) ? true : false;
+								
+							return $show;
+						
+					}
+				)
+			);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_archive_parallax_control', 
+				array(
+					'label'    => 'Archive Parallax Effect',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_archive_parallax',
+					'type'     => 'checkbox',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_archive_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
+		} // End Foreach
+		
+		/**********************************************
+		 * Add Custom Type Sections
+		***********************************************/
+		
+		foreach( $page_types as $name => $type ){
+			
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_banner_control', 
+				array(
+					'label'    => $type['label'] . ': Add Banner',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_banner',
+					'type'     => 'checkbox',
+				)
+			); // end control
+		
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_type_control', 
+				array(
+					'label'    => $type['label'] . ' Banner',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_type',
+					'type'     => 'select',
+					'choices'  => ( ! empty( $type['banners'] ) ) ? $type['banners'] : $this->banners,
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$has_banner = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_banner' )->value();
+						
+						$show = ( $has_banner ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
+			
+			$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'_cahnrswp_ignite_banner_' . $name . '_image_control',
+			   	array(
+				   	'label'      		=> 'Default ' . $type['label'] . ' Banner Image',
+				   	'section'    		=> $section_id,
+				   	'settings'   		=> '_cahnrswp_ignite_banner_' . $name . '_image',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll','404');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+			   	)
+		   	)
+	   	);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_height_control', 
+				array(
+					'label'    => 'Banner Height',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_height',
+					'type'     => 'select',
+					'choices'  => $this->heights,
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll','404');
+						
+							$show = false;
+							
+							$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+							
+							$show = ( in_array( $type, $show_with ) ) ? true : false;
+								
+							return $show;
+						
+					}
+				)
+			);
+			
+			$wp_customize->add_control(
+				'_cahnrswp_ignite_banner_' . $name . '_parallax_control', 
+				array(
+					'label'    => 'Parallax Effect',
+					'section'  => $section_id,
+					'settings' => '_cahnrswp_ignite_banner_' . $name . '_parallax',
+					'type'     => 'checkbox',
+					'active_callback' 	=> function() use ( $wp_customize, $name ){
+						
+						$show_with = array('dynamic-scroll');
+						
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_banner_' . $name . '_type' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+				)
+			); // end control
 			
 		} // End Foreach
 		
@@ -634,6 +1137,14 @@ class Customizer_CAHNRS_Ignite {
 			) 
 		); // end add_setting
 		
+		$wp_customize->add_setting( 
+			'_cahnrs_ignite_global_menu_depth', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
 		// Add section
 		
 		$section_id = '_cahnrswp_theme_options';
@@ -641,7 +1152,7 @@ class Customizer_CAHNRS_Ignite {
 		$wp_customize->add_section( 
 			$section_id, 
 			array(
-				'title'    	=> 'General Theme Settings',
+				'title'    	=> 'General Theme Options',
 				'panel' 	=> $panel,
 			)
 		); // end add_section
@@ -681,6 +1192,22 @@ class Customizer_CAHNRS_Ignite {
 				'section'  => $section_id,
 				'settings' => '_cahnrs_ignite_global_cropped_spine',
 				'type'     => 'checkbox',
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrs_ignite_global_menu_depth_control', 
+			array(
+				'label'    => 'Site Menu Depth',
+				'section'  => $section_id,
+				'settings' => '_cahnrs_ignite_global_menu_depth',
+				'type'     => 'select',
+				'choices'  => array(
+					'' 	=> 'Not Set',
+					1 	=> '1 Level',
+					2 	=> '2 Levels',
+					3 	=> '3 Levels',
+				),
 			)
 		); // end control
 		
@@ -773,6 +1300,14 @@ class Customizer_CAHNRS_Ignite {
 			'_cahnrswp_header_banner_text_color', 
 			array(
 				'default'   => 'default',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_header_banner_show_subhead', 
+			array(
+				'default'   => 1,
 				'transport' => 'refresh',
 			) 
 		); // end add_setting
@@ -1019,6 +1554,16 @@ class Customizer_CAHNRS_Ignite {
 				'settings' => '_cahnrswp_header_banner_text_color',
 				'type'     => 'select',
 				'choices'  => $this->get_colors('_cahnrswp_header_banner_text_color'),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_banner_show_subhead_control', 
+			array(
+				'label'    => 'Show Site Tagline',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_banner_show_subhead',
+				'type'     => 'checkbox',
 			)
 		); // end control
 		

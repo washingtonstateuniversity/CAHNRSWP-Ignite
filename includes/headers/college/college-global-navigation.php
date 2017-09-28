@@ -2,12 +2,12 @@
 $global_nav = array(
 	'home' 		=> array(
 		'label' => '<span>Home</span>',
-		'url' => 'http://stage.cahnrs.wsu.edu',
+		'url' => 'http://cahnrs.wsu.edu',
 		'news_category' => '',
 	),
 	'about' 	=> array(
 		'label' => 'About',
-		'url' => 'http://stage.cahnrs.wsu.edu/about',
+		'url' => 'http://cahnrs.wsu.edu/about',
 		'news_category' => '',
 		'unit-menu-label' => 'Learn About CAHNRS',
 		'unit-menu' => array(
@@ -25,46 +25,46 @@ $global_nav = array(
 		'sub-menu' => array(
 			array(
 				'label' => 'About CAHNRS',
-				'link' => 'http://stage.cahnrs.wsu.edu/about/',
+				'link' => 'http://cahnrs.wsu.edu/about/',
 				'menu-items' => array(
-					array( 'label' => 'Executive Leadership', 'url' => 'http://stage.cahnrs.wsu.edu/about/executive-leadership/' ),
-					array( 'label' => 'Administrative Contacts', 'url' => 'http://stage.cahnrs.wsu.edu/about/cahnrs-administration/' ),
-					array( 'label' => 'Chairs & Directors', 'url' => 'http://stage.cahnrs.wsu.edu/about/cahnrs-administration/#chairs' ),
-					array( 'label' => 'Organization Chart', 'url' => 'http://stage.cahnrs.wsu.edu/about/cahnrs-administration/#orgchart' ),
+					array( 'label' => 'Executive Leadership', 'url' => 'http://cahnrs.wsu.edu/about/leadership/' ),
+					array( 'label' => 'Administrative Contacts', 'url' => 'http://cahnrs.wsu.edu/about/cahnrs-administration/' ),
+					array( 'label' => 'Chairs & Directors', 'url' => 'http://cahnrs.wsu.edu/about/cahnrs-administration/#chairs' ),
+					array( 'label' => 'Organization Chart', 'url' => 'http://cahnrs.wsu.edu/about/cahnrs-administration/#orgchart' ),
 				)
 			),
 			array(
 				'label' => 'Departments & Units',
-				'link' => 'http://stage.cahnrs.wsu.edu/about/departments/',
+				'link' => 'http://cahnrs.wsu.edu/about/departments/',
 				'menu-items' => array(
-					array( 'label' => 'Academic Departments', 'url' => 'http://stage.cahnrs.wsu.edu/about/departments/' ),
-					array( 'label' => 'Administrative Departments', 'url' => 'http://stage.cahnrs.wsu.edu/about/departments/#admindept' ),
-					array( 'label' => 'Locations', 'url' => 'http://stage.cahnrs.wsu.edu/about/locations' ),
-					array( 'label' => 'Extension County Offices', 'url' => 'http://stage.cahnrs.wsu.edu/about/locations/#county' ),
-					array( 'label' => 'Centers & Facilities', 'url' => 'http://stage.cahnrs.wsu.edu/research/centers-and-facilities/' ),
+					array( 'label' => 'Academic Departments', 'url' => 'http://cahnrs.wsu.edu/about/academic-departments/' ),
+					array( 'label' => 'Administrative Departments', 'url' => 'http://cahnrs.wsu.edu/about/academic-departments/#admin' ),
+					array( 'label' => 'Locations', 'url' => 'http://cahnrs.wsu.edu/about/locations' ),
+					array( 'label' => 'Extension County Offices', 'url' => 'http://cahnrs.wsu.edu/about/locations/#county' ),
+					array( 'label' => 'Centers & Facilities', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/' ),
 				)
 			),
 			array(
 				'label' => 'Learn More',
 				'link' => '#',
 				'menu-items' => array(
-					array( 'label' => 'Latest News', 'url' => '#' ),
-					array( 'label' => 'Undergraduate Degrees', 'url' => 'http://stage.cahnrs.wsu.edu/academics/majors/' ),
-					array( 'label' => 'Graduate Studies', 'url' => 'http://stage.cahnrs.wsu.edu/academics/graduate-studies/' ),
-					array( 'label' => 'Scholarships', 'url' => 'http://stage.cahnrs.wsu.edu/academics/scholarships/' ),
+					array( 'label' => 'Latest News', 'url' => 'http://cahnrs.wsu.edu/about/featured-news/' ),
+					array( 'label' => 'Undergraduate Degrees', 'url' => 'http://cahnrs.wsu.edu/academics/majors/' ),
+					array( 'label' => 'Graduate Studies', 'url' => 'http://cahnrs.wsu.edu/academics/graduate-studies/' ),
+					array( 'label' => 'Scholarships', 'url' => 'http://cahnrs.wsu.edu/academics/scholarships/' ),
 					array( 'label' => 'Internships', 'url' => 'http://ctll.cahnrs.wsu.edu/internships/internship-events/' ),
 				)
 			),
 		),
 		'action-links' => array(
-			array( 'label' => 'About CAHNRS', 'url' => 'http://stage.cahnrs.wsu.edu/about/' ),
-			array( 'label' => 'Find Your Degree', 'url' => 'http://stage.cahnrs.wsu.edu/academics/majors/' ),
+			array( 'label' => 'About CAHNRS', 'url' => 'http://cahnrs.wsu.edu/about/' ),
+			array( 'label' => 'Find Your Degree', 'url' => 'http://cahnrs.wsu.edu/academics/majors/' ),
 			array( 'label' => 'Give', 'url' => 'https://secure.wsu.edu/give/default.aspx?fund=311' ),
 		)
 	),
 	'academics' 	=> array(
 		'label' => 'Academics',
-		'url' => 'http://stage.cahnrs.wsu.edu/academics',
+		'url' => 'http://cahnrs.wsu.edu/academics',
 		'news_category' => '',
 		'unit-menu-label' => 'Learn About CAHNRS',
 		'unit-menu' => array(
@@ -84,42 +84,42 @@ $global_nav = array(
 				'label' => 'Find Your Degree',
 				'link' => 'http://cahnrs.wsu.edu/fs/home/business-services/',
 				'menu-items' => array(
-					array( 'label' => 'Degree Programs', 'url' => 'http://stage.cahnrs.wsu.edu/academics/majors/' ),
-					array( 'label' => 'Graduate Studies', 'url' => 'http://stage.cahnrs.wsu.edu/academics/graduate-studies/' ),
-					array( 'label' => 'Transfer Students', 'url' => 'http://stage.cahnrs.wsu.edu/academics/academic-advising/' ),
-					array( 'label' => 'Articulation Agreements', 'url' => 'http://stage.cahnrs.wsu.edu/academics/transfer/articulation-agreements/' ),
+					array( 'label' => 'Degree Programs', 'url' => 'http://cahnrs.wsu.edu/academics/majors/' ),
+					array( 'label' => 'Graduate Studies', 'url' => 'http://cahnrs.wsu.edu/academics/graduate-studies/' ),
+					array( 'label' => 'Transfer Students', 'url' => 'http://cahnrs.wsu.edu/academics/academic-advising/' ),
+					array( 'label' => 'Articulation Agreements', 'url' => 'http://cahnrs.wsu.edu/academics/transfer/articulation-agreements/' ),
 				)
 			),
 			array(
 				'label' => 'Get Connected',
-				'link' => 'http://stage.cahnrs.wsu.edu/academics/meet-the-staff/',
+				'link' => 'http://cahnrs.wsu.edu/academics/meet-the-staff/',
 				'menu-items' => array(
-					array( 'label' => 'Staff Directory', 'url' => 'http://stage.cahnrs.wsu.edu/academics/meet-the-staff/' ),
-					array( 'label' => 'Academic Advising', 'url' => 'http://stage.cahnrs.wsu.edu/academics/transfer/' ),
-					array( 'label' => 'Clubs & Student Organizations', 'url' => 'http://stage.cahnrs.wsu.edu/academics/student-life/clubs/' ),
-					array( 'label' => 'Ambassadors', 'url' => 'http://stage.cahnrs.wsu.edu/academics/student-life/ambassadors/' ),
+					array( 'label' => 'Staff Directory', 'url' => 'http://cahnrs.wsu.edu/academics/meet-the-staff/' ),
+					array( 'label' => 'Academic Advising', 'url' => 'http://cahnrs.wsu.edu/academics/transfer/' ),
+					array( 'label' => 'Clubs & Student Organizations', 'url' => 'http://cahnrs.wsu.edu/academics/student-life/clubs/' ),
+					array( 'label' => 'Ambassadors', 'url' => 'http://cahnrs.wsu.edu/academics/student-life/ambassadors/' ),
 				)
 			),
 			array(
 				'label' => 'Learn More',
-				'link' => 'http://stage.cahnrs.wsu.edu/about/',
+				'link' => 'http://cahnrs.wsu.edu/about/',
 				'menu-items' => array(
-					array( 'label' => 'Scholarships', 'url' => 'http://stage.cahnrs.wsu.edu/academics/scholarships/' ),
+					array( 'label' => 'Scholarships', 'url' => 'http://cahnrs.wsu.edu/academics/scholarships/' ),
 					array( 'label' => 'Internships', 'url' => 'http://ctll.cahnrs.wsu.edu/internships/internship-events/' ),
-					array( 'label' => 'Academic Departments', 'url' => 'http://stage.cahnrs.wsu.edu/about/departments/' ),
-					array( 'label' => 'About CAHNRS', 'url' => 'http://stage.cahnrs.wsu.edu/about/' ),
+					array( 'label' => 'Academic Departments', 'url' => 'http://cahnrs.wsu.edu/about/academic-departments/' ),
+					array( 'label' => 'About CAHNRS', 'url' => 'http://cahnrs.wsu.edu/about/' ),
 				)
 			),
 		),
 		'action-links' => array(
-			array( 'label' => 'Find Your Degree', 'url' => 'http://stage.cahnrs.wsu.edu/academics/majors/' ),
+			array( 'label' => 'Find Your Degree', 'url' => 'http://cahnrs.wsu.edu/academics/majors/' ),
 			array( 'label' => 'Visit a WSU Campus', 'url' => 'http://admission.wsu.edu/visits/index.html' ),
 			array( 'label' => 'Apply to WSU', 'url' => 'http://admission.wsu.edu/applications/index.html' ),
 		)
 	),
 	'research' 	=> array(
 		'label' => 'Research',
-		'url' => 'http://stage.cahnrs.wsu.edu/research',
+		'url' => 'http://cahnrs.wsu.edu/research',
 		'news_category' => '',
 		'unit-menu-label' => 'Visit CAHNRS Research',
 		'unit-menu' => array(
@@ -139,45 +139,43 @@ $global_nav = array(
 				'label' => 'Centers & Facilities',
 				'link' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/',
 				'menu-items' => array(
-					array( 'label' => 'CAHNRS Research', 'url' => 'http://stage.cahnrs.wsu.edu/research' ),
-					array( 'label' => 'Research and Extension Centers', 'url' => 'http://stage.cahnrs.wsu.edu/research/centers-and-facilities/re-centers/' ),
-					array( 'label' => 'Subject Matter Centers', 'url' => 'http://stage.cahnrs.wsu.edu/research/centers-and-facilities/subject-matter-centers/' ),
-					array( 'label' => 'Core Facilities', 'url' => 'http://stage.cahnrs.wsu.edu/research/centers-and-facilities/core-facilities/' ),
-					array( 'label' => 'Academic Units', 'url' => 'http://stage.cahnrs.wsu.edu/about/departments/' ),
+					array( 'label' => 'CAHNRS Research', 'url' => 'http://cahnrs.wsu.edu/research' ),
+					array( 'label' => 'Research and Extension Centers', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/re-centers/' ),
+					array( 'label' => 'Subject Matter Centers', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/subject-matter-centers/' ),
+					array( 'label' => 'Core Facilities', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/core-facilities/' ),
+					array( 'label' => 'Academic Units', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/academic-departments/' ),
 				)
 			),
 			array(
 				'label' => 'Grant Resources',
 				'link' => 'http://cahnrs.wsu.edu/research/grant-resources/',
 				'menu-items' => array(
-					array( 'label' => 'Grant News', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/grant-news/' ),
-					array( 'label' => 'Proposal Development', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/proposal-development/' ),
-					array( 'label' => 'Award Management Services', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/award-management-services/' ),
-					array( 'label' => 'REEport Instructions', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/reeport-instructions/' ),
-					array( 'label' => 'Internal Competitive Grants', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/internal-competitive-grants/' ),
+					array( 'label' => 'Proposal Development', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/proposal-development/' ),
+					array( 'label' => 'Award Management Services', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/award-management-services/' ),
+					array( 'label' => 'REEport Instructions', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/reeport-instructions/' ),
+					array( 'label' => 'Internal Competitive Grants', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/internal-competitive-grants/' ),
 				)
 			),
 			array(
 				'label' => 'Intellectual Property',
 				'link' => 'http://cahnrs.wsu.edu/research/intellectual-property/',
 				'menu-items' => array(
-					array( 'label' => 'Plant Variety Licensing', 'url' => 'http://stage.cahnrs.wsu.edu/research/intellectual-property/plant-variety-liscensing/' ),
-					array( 'label' => 'Invention Disclosure', 'url' => 'http://stage.cahnrs.wsu.edu/research/intellectual-property/invention-disclosure/' ),
-					array( 'label' => 'Non-Disclosure Agreements/MTAs', 'url' => 'http://stage.cahnrs.wsu.edu/research/intellectual-property/non-disclosure-agreementsmtas/' ),
-					array( 'label' => 'Conflict of Interest', 'url' => 'http://stage.cahnrs.wsu.edu/research/intellectual-property/conflict-of-interest/' ),
-					array( 'label' => 'Intellectual Property', 'url' => 'http://stage.cahnrs.wsu.edu/research/intellectual-property/' ),
+					array( 'label' => 'Plant Variety Licensing', 'url' => 'http://cahnrs.wsu.edu/research/intellectual-property/#plant' ),
+					array( 'label' => 'Invention Disclosure', 'url' => 'http://cahnrs.wsu.edu/research/intellectual-property/#invention' ),
+					array( 'label' => 'Non-Disclosure Agreements/MTAs', 'url' => 'http://cahnrs.wsu.edu/research/intellectual-property/#non-disclosure' ),
+					array( 'label' => 'Conflict of Interest', 'url' => 'http://cahnrs.wsu.edu/research/intellectual-property/#conflict' ),
 				)
 			),
 		),
 		'action-links' => array(
 			array( 'label' => 'People Search', 'url' => 'http://search.wsu.edu/' ),
 			array( 'label' => 'Locations', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/' ),
-			array( 'label' => 'Request for Proposals', 'url' => 'http://stage.cahnrs.wsu.edu/research/grant-resources/' ),
+			array( 'label' => 'Request for Proposals', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/' ),
 		)
 	),
 	'extension' => array(
 		'label' => 'Extension',
-		'url' => 'http://extension.wsu.edu/v2',
+		'url' => 'http://extension.wsu.edu/',
 		'news_category' => '',
 		'unit-menu-label' => 'Visit Extension',
 		'unit-menu' => array(
@@ -209,7 +207,7 @@ $global_nav = array(
 				'link' => 'http://extension.wsu.edu/locations/',
 				'menu-items' => array(
 					array( 'label' => 'Extension County Offices', 'url' => 'http://extension.wsu.edu/locations/#county' ),
-					array( 'label' => 'Research and Extension Centers', 'url' => 'http://stage.cahnrs.wsu.edu/research/centers-and-facilities/re-centers/' ),
+					array( 'label' => 'Research and Extension Centers', 'url' => 'http://cahnrs.wsu.edu/research/centers-and-facilities/re-centers/' ),
 				)
 			),
 		),
@@ -221,7 +219,7 @@ $global_nav = array(
 	),
 	'alumni' 	=> array(
 		'label' => 'Alumni & Friends',
-		'url' => 'http://stage.cahnrs.wsu.edu/alumni',
+		'url' => 'http://cahnrs.wsu.edu/alumni',
 		'news_category' => '',
 		'unit-menu-label' => 'Visit Alumni & Freinds',
 		'unit-menu' => array(
@@ -239,43 +237,43 @@ $global_nav = array(
 		'sub-menu' => array(
 			array(
 				'label' => 'Support CAHNRS',
-				'link' => 'http://stage.cahnrs.wsu.edu/alumni/wheretogive/',
+				'link' => 'http://cahnrs.wsu.edu/alumni/wheretogive/',
 				'menu-items' => array(
 					array( 'label' => 'CAHNRS Excellence Fund', 'url' => 'https://foundation.wsu.edu/give-online/?fund=c39b3693-1ede-4044-aa2a-f5fed2b62638&utm_source=college-of-agricultural-human-and-natural-resource-sciences-excellence-fund&utm_medium=wsu-link&utm_campaign=agricultural-human-and-natural-resource-sciences' ),
 					array( 'label' => 'WSU Extension Excellence Fund', 'url' => 'https://foundation.wsu.edu/give-online/?fund=c1ddcc35-4a44-4812-88f9-d93e7300fe94&utm_source=wsu-extension-excellence-fund&utm_medium=wsu-link&utm_campaign=agricultural-human-and-natural-resource-sciences' ),
-					array( 'label' => 'Support a Scholarship', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/wheretogive/#scholarship' ),
-					array( 'label' => 'Academic Department Funds', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/wheretogive/#departments' ),
-					array( 'label' => 'Other Opportunities to Give', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/wheretogive/#other' ),
+					array( 'label' => 'Support a Scholarship', 'url' => 'http://cahnrs.wsu.edu/alumni/wheretogive/#scholarship' ),
+					array( 'label' => 'Academic Department Funds', 'url' => 'http://cahnrs.wsu.edu/alumni/wheretogive/#departments' ),
+					array( 'label' => 'Other Opportunities to Give', 'url' => 'http://cahnrs.wsu.edu/alumni/wheretogive/#other' ),
 					
 				)
 			),
 			array(
 				'label' => 'Ways to Give',
-				'link' => 'http://stage.cahnrs.wsu.edu/alumni/give/',
+				'link' => 'http://cahnrs.wsu.edu/alumni/give/',
 				'menu-items' => array(
-					array( 'label' => 'Where to Give', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/wheretogive/' ),
-					array( 'label' => 'Gifts of Grain', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/give/#grain' ),
-					array( 'label' => 'Planned Giving', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/give/#planned' ),
+					array( 'label' => 'Where to Give', 'url' => 'http://cahnrs.wsu.edu/alumni/wheretogive/' ),
+					array( 'label' => 'Gifts of Grain', 'url' => 'http://cahnrs.wsu.edu/alumni/give/#grain' ),
+					array( 'label' => 'Planned Giving', 'url' => 'http://cahnrs.wsu.edu/alumni/give/#planned' ),
 				)
 			),
 			array(
 				'label' => 'Connect With Us',
-				'link' => 'http://stage.cahnrs.wsu.edu/alumni/meet-the-team/dev-team/',
+				'link' => 'http://cahnrs.wsu.edu/alumni/meet-the-team/dev-team/',
 				'menu-items' => array(
-					array( 'label' => 'Meet Our Staff', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/meet-the-team/dev-team/' ),
-					array( 'label' => 'Scholarship Donor Profiles', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/scholarship-donor-profiles/' ),
+					array( 'label' => 'Meet Our Staff', 'url' => 'http://cahnrs.wsu.edu/alumni/meet-the-team/dev-team/' ),
+					array( 'label' => 'Scholarship Donor Profiles', 'url' => 'http://cahnrs.wsu.edu/alumni/scholarship-donor-profiles/' ),
 				)
 			),
 		),
 		'action-links' => array(
 			array( 'label' => 'Give', 'url' => 'https://foundation.wsu.edu/give-online/?fund=c39b3693-1ede-4044-aa2a-f5fed2b62638&utm_source=college-of-agricultural-human-and-natural-resource-sciences-excellence-fund&utm_medium=wsu-link&utm_campaign=agricultural-human-and-natural-resource-sciences' ),
-			array( 'label' => 'Connect', 'url' => 'http://stage.cahnrs.wsu.edu/alumni/reconnect/submissions/' ),
-			array( 'label' => 'Events', 'url' => 'http://stage.cahnrs.wsu.edu/events/' ),
+			array( 'label' => 'Connect', 'url' => 'http://cahnrs.wsu.edu/alumni/reconnect/submissions/' ),
+			//array( 'label' => 'Events', 'url' => 'http://cahnrs.wsu.edu/events/' ),
 		)
 	),
 	'fs' 		=> array(
 		'label' => 'Faculty & Staff <span>Resources</span>',
-		'url' => 'http://stage.cahnrs.wsu.edu/fs',
+		'url' => 'http://cahnrs.wsu.edu/fs',
 		'news_category' => '',
 		'unit-menu-label' => 'Visit Faculty & Staff',
 		'unit-menu' => array(
@@ -306,7 +304,7 @@ $global_nav = array(
 				'menu-items' => array(
 					array( 'label' => 'Budget/ Finance', 'url' => 'http://cahnrs.wsu.edu/fs/home/business-services/budget-and-finance-unit/' ),
 					array( 'label' => 'Grants Unit', 'url' => 'http://cahnrs.wsu.edu/research/grant-resources/' ),
-					array( 'label' => 'Information Technology', 'url' => 'http://cwr.wsu.edu/' ),
+					array( 'label' => 'Information Technology', 'url' => 'https://it.cahnrs.wsu.edu/' ),
 					array( 'label' => 'Operations', 'url' => 'https://operations.cahnrs.wsu.edu/' ),
 				)
 			),
