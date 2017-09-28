@@ -117,6 +117,20 @@ class CSS_CAHNRS_Ignite {
 			
 		} // end if
 		
+		$is_cropped = ( function_exists( 'spine_get_option' ) && ( true === spine_get_option( 'crop' ) && is_front_page() ) ) ? true : false;
+		
+		if ( get_theme_mod( '_cahnrs_ignite_global_cropped_spine', false ) ){
+			
+			$is_cropped = true;
+			
+		} // End if
+		
+		if ( ( 'disable' === $cahnrswp_theme_use_spine ) || $is_cropped ) {
+	
+			$classes[] = 'full-width-content';
+			
+		} // End if
+		
 		return $classes;
 		
 	} // end filter_body_class

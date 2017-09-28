@@ -7,9 +7,15 @@
 
 class Functions_Ignite {
 	
-	public static $version = '0.0.1';
+	public static $version = '0.0.3';
 	
 	public function __construct(){
+		
+		define( 'CAHNRSIGNITEPATH' , get_stylesheet_directory() . '/' );
+		
+		define( 'CAHNRSIGNITEURL' , get_stylesheet_directory_uri() . '/' );
+		
+		include_once 'lib/functions/global-functions.php';
 		
 		$this->init_theme_functions();
 		
@@ -18,20 +24,32 @@ class Functions_Ignite {
 	
 	protected function init_theme_functions(){
 		
-		define( 'CAHNRSIGNITEPATH' , get_stylesheet_directory() . '/' );
-		define( 'CAHNRSIGNITEURL' , get_stylesheet_directory_uri() . '/' );
+		if ( isset( $_GET['cahnrs-cache'] ) ){
+			
+			var_dump('cache cleared');
+			
+			wp_cache_flush();
+	
+			if ( class_exists( 'Memcache' ) ){
+				$memcache_obj = new Memcache;
+				$memcache_obj->connect('localhost', 11211);
+				
+				$memcache_obj->flush();
+			};
+			
+		} // end if
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-theme-setup-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-theme-setup-cahnrs-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-theme-part-ignite.php';
+		include_once ignite_get_part('classes/class-theme-part-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-scripts-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-scripts-cahnrs-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-customizer-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-customizer-cahnrs-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-css-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-css-cahnrs-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-post-editor-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-post-editor-cahnrs-ignite.php');
 		
 		$this->add_sidebars();
 		
@@ -39,30 +57,70 @@ class Functions_Ignite {
 		
 		$this->add_shortcodes();
 		
+		$this->add_menus();
+		
+		add_action('widgets_init', array( $this, 'add_widgets' ) );
+		
 	} // end init_theme_functions
 	
 	
 	protected function add_shortcodes(){
 		
-		include_once CAHNRSIGNITEPATH . 'shortcodes/cahnrs-news/class-cahnrs-news-shortcode-ignite.php';
+		include_once ignite_get_part('lib/shortcodes/class-shortcode-cahnrs-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cahnrs-news/class-cahnrs-news-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cahnrs-search/class-cahnrs-search-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/theme-part/class-cahnrs-theme-part-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cahnrs-events/class-cahnrs-events-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cahnrs-publications/class-cahnrs-publications-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cahnrs-posts/class-cahnrs-posts-shortcode-ignite.php');
 		
 	} // End add_shortcodes
 	
 	
 	protected function add_post_types(){
 		
-		include_once CAHNRSIGNITEPATH . 'post-types/articles/class-articles-post-type-cahnrs-ignite.php';
+		include_once ignite_get_part('lib/post-types/class-post-type-ignite.php');
 		
-		include_once CAHNRSIGNITEPATH . 'post-types/news-release/class-news-release-post-type-cahnrs-ignite.php';
+		include_once ignite_get_part('lib/post-types/articles/class-articles-post-type-cahnrs-ignite.php');
+		
+		include_once ignite_get_part('lib/post-types/news-release/class-news-release-post-type-cahnrs-ignite.php');
+		
+		include_once ignite_get_part('lib/post-types/theme-parts/class-theme-part-post-type-cahnrs-ignite.php');
+		
+		include_once ignite_get_part('lib/post-types/publications/class-publications-post-type-cahnrs-ignite.php');
+		
+		include_once ignite_get_part('lib/post-types/slides/class-slide-post-type-ignite.php');
 		
 	} // End add_post_types
 	
 	
 	protected function add_sidebars(){
 		
-		include_once CAHNRSIGNITEPATH . 'classes/class-sidebars-cahnrs-ignite.php';
+		include_once ignite_get_part('classes/class-sidebars-cahnrs-ignite.php');
 		
 	} // End add_sidebars
+	
+	
+	protected function add_menus(){
+		
+		include_once ignite_get_part('classes/class-menus-cahnrs-ignite.php');
+		
+	} // End add_menus
+	
+	
+	public function add_widgets(){
+		
+		include_once ignite_get_part('widgets/theme-parts/class-theme-part-widget-cahnrs-ignite.php');
+		
+		register_widget( 'Theme_Part_Widget_CAHNRS_Ignite' );
+		
+	} // End add_widgets
 
 	
 } // end Functions_Ignite

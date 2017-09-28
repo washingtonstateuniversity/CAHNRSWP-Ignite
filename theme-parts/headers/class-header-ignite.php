@@ -25,6 +25,16 @@ class Header_Ignite  extends Theme_Part_Ignite {
 		
 		$html = '';
 		
+		if ( is_active_sidebar( 'header_before' ) ) {
+			
+			ob_start();
+			
+			dynamic_sidebar( 'header_before' );
+			
+			$html .= '<div id="widget-area-header-before">' . ob_get_clean() .'</div>';
+			
+		} // End if
+		
 		$args = $this->get_customizer_args( $args );
 		
 		switch( $args['type'] ){
@@ -34,6 +44,16 @@ class Header_Ignite  extends Theme_Part_Ignite {
 				break;
 			
 		} // End switch
+		
+		if ( is_active_sidebar( 'header_after' ) ) {
+			
+			ob_start();
+			
+			dynamic_sidebar( 'header_after' );
+			
+			$html .= '<div id="widget-area-header-after">' . ob_get_clean() .'</div>';
+			
+		} // End if
 		
 		echo $html;
 		

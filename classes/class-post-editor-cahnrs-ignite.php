@@ -37,6 +37,20 @@ class Post_Editor_CAHNRS_Ignite {
 	
 	public function edit_form_after_title( $post ){
 		
+		$settings = array();
+		
+		$setting_keys = array(
+			'_show_title_single_ignite' => '',
+			'_remove_page_banner'		=> 0,
+			
+		);
+		
+		foreach( $setting_keys as $setting_key => $default_value ){
+			
+			$settings[ $setting_key ] = get_post_meta( $post->ID, $setting_key, true );
+			
+		} // End foreach
+		
 		$post_id = $post->ID;
 		
 		echo '<div class="ignite-edit-form">';
@@ -64,6 +78,7 @@ class Post_Editor_CAHNRS_Ignite {
 		
 		$fields = array(
 			'_show_title_single_ignite' => 'text',
+			'_remove_page_banner'		=> 'text',
 		);
 		
 		foreach( $fields as $key => $type ){
