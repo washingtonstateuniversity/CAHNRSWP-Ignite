@@ -16,7 +16,7 @@ class Query_CAHNRS_Ignite {
 		'tag_relation' 				=> 'OR',
 		'meta_relation' 			=> 'OR',
 		'per_page' 					=> 10,
-		'order_by' 					=> 'date',
+		'orderby' 					=> 'date',
 		'order' 					=> 'ASC',
 		'offset' 					=> 0,
 		'exclude' 					=> '',
@@ -308,9 +308,15 @@ class Query_CAHNRS_Ignite {
 			
 		} // End If
 		
+		if ( $this->args['orderby'] ){
+			
+			$query_args[ 'orderby' ] = $this->args['orderby'];
+			
+		} // End If
+		
 		if ( $this->args['keyword'] ){
 			
-			$query_args[ 's' ] = $displayed_posts;
+			$query_args[ 's' ] = $displayed_posts; 
 			
 		} // End If
 		

@@ -141,3 +141,34 @@ function ignite_get_slides( $args = array() ){
 	return $slides;
 	
 } // End ignite_get_slides
+
+
+function ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, $include_empty = true ){
+	
+	$return_terms = array();
+	
+	if ( $include_empty ){
+		
+		$return_terms[0] = 'No Category';
+		
+	} // end if
+	
+	$terms = get_terms( $taxonomy, array( 'hide_empty' => false, ) );
+	
+	if ( $as_select ){
+		
+		foreach( $terms as $term ){
+			
+			$return_terms[ $term->term_id ] = $term->name;
+			
+		} // End foreach
+		
+	} else {
+		
+		$return_terms = $terms;
+		
+	}// End if
+	
+	return $return_terms;
+	
+} // End ignite_get_terms

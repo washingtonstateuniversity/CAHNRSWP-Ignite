@@ -7,7 +7,7 @@
 
 class Functions_Ignite {
 	
-	public static $version = '0.0.3';
+	public static $version = '0.0.4';
 	
 	public function __construct(){
 		
@@ -58,6 +58,10 @@ class Functions_Ignite {
 		$this->add_shortcodes();
 		
 		$this->add_menus();
+		
+		$this->add_taxonomies();
+		
+		$this->add_customizer_controls();
 		
 		add_action('widgets_init', array( $this, 'add_widgets' ) );
 		
@@ -121,6 +125,24 @@ class Functions_Ignite {
 		register_widget( 'Theme_Part_Widget_CAHNRS_Ignite' );
 		
 	} // End add_widgets
+	
+	
+	protected function add_taxonomies(){
+		
+		include_once ignite_get_theme_path('lib/taxonomies/slideshow-category/class-slideshow-category-ignite.php');
+		
+	} // End add_taxonomies
+	
+	
+	protected function add_customizer_controls(){
+		
+		if ( class_exists('WP_Customize_Control') ){
+		
+			include_once ignite_get_theme_path('lib/customizer/controls/multi-select/class-customizer-multi-select-control-ignite.php');
+			
+		} // End if
+		
+	} // End add_customizer_controls
 
 	
 } // end Functions_Ignite

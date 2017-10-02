@@ -37,7 +37,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 			'cahnrs_page'			=> 1,
 			'categories' 			=> '',
 			'excerpt_length'		=> 25,
-			'order_by'				=> 'date',
+			'orderby'				=> 'date',
 			'offset'				=> 0,
 			'category_relation' 	=> 'OR',
 			'tag_relation' 			=> 'OR',
@@ -95,8 +95,10 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 		
 		$news = $query->posts;
 		
-		switch( $atts['order_by'] ){
-			
+		switch( $atts['orderby'] ){
+				
+			case 'rand':
+				break;
 			default:
 				$news = $this->order_by_date( $news );
 				break;

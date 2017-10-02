@@ -46,7 +46,6 @@ class Slide_Post_Type_Ignite extends Post_Type_Ignite {
 				//'publicly_queryable' => true,
 				//'show_ui'            => true,
 				'show_in_menu'       => true,
-				'taxonomies'          => array( 'category', ' post_tag' ),
 				'rewrite'            => array( 'slug' => 'slides' ),
 				'capability_type'    => 'post',
 				'show_in_rest'		 => true,

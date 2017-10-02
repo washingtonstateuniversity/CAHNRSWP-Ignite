@@ -36,7 +36,7 @@ class Slide_Factory_Ignite {
 	
 	public function get_slide(){
 		
-		ignite_load_class( 'lib/objects/class-slide-object-ignite.php', true );
+		ignite_load_class( 'lib/objects/slides/class-slide-object-ignite.php', true );
 		
 		$slide = new Slide_Object_Ignite();
 		
@@ -53,15 +53,19 @@ class Slide_Factory_Ignite {
 		
 		if ( $the_query->have_posts() ) {
 			
+			$i = 0;
+			
 			while ( $the_query->have_posts() ) {
 				
 				$the_query->the_post();
 				
 				$slide = $this->get_slide();
 				
-				$slide->set_from_loop();
+				$slide->set_from_loop( $i );
 				
 				$slides[] = $slide;
+				
+				$i++;
 				
 			} // End while
 
@@ -76,7 +80,7 @@ class Slide_Factory_Ignite {
 	
 	protected function get_basic_query_args( $args ){
 		
-		return $this->query_args;
+		return array_merge( $this->query_args, $args );
 		
 	} // End get_basic_query_args
 	

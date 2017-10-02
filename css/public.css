@@ -6,6 +6,7 @@ Articles
 Banners
 - Static Image Wide
 - Wide Static Slides
+- Banner Slideshow
 Colors
 - Full Bleeds
 Content
@@ -132,6 +133,10 @@ a:hover {
 figure {
     max-width: 100%;
 }
+.max-1188 .ignite-content-wrap {
+	max-width: 1188px;
+	margin: 0 auto;
+}
 
 /* Articles
 --------------------------------------------------------------- */
@@ -140,6 +145,127 @@ figure {
 }
 /* Banners
 --------------------------------------------------------------- */
+/* Banner Slideshow --- */
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper,
+.ignite-slideshow.banner-slideshow .ignite-slide,
+.ignite-slideshow.banner-slideshow {
+	height: 400px;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-slides-wrapper {
+	position:  absolute;
+	left: 0;
+	right: 0;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-image {
+	position:  absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide {
+	top: -9999rem;
+	width: 100%;
+	position:  absolute;
+	left: 0;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide.active {
+	top: 0;
+	position: relative;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-image {
+	background-position: center;
+	background-size: cover;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-caption-wrapper {
+	position:  absolute;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+}
+.max-1188 .ignite-slideshow.banner-slideshow .ignite-slide-caption {
+	max-width: 1188px;
+	margin: 0 auto;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-caption-inner {
+	max-width: 500px;
+	background-color: #981e32;
+	color: #fff;
+	padding: 18px 22px;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-caption-title {
+	font-size: 28px;
+	line-height: 28px;
+	font-weight: 300;
+	padding-bottom: 6px;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-caption-excerpt {
+	font-size: 14px;
+	padding-top: 6px;
+	letter-spacing: 1px;
+}
+.ignite-slideshow.banner-slideshow .ignite-slide-link-wrapper a {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	z-index: 1;
+	font-size: 0;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper {
+	position:  relative;
+	
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav {
+	position:  absolute;
+	bottom: 40px;
+	right: 0;
+	opacity: 0.6;
+	z-index: 2;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav:hover {
+	opacity: 1;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-button {
+	display: inline-block;
+	background-color: #eff0f1;;
+	border-radius: 4px;
+	padding: 6px 18px;
+	margin: 0 4px;
+	color: #717171;
+	cursor: pointer;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-button:hover {
+	display: inline-block;
+	background-color: #981e32;
+	color: #fff;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-slides-wrapper {
+	display: inline-block;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-slide {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #ccc;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	margin: 0 2px;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-slide:hover {
+	background-color: #981e32;
+	cursor: pointer;
+}
+.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-slide.active {
+	background-color: #981e32;
+}
+
 #site-banner.static-image-wide-banner {
 	height: 25vw;
 }
@@ -2249,6 +2375,20 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
 	---------------------------- */
 	#college-global-footer-nav .c-menu-item {
 		width: 33.33%;
+	}
+	/* Banners
+	--------------------------------------------------------------- */
+	/* Banner Slideshow --- */
+	.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav {
+		position: absolute;
+		bottom: -56px;
+		opacity: 1; 
+	}
+	.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper .ignite-slideshow-nav-button {
+		border: 1px solid #8d959a;
+	}
+	.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper, .ignite-slideshow.banner-slideshow .ignite-slide, .ignite-slideshow.banner-slideshow {
+		margin-bottom: 56px;
 	}
 }
 @media screen and (max-width: 700px) {

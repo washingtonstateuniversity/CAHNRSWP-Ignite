@@ -58,7 +58,7 @@ class Customizer_CAHNRS_Ignite {
 		'default' 				=> 'Not Set',
 		'none' 					=> 'No Banner',
 		'dynamic-scroll' 		=> 'Wide Banner',
-		'basic-slideshow'		=> 'Basic Slideshow',
+		'banner-slideshow'		=> 'Banner Slideshow',
 	);
 		
 	protected $heights = array(
@@ -72,6 +72,22 @@ class Customizer_CAHNRS_Ignite {
 		'height-tall' 		=> 'Tall (60vh - fixed height)',
 		'height-extra-tall' => 'Extra Tall (80vh - fixed height)',
 		'full' 				=> 'Full Height (100vh)'
+	);
+	
+	protected $css_heights = array(
+		'css-height-300' => '300px',
+		'css-height-325' => '325px',
+		'css-height-350' => '350px',
+		'css-height-375' => '375px',
+		'css-height-300' => '400px',
+		'css-height-425' => '425px',
+		'css-height-450' => '450px',
+		'css-height-475' => '475px',
+		'css-height-500' => '500px',
+		'css-height-525' => '525px',
+		'css-height-550' => '550px',
+		'css-height-575' => '575px',
+		'css-height-600' => '600px',
 	);
 	
 	
@@ -859,6 +875,8 @@ class Customizer_CAHNRS_Ignite {
 		
 		$section_id = '_cahnrswp_frontpage_options';
 		
+		$this->register_customizer_banner_slideshow_settings( '_cahnrswp_ignite_frontpage', $wp_customize );
+		
 		$wp_customize->add_setting( 
 			'_cahnrswp_ignite_fronpage_feature', 
 			array(
@@ -1073,6 +1091,8 @@ class Customizer_CAHNRS_Ignite {
 			)
 		); // end control
 		
+		$this->register_customizer_banner_slideshow_controls( '_cahnrswp_ignite_frontpage', $wp_customize, $section_id, '_cahnrswp_ignite_fronpage_feature', array( 'banner-slideshow' ) );
+		
 		$count_options = array( 
 			1 => 1, 
 			2 => 2,
@@ -1093,7 +1113,7 @@ class Customizer_CAHNRS_Ignite {
 				'choices'  => $count_options,
 				'active_callback' 	=> function() use ( $wp_customize ){
 					
-					$show_with = array('wide-static-slides');
+					$show_with = array('wide-static-slides','banner-slideshow');
 					
 					$show = false;
 					
@@ -1754,6 +1774,45 @@ class Customizer_CAHNRS_Ignite {
 		
 	} // end customize_theme
 	
+	
+	protected function register_customizer_banner_slideshow_settings( $prefix, $wp_customize ){
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_category', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+	} // End register_customizer_banner_slideshow_settings
+	
+	
+	protected function register_customizer_banner_slideshow_controls( $prefix, $wp_customize, $section_id, $show_key = '', $show_with = array() ){
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_category_control', 
+			array(
+				'label'    => 'Slideshow Category',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_category',
+				'type'     => 'select',
+				'choices'  => ignite_get_terms('slideshow_category'),
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+	} // End register_customizer_banner_slideshow_settings
 	
 	/**
 	 * @param string $context Where the colors will be used. Helpfull to give additional context to filters

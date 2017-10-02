@@ -37,10 +37,10 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 				case '404':
 					$html .= $this->get_404_banner( $args, $context, $post_id );
 					break;
-				case 'basic-slideshow':
-					include_once 'banners/basic-slideshow/class-basic-slideshow-banner-ignite.php';
-					$basic_slideshow = new Basic_Slideshow_Banner_Ignite( $args, $context, $post_id );
-					$html = $basic_slideshow->get_banner();
+				case 'banner-slideshow':
+					include_once ignite_get_theme_path('lib/parts/page-banners/banner-slideshow/class-banner-slideshow-ignite.php');
+					$banner_slideshow = new Banner_Slideshow_Ignite( $args, $context, $post_id );
+					$html = $banner_slideshow->get_banner();
 					break;
 				case 'wide-static-slides':
 					$html .= $this->get_wide_static_slides( $args, $context, $post_id );
