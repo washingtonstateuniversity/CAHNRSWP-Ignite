@@ -63,6 +63,8 @@ class Functions_Ignite {
 		
 		$this->add_customizer_controls();
 		
+		$this->add_post_formats();
+		
 		add_action('widgets_init', array( $this, 'add_widgets' ) );
 		
 	} // end init_theme_functions
@@ -84,6 +86,10 @@ class Functions_Ignite {
 		
 		include_once ignite_get_part('lib/shortcodes/cahnrs-posts/class-cahnrs-posts-shortcode-ignite.php');
 		
+		include_once ignite_get_part('lib/shortcodes/cwpinsert/class-cwpinsert-shortcode-ignite.php');
+		
+		include_once ignite_get_part('lib/shortcodes/cwpaccordions/class-cwpaccordion-shortcode-ignite.php');
+		
 	} // End add_shortcodes
 	
 	
@@ -100,6 +106,8 @@ class Functions_Ignite {
 		include_once ignite_get_part('lib/post-types/publications/class-publications-post-type-cahnrs-ignite.php');
 		
 		include_once ignite_get_part('lib/post-types/slides/class-slide-post-type-ignite.php');
+		
+		include_once ignite_get_part('lib/post-types/videos/class-video-post-type-ignite.php');
 		
 	} // End add_post_types
 	
@@ -143,6 +151,13 @@ class Functions_Ignite {
 		} // End if
 		
 	} // End add_customizer_controls
+	
+	
+	protected function add_post_formats(){
+		
+		include_once ignite_get_theme_path('lib/post-formats/class-post-formats-ignite.php');
+		
+	} // End add_post_formats
 
 	
 } // end Functions_Ignite

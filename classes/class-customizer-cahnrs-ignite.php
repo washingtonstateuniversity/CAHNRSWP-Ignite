@@ -150,9 +150,10 @@ class Customizer_CAHNRS_Ignite {
 	private function customize_post_types( $wp_customize, $panel ){
 		
 		$post_types = array(
-			'publications' 	=> "Publications" ,
+			'publication' 	=> "Publications" ,
 			'theme_parts' 	=> "Theme Parts",
-			'slides' 		=> "Slides" 
+			'slides' 		=> "Slides",
+			'video'			=> "Videos",
 		);
 		
 		foreach( $post_types as $post_type => $label ){
@@ -1237,6 +1238,14 @@ class Customizer_CAHNRS_Ignite {
 	private function customize_header( $wp_customize, $panel ){
 		
 		$wp_customize->add_setting( 
+			'_cahnrswp_header_type', 
+			array(
+				'default'   => 'cahnrs-college',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
 			'_cahnrswp_header_show_college_global_nav', 
 			array(
 				'default'   => 0,
@@ -1312,6 +1321,22 @@ class Customizer_CAHNRS_Ignite {
 			'_cahnrswp_header_display_banner', 
 			array(
 				'default'   => 1,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_header_include_search', 
+			array(
+				'default'   => 0,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_header_search_color', 
+			array(
+				'default'   => '',
 				'transport' => 'refresh',
 			) 
 		); // end add_setting
@@ -1404,6 +1429,30 @@ class Customizer_CAHNRS_Ignite {
 			) 
 		); // end add_setting
 		
+		$wp_customize->add_setting( 
+			'_cahnrswp_global_top_bar', 
+			array(
+				'default'   => 1,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_global_top_bar_bg_color', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_global_top_bar_text_color', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
 		// Add section
 		
 		$section_id = '_cahnrswp_header_options';
@@ -1419,12 +1468,85 @@ class Customizer_CAHNRS_Ignite {
 		// Add Controls
 		
 		$wp_customize->add_control(
+			'_cahnrswp_header_type_control', 
+			array(
+				'label'    => 'Header Type',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_type',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' 			=> 'Basic Header',
+					'cahnrs-college' 	=> 'College Header'
+				),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_global_top_bar_control', 
+			array(
+				'label'    => 'Show Top Header Bar',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_global_top_bar',
+				'type'     => 'checkbox',
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_global_top_bar_bg_color_control', 
+			array(
+				'label'    => 'Header Bar Background Color',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_global_top_bar_bg_color',
+				'type'     => 'select',
+				'choices'  => $this->get_colors('_cahnrswp_global_top_bar_bg_color'),
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('default');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_global_top_bar_text_color_control', 
+			array(
+				'label'    => 'Header Bar Text Color',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_global_top_bar_text_color',
+				'type'     => 'select',
+				'choices'  => $this->get_colors('_cahnrswp_global_top_bar_text_color'),
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('default');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
+			)
+		); // end control
+		
+		$wp_customize->add_control(
 			'_cahnrswp_header_show_college_global_nav_control', 
 			array(
 				'label'    => 'Show College Global Nav',
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_header_show_college_global_nav',
 				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('cahnrs-college');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
 			)
 		); // end control
 		
@@ -1446,10 +1568,14 @@ class Customizer_CAHNRS_Ignite {
 					'fs' 		=> 'Faculty & Staff',  
 				),
 				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('cahnrs-college');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
 					
-					$value = $wp_customize->get_setting( '_cahnrswp_header_show_college_global_nav' )->value();
+					$value_add = $wp_customize->get_setting( '_cahnrswp_header_show_college_global_nav' )->value();
 						
-					return ( ! empty( $value ) )? true : false;
+					return ( in_array( $value, $show_with ) && ! empty( $value_add ) ) ? true : false;
 				
 				} // End active_callback
 			)
@@ -1529,6 +1655,15 @@ class Customizer_CAHNRS_Ignite {
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_header_show_college_global',
 				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('cahnrs-college');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
 			)
 		); // end control
 		
@@ -1542,6 +1677,15 @@ class Customizer_CAHNRS_Ignite {
 				'settings' => '_cahnrswp_header_college_global_nav_bg_color',
 				'type'     => 'select',
 				'choices'  => $this->get_colors('_cahnrswp_header_college_global_nav_bg_color'),
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('cahnrs-college');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
 			)
 		); // end control
 		
@@ -1553,6 +1697,15 @@ class Customizer_CAHNRS_Ignite {
 				'settings' => '_cahnrswp_header_college_global_nav_text_color',
 				'type'     => 'select',
 				'choices'  => $this->get_colors('_cahnrswp_header_college_global_nav_text_color'),
+				'active_callback' 	=> function() use ( $wp_customize ){
+			
+					$show_with = array('cahnrs-college');
+
+					$value = $wp_customize->get_setting( '_cahnrswp_header_type' )->value();
+
+					return ( in_array( $value, $show_with ) ) ? true : false;
+
+				} // End active_callback
 			)
 		); // end control
 		
@@ -1598,6 +1751,27 @@ class Customizer_CAHNRS_Ignite {
 			   	)
 		   	)
 	   	);
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_include_search_control', 
+			array(
+				'label'    => 'Show Search',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_include_search',
+				'type'     => 'checkbox',
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_search_color_control', 
+			array(
+				'label'    => 'Search Button Color',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_search_color',
+				'type'     => 'select',
+				'choices'  => $this->get_colors('_cahnrswp_header_search_color'),
+			)
+		); // end control
 		
 		$wp_customize->add_control(
 			'_cahnrswp_header_horizontal_nav_control', 
@@ -1785,6 +1959,54 @@ class Customizer_CAHNRS_Ignite {
 			) 
 		); // end add_setting
 		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_speed', 
+			array(
+				'default'   => 1000,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_height', 
+			array(
+				'default'   => '400px',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_isauto', 
+			array(
+				'default'   => 1,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_delay', 
+			array(
+				'default'   => 6000,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_show_caption', 
+			array(
+				'default'   => 1,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_banner_slideshow_show_nav', 
+			array(
+				'default'   => 1,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
 	} // End register_customizer_banner_slideshow_settings
 	
 	
@@ -1810,6 +2032,155 @@ class Customizer_CAHNRS_Ignite {
 					
 				}
 			)
+		); // end control
+		
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_height_control', 
+			array(
+				'label'    => 'Slideshow Height',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_height',
+				'type'     => 'select',
+				'choices'  => $this->css_heights,
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+			
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_isauto_control', 
+			array(
+				'label'    => 'Auto Rotate',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_isauto',
+				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_show_caption_control', 
+			array(
+				'label'    => 'Show Caption',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_show_caption',
+				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_show_nav_control', 
+			array(
+				'label'    => 'Show Nav',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_show_nav',
+				'type'     => 'checkbox',
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_speed_control', 
+			array(
+				'label'    => 'Slideshow Speed (Change)',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_speed',
+				'type'     => 'select',
+				'choices'  => array(
+					'500' 	=> '0.5 Seconds',
+					'700' 	=> '0.7 Seconds',
+					'1000' 	=> '1 Second',
+					'1200' 	=> '1.2 Seconds',
+					'1500' 	=> '1.5 Second',
+				),
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+			
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_banner_slideshow_delay_control', 
+			array(
+				'label'    => 'Slideshow Delay',
+				'section'  => $section_id,
+				'settings' => $prefix . '_banner_slideshow_delay',
+				'type'     => 'select',
+				'choices'  => array(
+					'1000' 	=> '1 Second',
+					'2000' 	=> '2 Seconds',
+					'3000' 	=> '3 Seconds',
+					'4000' 	=> '4 Seconds',
+					'5000' 	=> '5 Seconds',
+					'6000' 	=> '6 Seconds',
+					'7000' 	=> '7 Seconds',
+					'8000' 	=> '8 Seconds',
+					'9000' 	=> '9 Seconds',
+				),
+				'active_callback' 	=> function() use ( $wp_customize, $show_key, $show_with ){
+					
+					$show = false;
+					
+					$type = $wp_customize->get_setting( $show_key )->value();
+					
+					$show = ( in_array( $type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+			
 		); // end control
 		
 	} // End register_customizer_banner_slideshow_settings

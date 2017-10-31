@@ -5,7 +5,7 @@
 * @param string $size Size of image to be used (full,large,medium,small, or custom)
 * @return array Array of image data
 */
-function ignite_get_post_image( $post_id, $size = full ){
+function ignite_get_post_image( $post_id, $size = 'full' ){
 	
 	$image = array();
 		
@@ -172,3 +172,21 @@ function ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, 
 	return $return_terms;
 	
 } // End ignite_get_terms
+
+function get_after_content_sidebar_ignite(){
+	
+	$html = '';
+	
+	if ( is_active_sidebar( 'content_after' ) ) {
+
+		ob_start();
+
+		dynamic_sidebar( 'content_after' );
+
+		$html .= '<div id="content-after-widget-area">' . ob_get_clean() .'</div>';
+
+	} // End if
+	
+	return $html;
+	
+} // End get_after_content_sidebar_ignite

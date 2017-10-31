@@ -55,6 +55,10 @@ Media Queries
 	right: 0;
 	bottom:0;
 }
+
+.ignite-post-editor .ignite-field-set .ignite-field-set-description {
+	margin-bottom: 8px;
+}
 .ignite-post-editor .ignite-field {
 	width: 48%;
 	display: inline-block;
@@ -72,4 +76,28 @@ Media Queries
 	height: 40px;
 	text-indent: 8px;
 	font-size: 18px;
+}
+.ignite-post-editor .ignite-field.checkbox-field.checkbox-list {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.ignite-post-editor .ignite-field.checkbox-field label {
+	display: inline-block;
+	font-size: 14px;
+}
+.ignite-post-editor .ignite-field.ignite-field-full {
+	width: auto;
+	display: block;
+}
+.ignite-post-editor .ignite-field.ignite-field-33 {
+	width: 32%;
+}
+.ignite-post-editor .ignite-field.ignite-field-25 {
+	width: 24%;
+}
+.ignite-field input[type=checkbox] {
+  transform: scale(1.25);
+}
+.ignite-field textarea {
+  width: 100%;
 }

@@ -17,12 +17,34 @@ class Theme_Setup_CAHNRS_Ignite {
 		
 		add_action( 'init', array( $this, 'init' ), 999 );
 		
-		add_action( 'template_include' , array( $this, 'add_404_template' ), 9999 );
+		add_action( 'template_include' , array( $this, 'add_templates' ), 9999 );
 		
 	} // End __construct
 	
 	
-	public function add_404_template( $template ){
+	public function add_templates( $template ){
+		
+		if ( isset( $_GET['rest-ext'] ) || isset( $_GET['get-post-json'] ) ){
+			
+			global $post;
+			
+			$site_url = get_site_url() . '/wp-json/wp/v2/';
+			
+			if ( $post->post_type !== 'post' ){
+				
+				$site_url .= $post->post_type .'/';
+				
+			} else {
+				
+				$site_url .= 'posts/';
+				
+			} // End if
+			
+			$site_url .= $post->ID;
+		
+			wp_redirect( $site_url );
+			
+		} // End If
 		
 		if ( isset( $_GET['not-found'] ) && empty( $_GET['has-page'] ) ){
 			

@@ -4,4 +4,4 @@
 		<?php foreach( $slides as $index => $slide ):?><div class="ignite-slideshow-nav-slide<?php if ( $slide->get_index() === 0 ) echo ' active';?>"></div><?php endforeach;?>
 	</div>
 	<div class="ignite-slideshow-nav-button next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-</div>
+</div> 

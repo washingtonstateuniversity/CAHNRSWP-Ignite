@@ -44,7 +44,7 @@ class Footer_Ignite extends Theme_Part_Ignite {
 			
 		} // End if
 		
-		echo $html;
+		echo apply_filters( 'cahnrs_ignite_page_html', $html );
 		
 	} // End get_footer
 	

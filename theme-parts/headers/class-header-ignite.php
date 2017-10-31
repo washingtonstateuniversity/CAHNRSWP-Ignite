@@ -9,6 +9,7 @@ class Header_Ignite  extends Theme_Part_Ignite {
 		'college_global_nav' => 0,
 		'college_banner' => 1,
 		'horiz_nav' => 0,
+		'cahnrs_global_top_bar' => 1,
 	);
 	
 	protected $settings = array(
@@ -38,9 +39,13 @@ class Header_Ignite  extends Theme_Part_Ignite {
 		$args = $this->get_customizer_args( $args );
 		
 		switch( $args['type'] ){
+				
+			case 'default':
+				$html .= $this->get_default_header( $context, $args );
+				break;
 			
 			case 'cahnrs-college':
-				$html = $this->get_college_header( $context, $args );
+				$html .= $this->get_college_header( $context, $args );
 				break;
 			
 		} // End switch
@@ -55,9 +60,67 @@ class Header_Ignite  extends Theme_Part_Ignite {
 			
 		} // End if
 		
-		echo $html;
+		echo apply_filters( 'cahnrs_ignite_page_html', $html );
 		
 	} // End the_header
+	
+	
+	protected function get_default_header( $context, $args ){
+		
+		$classes = array();
+		
+		$default_header_args = array(
+			'cahnrswp_global_top_bar' 	=> get_theme_mod('_cahnrswp_global_top_bar', 1),
+			'college_banner' 			=> get_theme_mod('_cahnrswp_header_display_banner', 1),
+			'horiz_nav' 				=> get_theme_mod('_cahnrswp_header_horizontal_nav', 0),
+			'has_search' 				=> get_theme_mod('_cahnrswp_header_include_search', 0),
+		);
+		
+		$args = array_merge( $args, $default_header_args );
+		
+		if ( $args['horiz_nav'] ) $classes[] = 'has-horiz-nav';
+		
+		if ( $args['has_search'] ) $classes[] = 'has-search';
+		
+		$html = '<header id="site-header" class="' . implode( ' ', $classes ) . '">';
+		
+		ob_start();
+		
+		if ( ! empty( $args['cahnrswp_global_top_bar'] ) ) {
+	
+			include ignite_get_theme_path( 'lib/parts/page-headers/top-header-bar.php');
+		
+		} // end if
+		
+		if ( ! empty( $args['college_banner'] ) ) {
+			
+			echo '<div class="ignite-header-banner-wrapper">';
+			
+			include ignite_get_theme_path( 'lib/parts/page-headers/header-banner.php');
+			
+			if ( ! empty( $args['has_search'] ) ) {
+			
+				include ignite_get_theme_path( 'lib/parts/search/basic-search.php');
+				
+			} // End if
+			
+			echo '</div>';
+		
+		} // end if
+		
+		if ( ! empty( $args['horiz_nav'] ) ){
+			
+			include locate_template( 'includes/headers/college/college-horizontal-menu.php', false );
+			
+		} // end if
+		
+		$html .= ob_get_clean();
+		
+		$html .= '</header>';
+		
+		return $html;
+		
+	} // End 
 	
 	
 	protected function get_college_header( $context, $args ){

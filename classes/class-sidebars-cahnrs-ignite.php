@@ -29,6 +29,22 @@ class Sidebars_CAHNRS_Ignite {
 		) );
 		
 		register_sidebar( array(
+			'name' => 'Top Header Bar Primary',
+			'id' => 'global-top-header-bar-primary',
+			'description' => 'Widgets in this area will be shown first in the top header bar.',
+			'before_widget' => '',
+			'after_widget'  => '',
+		) );
+		
+		register_sidebar( array(
+			'name' => 'Top Header Bar Secondary',
+			'id' => 'global-top-header-bar-secondary',
+			'description' => 'Widgets in this area will be shown to the right in the top header bar.',
+			'before_widget' => '',
+			'after_widget'  => '',
+		) );
+		
+		register_sidebar( array(
 			'name' => 'Banner After',
 			'id' => 'banner_after',
 			'description' => 'Widgets in this area will be shown after the Banner.',

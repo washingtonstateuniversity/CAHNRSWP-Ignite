@@ -67,7 +67,9 @@ class CSS_CAHNRS_Ignite {
 		$cahnrswp_header_horizontal_nav_link_active_bg_color = get_theme_mod( '_cahnrswp_header_horizontal_nav_link_active_bg_color', '' );
 		$cahnrswp_header_horizontal_nav_link_hover_text_color = get_theme_mod( '_cahnrswp_header_horizontal_nav_link_hover_text_color', '' );
 		$cahnrswp_header_horizontal_nav_link_hover_bg_color = get_theme_mod( '_cahnrswp_header_horizontal_nav_link_hover_bg_color', '' );
-		
+		$cahnrswp_global_top_bar_bg_color = get_theme_mod( '_cahnrswp_global_top_bar_bg_color', '' );
+		$cahnrswp_global_top_bar_text_color = get_theme_mod( '_cahnrswp_global_top_bar_text_color', '' );
+		$cahnrswp_header_search_color = get_theme_mod( '_cahnrswp_header_search_color', '' );
 		
 		$css = array(
 			array( '#site-header', 'background-image', 'url(' . $cahnrswp_header_bg_image . ')' ),
@@ -76,9 +78,9 @@ class CSS_CAHNRS_Ignite {
 			array( '#site-header:after', 'background-color', $cahnrswp_header_bg_color ),
 			array( '#site-header', 'background-size', $cahnrswp_header_bg_image_size ),
 			array( '#site-header', 'background-position', $cahnrswp_header_bg_image_position ),
-			array( '#college-global-header', 'background-color', $college_global_nav_bg_color ),
-			array( '#college-global-header:before', 'background-color', $college_global_nav_bg_color ),
-			array( '#college-global-header:after', 'background-color', $college_global_nav_bg_color ),
+			array( '#college-global-header, #global-top-header-bar', 'background-color', $college_global_nav_bg_color ),
+			array( '#college-global-header:before, #global-top-header-bar:before', 'background-color', $college_global_nav_bg_color ),
+			array( '#college-global-header:after, #global-top-header-bar:after', 'background-color', $college_global_nav_bg_color ),
 			array( '#college-global-nav > ul > li > a.active:after', 'border-top-color', $college_global_nav_bg_color ),
 			array( '#college-global-header', 'color', $college_global_nav_text_color ),
 			array( '#college-global-actions a:before', 'background-color', $college_global_nav_text_color ),
@@ -94,6 +96,14 @@ class CSS_CAHNRS_Ignite {
 			array( '#college-header-horiz-menu ul.menu > li.current-menu-parent > a', 'background-color', $cahnrswp_header_horizontal_nav_link_active_bg_color ),
 			array( '#college-header-horiz-menu ul.menu > li:hover > a', 'color', $cahnrswp_header_horizontal_nav_link_hover_text_color ),
 			array( '#college-header-horiz-menu ul.menu > li:hover > a', 'background-color', $cahnrswp_header_horizontal_nav_link_hover_bg_color ),
+			array( '#global-top-header-bar', 'background-color', $cahnrswp_global_top_bar_bg_color),
+			array( '#global-top-header-bar:before', 'background-color', $cahnrswp_global_top_bar_bg_color ),
+			array( '#global-top-header-bar:after', 'background-color', $cahnrswp_global_top_bar_bg_color ),
+			array( '#global-top-header-bar', 'color', $cahnrswp_global_top_bar_text_color ),
+			array( '#global-top-header-bar .top-header-bar-secondary-nav a:before', 'background-color', $cahnrswp_global_top_bar_text_color ),
+			array( '#global-top-header-bar .top-header-bar-primary-nav .menu li:before', 'background-color', $cahnrswp_global_top_bar_text_color ),
+			array( '#global-top-header-bar .top-header-bar-secondary-nav .menu li:before', 'background-color', $cahnrswp_global_top_bar_text_color ),
+			array( '.cahnrs-ignite-search-form.basic-search-form .ignite-search-form-field-submit', 'background-color', $cahnrswp_header_search_color ),
 		);
 		
 		foreach( $css as $instance ){

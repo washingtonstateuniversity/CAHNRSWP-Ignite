@@ -12,6 +12,7 @@ Colors
 Content
 - Promo List
 Displays
+
 Footers
 - College Global Footer
 Headers
@@ -19,14 +20,25 @@ Headers
 - College Global Navigation
 - College Header Banner
 - College Header Horizontal Menu
+- Search
+News Articles
 Pagebuilder Overrides
 Pagination
 Post Editor
+Post Formats
+- Scholarship Donor Profiles
+- Content Accordion
+- Accordion
+Post Types
+- Publications
+Search
+- In Page Search
 Secondary Menu
 Shortcodes
 Spine Overrides
 - Disabled Spine
 404 Page
+Videos
 **
 Media Queries
 ---------------------------------------------*/
@@ -51,6 +63,20 @@ Media Queries
 	font-size: 14px;
 	line-height: 18px;
 }
+
+.css-height-300 { height: 300px; }
+.css-height-325 { height: 325px; }
+.css-height-350 { height: 350px; }
+.css-height-375 { height: 375px; }
+.css-height-400 { height: 400px; }
+.css-height-425 { height: 425px; }
+.css-height-450 { height: 450px; }
+.css-height-475 { height: 475px; }
+.css-height-500 { height: 500px; }
+.css-height-525 { height: 525px; }
+.css-height-550 { height: 550px; }
+.css-height-575 { height: 575px; }
+.css-height-600 { height: 600px; }
 
 /* Document
 --------------------------------------------------------------- */
@@ -88,6 +114,7 @@ h1{
 	font-size:2.3em;
 	font-weight:400;
 	line-height: normal;
+	margin-bottom: 12px;
 }
 
 h2 {
@@ -133,6 +160,9 @@ a:hover {
 figure {
     max-width: 100%;
 }
+#site-content ul {
+	overflow: hidden;
+}
 .max-1188 .ignite-content-wrap {
 	max-width: 1188px;
 	margin: 0 auto;
@@ -146,11 +176,11 @@ figure {
 /* Banners
 --------------------------------------------------------------- */
 /* Banner Slideshow --- */
-.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper,
+/*.ignite-slideshow.banner-slideshow .ignite-slideshow-nav-wrapper,
 .ignite-slideshow.banner-slideshow .ignite-slide,
 .ignite-slideshow.banner-slideshow {
 	height: 400px;
-}
+}*/
 .ignite-slideshow.banner-slideshow .ignite-slideshow-slides-wrapper {
 	position:  absolute;
 	left: 0;
@@ -176,6 +206,7 @@ figure {
 .ignite-slideshow.banner-slideshow .ignite-slide-image {
 	background-position: center;
 	background-size: cover;
+	font-size: 0;
 }
 .ignite-slideshow.banner-slideshow .ignite-slide-caption-wrapper {
 	position:  absolute;
@@ -953,6 +984,154 @@ figure {
 	margin-left: 198px;
 	padding-left: 2rem;
 }
+/* Default Header ------------------------------- */
+#global-top-header-bar {
+	background-color: #23282b;
+	color: #ccc;
+	position: relative;
+}
+
+#global-top-header-bar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#global-top-header-bar:before, #global-top-header-bar:after {
+	content: '';
+	width: 9999rem;
+	position: absolute;
+	background-color: #23282b;
+	top: 0;
+	bottom: 0;
+	left: 100%;
+	z-index: 1;
+}
+
+#global-top-header-bar:before {
+	left: auto;
+	right: 100%;
+}
+#global-top-header-bar .top-header-bar-primary-nav {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#global-top-header-bar .top-header-bar-primary-nav:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+#global-top-header-bar .top-header-bar-secondary-nav,
+#global-top-header-bar .top-header-bar-primary-nav {
+	text-transform: uppercase;
+	font-size: 0.7rem;
+	letter-spacing: 1px;
+	line-height: normal;
+}
+#global-top-header-bar .top-header-bar-secondary-nav  ul  li,
+#global-top-header-bar .top-header-bar-primary-nav  ul  li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	position: relative;
+}
+
+#global-top-header-bar .top-header-bar-primary-nav  ul  li  a.active:after {
+	content: '';
+	display: block;
+	width: 0; 
+  	height: 0; 
+  	border-left: 15px solid transparent;
+  	border-right: 15px solid transparent;
+  	border-top: 6px solid #2a3033;
+	position: absolute;
+	top: 100%;
+	left: 0;
+}
+#global-top-header-bar .top-header-bar-primary-nav  ul  li  a .mobile {
+	display: none;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+#global-top-header-bar .top-header-bar-primary-nav .college-name-logo a,
+#global-top-header-bar .top-header-bar-secondary-nav a,
+#global-top-header-bar .top-header-bar-primary-nav .menu .menu-item a,
+#global-top-header-bar .top-header-bar-secondary-nav .menu .menu-item a{
+	color: inherit;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: top;
+	position: relative;
+	font-size: 12px;
+	padding-left: 12px;
+    padding-right: 12px;
+}
+#global-top-header-bar .top-header-bar-primary-nav .college-name-logo li:first-child a,
+#global-top-header-bar .top-header-bar-primary-nav .menu .menu-item:first-child a,
+#global-top-header-bar .top-header-bar-secondary-nav .menu .menu-item:first-child a {
+	padding-left: 0;
+}
+#global-top-header-bar .top-header-bar-primary-nav .college-name-logo li:before,
+#global-top-header-bar .top-header-bar-primary-nav .menu li:before,
+#global-top-header-bar .top-header-bar-secondary-nav .menu li:before
+{
+	content: '';
+	display: block;
+	position: absolute;
+	top: 12px;
+	bottom: 10px;
+	left: 0;
+	background-color: #ccc;
+	width: 1px;
+}
+#global-top-header-bar .top-header-bar-primary-nav .college-name-logo li:first-child:before,
+#global-top-header-bar .top-header-bar-primary-nav .menu li:first-child:before,
+#global-top-header-bar .top-header-bar-secondary-nav .menu li:first-child:before
+{
+	display: none;
+}
+#global-top-header-bar .top-header-bar-secondary-nav  a:first-child:before,
+#global-top-header-bar .top-header-bar-secondary-nav .menu .menu-item a:first-child:before{
+	display: none;
+}
+#global-top-header-bar .top-header-bar-primary-nav .college-name-logo a:after {
+	content: '\f107';
+	font-family: fontAwesome;
+	margin-left: 4px;
+	font-size: 16px;
+	display: none;
+}
+#global-top-header-bar .top-header-bar-secondary-nav  a:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 12px;
+	bottom: 10px;
+	left: 0;
+	background-color: #ccc;
+	width: 1px;
+}
+
+#global-top-header-bar .top-header-bar-secondary-nav  a:first-child:before {
+	display: none;
+}
+
+#global-top-header-bar .top-header-bar-secondary-nav  {
+	float: right;
+}
+
+#global-top-header-bar .top-header-bar-secondary-nav  a {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+/* Global Header ------------------------------- */
 
 #college-global-header {
 	background-color: #23282b;
@@ -1292,7 +1471,8 @@ figure {
 
 /* College Header Banner
 ----------------------------- */
-#college-header-banner {
+.ignite-header-banner-wrapper {
+	position:  relative;
 }
 
 #college-header-banner #site-logo {
@@ -1301,6 +1481,9 @@ figure {
 }
 .has-college-global-nav #college-header-banner #site-logo {
 	height: 110px;
+}
+.has-horiz-nav #college-header-banner #site-logo {
+	height: 123px;
 }
 
 #college-header-banner .site-logo-image,
@@ -1332,6 +1515,17 @@ figure {
 #college-header-banner .site-logo-image img {
 	max-height: 100px;
 	max-width: 100%;
+}
+#college-header-banner .site-logo-image .header-banner-site-logo-image {
+	height: 123px;
+	width: 123px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-right: 22px;
+}
+.has-search #college-header-banner {
+	margin-right: 225px;
 }
 /* College Header Horizontal Menu
 ----------------------------- */
@@ -1464,6 +1658,58 @@ figure {
 	font-size: 0.7rem;
 	background-color: #fff;
 }
+/* Header: Search  ------------------------- */
+.ignite-header-banner-wrapper .cahnrs-ignite-search-form {
+	position:  absolute;
+	top: 36px;
+	right: 0;
+}
+.cahnrs-ignite-search-form.basic-search-form {
+	width: 225px;
+}
+.cahnrs-ignite-search-form.basic-search-form form {
+	margin: 0;
+	padding: 0;
+}
+.cahnrs-ignite-search-form.basic-search-form label {
+	display: none;
+}
+.cahnrs-ignite-search-form.basic-search-form .ignite-search-form-field-keyword input {
+	display: block;
+	width: 100%;
+	height: 50px;
+	text-indent: 8px;
+	font-size: 18px;
+}
+.cahnrs-ignite-search-form.basic-search-form .ignite-search-form-field-submit {
+	position:  absolute;
+	top: 0;
+	right: 0;
+	background-color: #981e32;
+	background-image: url(../images/search-icon-light.png);
+	background-repeat:  no-repeat;
+	background-size: auto 80%;
+	background-position: center;
+}
+.cahnrs-ignite-search-form.basic-search-form .ignite-search-form-field-submit input {
+	height: 50px;
+	width: 60px;
+	border-radius: 0;
+	outline: none;
+	border: none;
+	text-transform:  uppercase;
+	color: #eee;
+	font-size: 0;
+	background-color: transparent;
+}
+
+
+/* News Articles
+--------------------------------------------------------------- */
+.ignite-media-footer .ignite-media-contact-phone,
+.ignite-media-footer .ignite-media-contact-email {
+	font-size: 14px;
+} 
 /* Pagebuilder Overrides
 --------------------------------------------------------------- */
 body .cpb-action-button {
@@ -1594,7 +1840,7 @@ body .widget_cahnrs_action_item a {
 }
 .cahnrs-pagnination.default-display .page-nav a {
 	display: block;
-	border: 2px solid #981e32;;
+	border: 2px solid #981e32;
 	padding: 4px 18px;
 	border-radius: 4px;
 }
@@ -1612,7 +1858,145 @@ body .widget_cahnrs_action_item a {
 	margin-right: 12px;
 	font-size: 16px;
 }
+/* Post Formats
+--------------------------------------------------------------- */
 
+/* Post Formats: Scholarship Donor Profiles ------------- */
+.scholarship-donor-profile .profile-image {
+	float: left;
+	margin: 0 18px 12px 0;
+}
+.scholarship-donor-profile .profile-content {
+	display: table-cell;
+	padding-right: 12px;
+	vertical-align: top;
+}
+.scholarship-donor-profile .profile-sidebar {
+	width: 250px;
+	display: table-cell;
+	padding-left: 12px;
+	vertical-align: top
+}
+/* Post Formats: Content Accordion ------------- */
+.ignite-content-accordion {
+	margin-bottom: 18px;
+}
+.ignite-content-accordion .ignite-content-accordion-title {
+	padding: 18px;
+	color: #981e32;
+	border: 1px solid #981e32;
+	background-color: #eff0f1;
+	cursor: pointer;
+	position: relative;
+}
+.ignite-content-accordion .ignite-content-accordion-title:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: 0;
+	width: 40px;
+	top: 0;
+	bottom: 0;
+	background-image: url(../images/plus-icon-basic.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px;
+}
+.ignite-content-accordion .ignite-content-accordion-title.active:after {
+	background-image: url(../images/minus-icon-basic.png);
+}
+.ignite-content-accordion .ignite-content-accordion-content {
+	padding: 18px;
+	display: none;
+}
+/* Post Formats: Accordion ------------- */
+.ignite-accordion {
+	margin-bottom: 18px;
+}
+.ignite-accordion .ignite-accordion-title {
+	padding: 12px 18px;
+	color: #981e32;
+	border: 1px solid #d7dadb;
+	background-color: #eff0f1;
+	cursor: pointer;
+	position: relative;
+}
+.ignite-accordion .ignite-accordion-title:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: 0;
+	width: 40px;
+	top: 0;
+	bottom: 0;
+	background-image: url(../images/plus-icon-basic.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30px;
+}
+.ignite-accordion .ignite-accordion-title.active:after {
+	background-image: url(../images/minus-icon-basic.png);
+}
+.ignite-accordion .ignite-accordion-content {
+	padding: 18px;
+	display: none;
+}
+/* Post Types
+--------------------------------------------------------------- */
+
+/* Post Types: Publications ------------- */
+.ignite-pub-title {
+	display: block;
+	font-size: 16px;
+}
+.ignite-pub-title .ignite-pub-title-published {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+/* Search
+--------------------------------------------------------------- */
+
+/* Search: In Page Search ------------- */
+.cahnrs-ignite-search-form.archive-search-form {
+	max-width: 400px;
+	position: relative;
+}
+.cahnrs-ignite-search-form.archive-search-form form {
+	margin: 0;
+	padding: 0;
+}
+.cahnrs-ignite-search-form.archive-search-form label {
+	display: none;
+}
+.cahnrs-ignite-search-form.archive-search-form .ignite-search-form-field-keyword input {
+	display: block;
+	width: 100%;
+	height: 50px;
+	text-indent: 8px;
+	font-size: 18px;
+}
+.cahnrs-ignite-search-form.archive-search-form .ignite-search-form-field-submit {
+	position:  absolute;
+	top: 0;
+	right: 0;
+	background-color: #981e32;
+	background-image: url(../images/search-icon-light.png);
+	background-repeat:  no-repeat;
+	background-size: auto 80%;
+	background-position: center;
+}
+.cahnrs-ignite-search-form.archive-search-form .ignite-search-form-field-submit input {
+	height: 50px;
+	width: 60px;
+	border-radius: 0;
+	outline: none;
+	border: none;
+	text-transform:  uppercase;
+	color: #eee;
+	font-size: 0;
+	background-color: transparent;
+}
 /* Secondary Menu
 --------------------------------------------------------------- */
 #secondary-menu {
@@ -2107,7 +2491,23 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
     font-size: 18px;
 	text-transform: uppercase;
 }
-    
+
+/* Videos
+--------------------------------------------------------------- */
+.ignite-video-wrapper {
+	padding-top: 56.25%;
+	position:  relative;
+	margin-bottom: 35px;
+}
+.ignite-video-wrapper iframe {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 /* Media Queries
 --------------------------------------------------------------- */
 @media screen and (max-width: 1200px) {
@@ -2269,12 +2669,13 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
 	#college-global-header {
     	margin-left: 0;
 	}
+	#global-top-header-bar,
 	#college-global-nav {
 		padding: 0 1rem;
 		box-sizing: border-box;
 		margin-left: 0;
 	}
-	
+	#global-top-header-bar .college-name-logo a:after,
 	#college-global-nav .college-name-logo a:after {
 		display: inline-block;
 	}
@@ -2333,6 +2734,10 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
 	#college-global-nav {
 		margin-right: 0;
 	}
+	#global-top-header-bar .top-header-bar-secondary-nav {
+		margin: 0 -1rem;
+	}
+	#global-top-header-bar .college-name-logo a,
 	#college-global-nav .college-name-logo a {
 		display: block;
 		height: auto;
@@ -2340,18 +2745,24 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
 		font-size: 12px;
 		padding: 12px 0;
 	}
+	#global-top-header-bar .top-header-bar-primary-nav .college-name-logo a {
+		height: auto;
+    	line-height: 22px;
+	}
 	/* College Global Actions
 	----------------------------- */
+	#global-top-header-bar .top-header-bar-secondary-nav,
 	#college-global-actions {
 		float: none;
 		background-color: #515558;
 	}
-	
+	#global-top-header-bar .top-header-bar-secondary-nav:after,
 	#college-global-actions:after{
 		content: '';
 		display: block;
 		clear: both;
-	} 
+	}
+	#global-top-header-bar .top-header-bar-secondary-nav a,
 	#college-global-actions a {
 		display: block;
 		float: left;
@@ -2361,6 +2772,7 @@ body .tribe-mini-calendar-event.cahnrs-template .list-info h2 {
 		border-left: 1px solid #333;
 		border-right: 1px solid #777;
 	}
+	#global-top-header-bar .top-header-bar-secondary-nav a:before,
 	#college-global-actions a:before {
 		display: none;
 	}

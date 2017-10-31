@@ -27,7 +27,7 @@ class Secondary_Menu_Ignite extends Theme_Part_Ignite {
 				
 			} // End switch
 			
-			echo $html;
+			echo apply_filters( 'cahnrs_ignite_page_html', $html );
 		
 		} // End if
 		

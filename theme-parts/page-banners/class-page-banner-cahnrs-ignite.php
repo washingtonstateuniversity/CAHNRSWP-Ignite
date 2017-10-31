@@ -64,7 +64,7 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 			
 		} // End if
 		
-		echo $html;
+		echo apply_filters( 'cahnrs_ignite_page_html', $html );
 		
 	} // End the_banner
 	

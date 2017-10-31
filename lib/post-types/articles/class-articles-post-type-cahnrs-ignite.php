@@ -3,6 +3,31 @@
 class Articles_Post_Type_CAHNRS_Ignite {
 	
 	
+	protected $general_topics = array(
+		'academics' 	=> 'Academics',
+		'research' 		=> 'Research',
+		'extension' 	=> 'Extension',
+		'alumni' 		=> 'Alumni',
+		'giving' 		=> 'Giving and Development',
+		'events' 		=> 'Events',
+		'faculty-staff' => 'Faculty & Staff',
+	);
+		
+	protected $subjects = array(
+		'faculty' 			=> 'Faculty',
+		'staff' 			=> 'Staff',
+		'extension' 		=> 'Extension Specialists',
+		'students' 			=> 'Students',
+		'alumni' 			=> 'Alumni',
+		'industry' 			=> 'Industry and Partners',
+		'volunteers' 		=> 'Volunteers',
+		'administrators' 	=> 'Administrators',
+		'initiatives'		=> 'University Initiatives',
+		'facilities' 		=> 'Facilities and Centers',
+		'awards'			=> 'Press and Awards',
+	);
+	
+	
 	public function __construct(){
 		
 		add_action( 'init', array( $this, 'register_post_type' ) );
@@ -23,7 +48,32 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		add_filter( 'template_include', array( $this, 'check_redirect'), 1 );
 		
+		add_filter( 'the_content', array( $this, 'add_media_footer'), 99999 );
+		
 	} // End __construct
+	
+	
+	public function add_media_footer( $content ){
+		
+		if ( is_singular( 'article' ) ){
+			
+			global $post;
+		
+			$sources = $this->get_sources( $post->ID );
+
+			ob_start();
+
+			include 'includes/media-footer.php';
+
+			$content .= ob_get_clean();
+			
+			remove_filter( 'the_content', array( $this, 'add_media_footer'), 99999 );
+			
+		} // End if
+		
+		return $content;
+		
+	} // End add_media_footer
 	
 	
 	public function check_redirect( $template ){
@@ -36,9 +86,7 @@ class Articles_Post_Type_CAHNRS_Ignite {
 			
 			if ( ! empty( $redirect_url ) ){
 				
-				wp_redirect( $redirect_url );
-				
-				exit;
+				$template = locate_template( 'lib/theme-templates/redirect.php', false );
 				
 			} // End if
 			
@@ -381,27 +429,27 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 			$post_id = $post->ID;
 			
-			$html .= '<style>';
+			//$html .= '<style>';
 			
-			ob_start();
+			//ob_start();
 			
-			include locate_template( 'lib/post-types/articles/includes/style.css', false );
+			//include locate_template( 'lib/post-types/articles/includes/style.css', false );
 			
-			$html .= ob_get_clean() . '</style>';
+			//$html .= ob_get_clean() . '</style>';
 			
-			$html .= '<fieldset id="news-release-options">';
+			//$html .= '<fieldset id="news-release-options">';
 			
-			$html .= $this->get_sources_form( $post );
+			//$html .= $this->get_sources_form( $post );
 			
-			$html .= $this->get_slide_edit_form( $post_id );
+			//$html .= $this->get_slide_edit_form( $post_id );
 			
-			$html .= $this->get_position_edit_form( $post_id );
+			//$html .= $this->get_position_edit_form( $post_id );
 			
-			$html .= $this->get_data_edit_form( $post_id );
+			$html .= $this->get_edit_form( $post_id );
 			
 			//$html .= $this->get_article_summary_form( $post );
 			
-			$html .= '</fieldset>';
+			//$html .= '</fieldset>';
 			
 			echo $html;
 		
@@ -410,7 +458,7 @@ class Articles_Post_Type_CAHNRS_Ignite {
 	} // End add_feature_settings
 	
 	
-	protected function get_sources_form( $post ){
+	/*protected function get_sources_form( $post ){
 		
 		$html = '';
 		
@@ -422,34 +470,24 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		return $html;
 		
-	}
+	}*/
 	
 	
-	protected function get_data_edit_form( $post_id ){
+	protected function get_edit_form( $post_id ){
 		
-		$general_topics = array(
-			'academics' 	=> 'Academics',
-			'research' 		=> 'Research',
-			'extension' 	=> 'Extension',
-			'alumni' 		=> 'Alumni',
-			'giving' 		=> 'Giving/Development',
-			'events' 		=> 'Events',
-			'faculty-staff' => 'Faculty & Staff',
-		);
+		$distribute = get_post_meta( $post_id, '_article_distribute', true );
 		
-		$subjects = array(
-			'faculty' 			=> 'Faculty',
-			'staff' 			=> 'Staff',
-			'extension' 		=> 'Extension Specialists',
-			'students' 			=> 'Students',
-			'alumni' 			=> 'Alumni',
-			'industry' 			=> 'Industry Partners',
-			'volunteers' 		=> 'Volunteers',
-			'administrators' 	=> 'Administrators',
-			'initiatives'		=> 'University Initiatives',
-			'facilities' 		=> 'Facilities & Centers',
-			'awards'			=> 'Press & Awards',
-		);
+		if ( is_array( $distribute ) ) $distribute = $distribute[0];
+		
+		$placement = get_post_meta( $post_id, '_article_placement', true );
+		
+		if ( ! is_array( $placement ) ) $placement = array('news-feed');
+		
+		$general_topics = $this->general_topics;
+		
+		$subjects = $this->subjects;
+		
+		$sources = $this->get_sources( $post_id );
 		
 		$topic_values = get_post_meta( $post_id, '_article_topic', true );
 		
@@ -459,13 +497,19 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		if ( ! is_array( $subjects_values ) ) $subjects_values = array();
 		
+		$short_title = get_post_meta( $post_id, '_article_short_title', true );
+		
+		$slide_image_url = get_post_meta( $post_id, '_article_slide_image_url', true );
+		
+		$redirect_url = get_post_meta( $post_id, '_article_redirect_url', true );
+		
 		$html = '';
 		
 		if ( ! is_array( $locations ) ) $locations = array(); 
 		
 		ob_start();
 		
-			include locate_template( 'lib/post-types/articles/includes/data-edit-form.php', false );
+			include locate_template( 'lib/post-types/articles/includes/editor.php', false );
 		
 		$html .= ob_get_clean();
 		
@@ -474,7 +518,47 @@ class Articles_Post_Type_CAHNRS_Ignite {
 	} // End get_data_edit_form
 	
 	
-	protected function get_position_edit_form( $post_id ){
+	protected function get_sources( $post_id ){
+		
+		$sources = array();
+		
+		$sources_meta = get_post_meta( $post_id, '_sources', true );
+		
+		if ( ! empty( $sources_meta['name_1'] ) ){
+			
+			for( $i = 1; $i < 6; $i++ ){
+				
+				$index = ( $i - 1 );
+				
+				if ( ! emtpy( $sources_meta['name_' . $index ]  ) ){
+					
+					$sources[ $index ]['name'] = $sources_meta['name_' . $index ]; 
+					
+				} // End if
+				
+				if ( ! emtpy( $sources_meta['info_' . $index ]  ) ){
+					
+					$sources[ $index ]['info'] = $sources_meta['name_' . $index ]; 
+					
+				} // End if
+				
+				$sources[ $index ]['email'] = '';
+				$sources[ $index ]['phone'] = '';
+				
+			} // End for
+			
+		} else {
+			
+			$sources = ( is_array( $sources_meta ) ) ? $sources_meta : array();
+			
+		} // End if
+		
+		return $sources;
+		
+	} // End get_sources
+	
+	
+	/*protected function get_position_edit_form( $post_id ){
 		
 		$html = '';
 		
@@ -496,10 +580,10 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		return $html;
 		
-	} // End get_position_edit_form
+	} // End get_position_edit_form*/
 	
 	
-	protected function get_slide_edit_form( $post_id ){
+	/*protected function get_slide_edit_form( $post_id ){
 		
 		$html = '';
 		
@@ -517,7 +601,7 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		return $html;
 		
-	} // End get_slide_edit_form
+	} // End get_slide_edit_form*/
 	
 	
 	protected function get_article_summary_form( $post ){
@@ -558,18 +642,23 @@ class Articles_Post_Type_CAHNRS_Ignite {
 			'_article_subject' 			=> 'text-array',
 			'_article_distribute' 		=> 'text-array',
 			'_article_placement' 		=> 'text-array',
+			'_sources' 					=> 'text-array',
 		);
 		
 		foreach( $fields as $key => $type ){
 
 			
-			//if ( isset( $_POST[ $key ] ) ){
+			if ( isset( $_POST[ $key ] ) ){
 				
 				$val = $_POST[ $key ];
 				
+				//var_dump( $key );
+				
+				//var_dump( $val );
+				
 				update_post_meta( $post_id, $key, $val );
 				
-			//} // End if
+			} // End if
 			
 		} // End foreach
 		
