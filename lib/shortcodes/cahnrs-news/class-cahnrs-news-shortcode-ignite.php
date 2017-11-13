@@ -34,7 +34,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 			'do_link' 				=> 1,
 			'display' 				=> 'promo-list',
 			'tags'					=> '',
-			'cahnrs_page'			=> 1,
+			'cpage'					=> 1,
 			'categories' 			=> '',
 			'excerpt_length'		=> 25,
 			'orderby'				=> 'date',
@@ -87,7 +87,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 		
 		require_once locate_template( 'classes/class-paginiation-cahnrs-ignite.php', false );
 		
-		$pagination = new Pagination_CAHNRS_Ignite( $atts['page'], $atts['per_page'], $query->total_posts );
+		$pagination = new Pagination_CAHNRS_Ignite( $atts['cpage'], $atts['per_page'], $query->total_posts );
 		
 		$pagination_html = '';
 		
