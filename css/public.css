@@ -24,6 +24,8 @@ Headers
 News Articles
 Pagebuilder Overrides
 Pagination
+Plugin Overrides
+- Tribe Events
 Post Editor
 Post Formats
 - Scholarship Donor Profiles
@@ -1858,9 +1860,15 @@ body .widget_cahnrs_action_item a {
 	margin-right: 12px;
 	font-size: 16px;
 }
+/* Plugin Overrides
+--------------------------------------------------------------- */
+/* Plugin Overrides: Tribe Events ------------- */
+
 /* Post Formats
 --------------------------------------------------------------- */
-
+.events-list .tribe-events-loop, .single-tribe_organizer .tribe-events-loop, .single-tribe_venue .tribe-events-loop, .tribe-events-day .tribe-events-loop {
+    max-width: none;
+}
 /* Post Formats: Scholarship Donor Profiles ------------- */
 .scholarship-donor-profile .profile-image {
 	float: left;

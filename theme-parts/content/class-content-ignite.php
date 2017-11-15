@@ -83,6 +83,15 @@ class Content_Ignite extends Theme_Part_Ignite {
 		
 		$html = apply_filters( 'ignite_content_template', '', $context, $args );
 		
+		switch( $context ){
+				
+			case 'search':
+				$html .= $this->get_search_content( $context, $args );
+				break;
+		} // End switch
+		
+		
+		
 		if ( empty( $html ) ){
 			
 			if ( is_archive() ){
@@ -147,11 +156,30 @@ class Content_Ignite extends Theme_Part_Ignite {
 	} // End get_content_title
 	
 	
+	protected function get_search_content( $context, $args ){
+		
+		$html = '';
+		
+		$html .= '<h1>Search</h1>';
+				
+		$html .= $this->get_search( 'archive' );
+		
+		$content = $this->get_content_archive( $context, $args );
+
+		$html .= apply_filters( 'ignite_content_html_inner', $content, $context, $args ) ;
+		
+		return $html;
+		
+	} // End get_search_content
+	
+	
 	protected function get_recent_posts(){
 		
 		
-		
-		
 	}
+	
+	protected function get_promo_display( $context, $args ){
+		
+	} // End get_promo_display
 	
 } // End Content_Ignite
