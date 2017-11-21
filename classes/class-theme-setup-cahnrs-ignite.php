@@ -105,6 +105,8 @@ class Theme_Setup_CAHNRS_Ignite {
 		
 		$is_cropped = get_theme_mod( '_cahnrs_ignite_global_cropped_spine', false );
 		
+		//var_dump( $is_cropped );
+		
 		if ( $is_cropped ){
 			
 			$html = preg_replace_callback( 

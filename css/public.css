@@ -39,6 +39,7 @@ Secondary Menu
 Shortcodes
 Spine Overrides
 - Disabled Spine
+- Enable Spine Mobile
 404 Page
 Videos
 **
@@ -219,6 +220,12 @@ figure {
 .max-1188 .ignite-slideshow.banner-slideshow .ignite-slide-caption {
 	max-width: 1188px;
 	margin: 0 auto;
+	padding-left: 198px;
+	box-sizing: border-box;
+}
+.cropped-spine .ignite-slideshow.banner-slideshow .ignite-slide-caption,
+.disable-spine .ignite-slideshow.banner-slideshow .ignite-slide-caption {
+	padding-left: 0 !important;
 }
 .ignite-slideshow.banner-slideshow .ignite-slide-caption-inner {
 	max-width: 500px;
@@ -1529,6 +1536,14 @@ figure {
 .has-search #college-header-banner {
 	margin-right: 225px;
 }
+@media screen and (max-width: 989px){ 
+	#college-header-banner .site-title {
+		font-size: 24px;
+		line-height: normal;
+	}
+}
+
+
 /* College Header Horizontal Menu
 ----------------------------- */
 #college-header-horiz-menu {
@@ -1660,6 +1675,11 @@ figure {
 	font-size: 0.7rem;
 	background-color: #fff;
 }
+@media screen and (max-width: 989px){ 
+	.hide-horiz-nav-mobile #college-header-horiz-menu {
+		display: none !important;
+	}
+}
 /* Header: Search  ------------------------- */
 .ignite-header-banner-wrapper .cahnrs-ignite-search-form {
 	position:  absolute;
@@ -1703,6 +1723,23 @@ figure {
 	color: #eee;
 	font-size: 0;
 	background-color: transparent;
+}
+@media screen and (max-width: 989px){
+	.cahnrs-ignite-search-form.basic-search-form {
+		width: 60px;
+		height: 50px;
+		right: 18px;
+	}
+	.cahnrs-ignite-search-form.basic-search-form:hover .ignite-search-form-field-keyword {
+		position: absolute;
+		width: 225px;
+		top: 100%;
+		right: 0;
+		z-index: 999;
+	}
+	.has-search #college-header-banner {
+		margin-right: 70px;
+	}
 }
 
 
@@ -2408,7 +2445,7 @@ body:not(.has-background-image) {
 	text-decoration: none;
 }
 
-/* Disabled Spine 
+/* Spine: Disabled Spine 
 ------------------------------------*/
 body.disable-spine #spine {
 	top: -9999rem !important;
@@ -2427,6 +2464,18 @@ body.disable-spine #college-header-horiz-menu {
 body.disable-spine #binder #spine header {
 	position: absolute !important;
 	top: -9999rem !important;
+}
+/* Spine: Enable Spine Mobile
+------------------------------------*/
+@media screen and (max-width: 989px) {
+	
+	body.disable-spine.enable-spine-mobile #binder #spine header {
+		position: fixed !important;
+		top: 0 !important;
+	}
+	body.disable-spine.enable-spine-mobile #binder main {
+		margin-top: 50px;
+	}
 }
 
 body .tribe-mini-calendar-event.cahnrs-template p {

@@ -1,8 +1,6 @@
 <?php
 
-include locate_template( 'includes/headers/header.php', false );
-
-include locate_template( 'includes/main/main-start.php', false );
+the_ignite_theme_header('search');
 
 include_once CAHNRSIGNITEPATH . 'theme-parts/headers/class-header-ignite.php';
 $header = new Header_Ignite();
@@ -20,10 +18,4 @@ include_once CAHNRSIGNITEPATH . 'theme-parts/content/class-content-ignite.php';
 $content = new Content_Ignite();
 $content->the_content( 'search' );
 
-include_once CAHNRSIGNITEPATH . 'theme-parts/footers/class-footer-ignite.php';
-$footer = new Footer_Ignite();
-$footer->the_footer( 'archive' );
-
-include locate_template( 'includes/main/main-end.php', false );
-
-get_footer();
+the_ignite_theme_footer('search');

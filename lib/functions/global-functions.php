@@ -190,3 +190,57 @@ function get_after_content_sidebar_ignite(){
 	return $html;
 	
 } // End get_after_content_sidebar_ignite
+
+
+function the_ignite_theme_header( $context = 'single', $args = array(), $echo = true ){
+	
+	ob_start();
+	
+	include_once CAHNRSIGNITEPATH . 'theme-parts/theme-header/class-theme-header-ignite.php';
+	
+	$theme_header = new Theme_Header_Ignite();
+	
+	$theme_header->the_theme_header( 'single' );
+	
+	$html = apply_filters( 'cahnrs_ignite_page_html', ob_get_clean() );
+	
+	if ( $echo ){
+		
+		echo $html;
+		
+	} else {
+		
+		return $html;
+		
+	} // End if
+	
+} // End get_theme_header
+
+
+function the_ignite_theme_footer( $context = 'single', $args = array(), $echo = true ){
+	
+	ob_start();
+	
+	include_once CAHNRSIGNITEPATH . 'theme-parts/footers/class-footer-ignite.php';
+	
+	$footer = new Footer_Ignite();
+	
+	$footer->the_footer( $context );
+
+	include locate_template( 'includes/main/main-end.php', false );
+
+	get_footer();
+	
+	$html = apply_filters( 'cahnrs_ignite_page_html', ob_get_clean() );
+	
+	if ( $echo ){
+		
+		echo $html;
+		
+	} else {
+		
+		return $html;
+		
+	} // End if
+	
+} // End 

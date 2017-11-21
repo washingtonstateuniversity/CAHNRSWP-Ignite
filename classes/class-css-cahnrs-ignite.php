@@ -121,11 +121,27 @@ class CSS_CAHNRS_Ignite {
 		
 		$cahnrswp_theme_use_spine = get_theme_mod( '_cahnrswp_theme_use_spine', '' );
 		
+		$cahnrswp_theme_use_spine_mobile = get_theme_mod( '_cahnrswp_theme_use_spine_mobile', '' );
+		
+		$cahnrswp_header_horizontal_nav_mobile = get_theme_mod( '_cahnrswp_header_horizontal_nav_mobile', '' );
+		
 		if ( $cahnrswp_theme_use_spine == 'disable' ){
 			
 			$classes[] = 'disable-spine';
 			
 		} // end if
+		
+		if ( $cahnrswp_header_horizontal_nav_mobile ) {
+			
+			$classes[] = 'hide-horiz-nav-mobile';
+			
+		} // End if
+		
+		if ( $cahnrswp_theme_use_spine_mobile === 'enable' ){
+			
+			$classes[] = 'enable-spine-mobile';
+			
+		} // End if
 		
 		$is_cropped = ( function_exists( 'spine_get_option' ) && ( true === spine_get_option( 'crop' ) && is_front_page() ) ) ? true : false;
 		

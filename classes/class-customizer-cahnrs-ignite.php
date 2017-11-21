@@ -1151,6 +1151,14 @@ class Customizer_CAHNRS_Ignite {
 		); // end add_setting
 		
 		$wp_customize->add_setting( 
+			'_cahnrswp_theme_use_spine_mobile', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
 			'_cahnrs_ignite_global_cropped_spine', 
 			array(
 				'default'   => '',
@@ -1197,6 +1205,21 @@ class Customizer_CAHNRS_Ignite {
 				'label'    => 'Use Spine (sitewide)',
 				'section'  => $section_id,
 				'settings' => '_cahnrswp_theme_use_spine',
+				'type'     => 'select',
+				'choices'  => array(
+					'default' 	=> 'Not Set',
+					'enable' 	=> 'Enable',
+					'disable' 	=> 'Disable', 
+				),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_theme_use_spine_mobile_control', 
+			array(
+				'label'    => 'Use Mobile Spine (sitewide)',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_theme_use_spine_mobile',
 				'type'     => 'select',
 				'choices'  => array(
 					'default' 	=> 'Not Set',
@@ -1367,6 +1390,14 @@ class Customizer_CAHNRS_Ignite {
 		
 		$wp_customize->add_setting( 
 			'_cahnrswp_header_horizontal_nav', 
+			array(
+				'default'   => 0,
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_header_horizontal_nav_mobile', 
 			array(
 				'default'   => 0,
 				'transport' => 'refresh',
@@ -1781,6 +1812,16 @@ class Customizer_CAHNRS_Ignite {
 				'settings' => '_cahnrswp_header_horizontal_nav',
 				'type'     => 'select',
 				'choices'  => $this->menus,
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_horizontal_nav_mobile_control', 
+			array(
+				'label'    => 'Horiz. Nav Hide On Mobile',
+				'section'  => $section_id,
+				'settings' => '_cahnrswp_header_horizontal_nav_mobile',
+				'type'     => 'checkbox',
 			)
 		); // end control
 		
