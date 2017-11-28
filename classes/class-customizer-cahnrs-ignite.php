@@ -868,11 +868,130 @@ class Customizer_CAHNRS_Ignite {
 	} // End customize_pagebanners
 	
 	
+	private function customize_video_banner( $wp_customize, $panel_id, $section_id, $prefix = '', $current_type = '' ){
+		
+		$wp_customize->add_setting( 
+			$prefix . '_video_height', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_video_content_position', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_video_id', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_setting( 
+			$prefix . '_video_bg_image', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_control(
+			$prefix . '_video_height_control', 
+			array(
+				'label'    => 'Video Height Control',
+				'section'  => $section_id,
+				'settings' => $prefix . '_video_height',
+				'type'     => 'select',
+				'choices'  => array(
+					'height-400' 		=> '400px',
+					'height-600' 		=> '600px',
+					'height-full' 		=> 'Full Window',
+				),
+				'active_callback' 	=> function() use ( $current_type ){
+					
+					$show_with = array('video-banner');
+					
+					$show = ( in_array( $current_type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			$prefix . '_video_content_position_control', 
+			array(
+				'label'    => 'Video Content Position',
+				'section'  => $section_id,
+				'settings' => $prefix . '_video_content_position',
+				'type'     => 'select',
+				'choices'  => array(
+					'ignite-content-top' 		=> 'Top',
+					'ignite-content-middle' 	=> 'Middle',
+					'ignite-content-bottom' 	=> 'Bottom',
+				),
+				'active_callback' 	=> function() use ( $current_type ){
+					
+					$show_with = array('video-banner');
+					
+					$show = ( in_array( $current_type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		
+		$wp_customize->add_control(
+			$prefix . '_video_id_control', 
+			array(
+				'label'    => 'Video ID (*Vimeo)',
+				'section'  => $section_id,
+				'settings' => $prefix . '_video_id',
+				'type'     => 'text',
+				'active_callback' 	=> function() use ( $current_type ){
+					
+					$show_with = array('video-banner');
+					
+					$show = ( in_array( $current_type, $show_with ) ) ? true : false;
+						
+					return $show;
+					
+				}
+			)
+		); // end control
+		
+		
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				$prefix . '_video_bg_image_control',
+			   	array(
+				   	'label'      => 'Video Background Image',
+				   	'section'    => $section_id,
+				   	'settings'   => $prefix . '_video_bg_image', 
+			   	)
+		   	)
+	   	);
+		
+	} // End customize_video_banner
+	
+	
 	private function customize_frontpage( $wp_customize, $panel ){
 		
 		$banners = $this->banners;
 		
 		$banners['wide-static-slides'] = 'College Slideshow';
+		$banners['video-banner'] = 'Video Banner';
 		
 		$section_id = '_cahnrswp_frontpage_options';
 		
@@ -933,6 +1052,7 @@ class Customizer_CAHNRS_Ignite {
 				'transport' => 'refresh',
 			) 
 		); // end add_setting
+	
 		
 		$wp_customize->add_section( 
 			$section_id, 
@@ -941,6 +1061,12 @@ class Customizer_CAHNRS_Ignite {
 				'panel' 	=> $panel,
 			)
 		); // end add_section
+		
+		// Currently Selected Banner
+		$current_banner = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+		
+		// Add Video Banner Controls
+		$this->customize_video_banner( $wp_customize, $panel, $section_id, $prefix = '_cahnrswp_ignite_fronpage_feature', $current_banner );
 		
 		$wp_customize->add_control(
 			'_cahnrswp_ignite_fronpage_feature_control', 

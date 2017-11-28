@@ -1,3 +1,157 @@
+/*
+* Video banner object used for ignite front page
+*/
+var ignite_video_banner = function( banner ){
+
+	this.banner = banner;
+	this.ratio = 0.5625;
+	this.video_wrapper = this.banner.find( '.ignite-video-container-wrapper');
+	this.video = this.banner.find( '.ignite-video-container');
+	this.video_iframe = this.video.find('iframe');
+	this.video_spacer = this.banner.find('.ignite-video-container-spacer');
+	this.video_widget_area = this.banner.find('.ignite-video-container-widget-area');
+	this.player = false;
+	var self = this;
+
+	this.events = function(){
+
+		jQuery( window ).resize(
+			function(){
+				self.resize();
+			}
+		);
+
+	} // End events
+
+	this.resize = function(){
+		
+		self.video.css( 'padding-bottom','0');
+		
+		if ( self.banner.hasClass('height-full') ) {
+			
+			self.set_full_video_height();
+			
+		} // end if
+		
+		this.check_spacer_height();
+		
+		var video_w = self.video_wrapper.width();
+		var video_h = self.video_wrapper.height();
+
+		var ratio = ( video_h / video_w );
+
+		if ( ratio > self.ratio ){
+
+			self.set_video_height( video_h, video_w );
+
+		} else {
+
+			self.set_video_width( video_h, video_w );
+
+		} // End if
+
+	}; // End resize
+	
+	this.check_spacer_height = function(){
+		
+		//this.video_spacer.css('height', null);
+		//this.video_widget_area.css('height', null);
+		
+		var spacer_h = this.video_spacer.height();
+		var widget_h = this.video_widget_area.outerHeight();
+		
+		if ( widget_h > spacer_h ){
+			
+			this.set_video_wrapper_height( widget_h );
+			
+		} else {
+			
+			this.video_widget_area.height( spacer_h );
+			
+		}// End if
+		
+	} // End check_spacer_height
+
+	this.set_video_height = function( window_h, window_w ){
+		
+		console.log( window_h );
+
+		self.video.height( window_h );
+
+		var video_w = ( window_h / self.ratio );
+
+		var margin = ( ( video_w - window_w ) * 0.5 );
+
+		self.video.css( 'left','-' + margin + 'px' );
+
+		self.video.width( video_w );
+
+		//console.log('set window height');
+
+	}; // End get_video_height
+	
+	
+	this.set_full_video_height = function(){
+		
+		var window_w = jQuery( window ).width();
+		
+		var window_h = jQuery( window ).height();
+		
+		var offset = self.banner.offset().top;
+		
+		var wrapper_h = ( window_h - offset );
+		
+		this.set_video_wrapper_height( wrapper_h );
+		
+	}; // End set_full_video_height
+	
+	
+	this.set_video_wrapper_height = function( wrapper_h ){
+		
+		//alert( wrapper_h );
+		
+		self.video_wrapper.height( wrapper_h );
+		
+		self.video_spacer.height( wrapper_h );
+		
+	}; // End set_video_wrapper_height
+	
+
+	this.set_video_width = function( window_h, window_w ){
+
+		self.video.css( {'width':'100%','left':0 } );
+
+		var video_h = ( window_w * self.ratio );
+
+		var margin = ( ( video_h - window_h ) * 0.5 );
+
+		self.video.css( 'top','-' + margin + 'px' );
+
+		self.video.height( video_h );
+
+		//console.log('set window width');
+
+	} // End get_video_height
+
+	this.do_video = function(){
+
+		var iframe = self.video_iframe;
+
+		self.player = new Vimeo.Player( iframe );
+		
+		setTimeout( function(){ self.video_iframe.fadeIn('fast'); }, 1000 );
+
+	} // End do_video
+
+	this.events();
+
+	this.do_video();
+
+	this.resize();
+
+} // End video_banner
+
+
 var cahnrs_ignite = function(){
 	
 	this.slideshows = [];
@@ -275,7 +429,7 @@ var instance_cahnrs_ignite = new cahnrs_ignite();
 var ignite = {
 	
 	init:function(){
-		
+		ignite.banners.init_banners();
 		ignite.banners.bind_events();
 		ignite.headers.bind_events();
 		ignite.accordions.bind_events();
@@ -342,9 +496,22 @@ var ignite = {
 	
 	banners: {
 		
+		init_banners: function(){
+			
+			jQuery('.ignite-video-banner').each( 
+				
+				function( index, value ){ 
+					
+				window['ignite_video' + index] = new ignite_video_banner( jQuery(this) ); 
+					
+			});
+			
+		}, // End init_banners
+		
 		bind_events:function(){
 			
 			jQuery( window ).scroll(
+				
 				function( e ){
 					
 					if ( jQuery('.parallax-banner' ).length > 0 ){
@@ -395,6 +562,10 @@ var ignite = {
 			}, // end get_banner_scroll_bottom
 			
 		}, // end parallax_banner
+		
+		video_banner: {
+			
+		}, // End video banner 
 		
 	}, // end banners
 	
@@ -508,5 +679,7 @@ var ignite = {
 	}, // End slideshow
 	
 } // end ignite
+
+
 
 ignite.init();

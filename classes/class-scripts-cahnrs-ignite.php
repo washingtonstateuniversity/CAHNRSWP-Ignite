@@ -18,6 +18,8 @@ class Scripts_CAHNRS_Ignite {
 		
 		wp_enqueue_style( 'font-awesome', CAHNRSIGNITEURL . 'font-awesome/css/font-awesome.min.css', array(), Functions_Ignite::$version );
 		
+		wp_enqueue_script( 'vimeo', 'https://player.vimeo.com/api/player.js', array(), Functions_Ignite::$version );
+		
 	} // end wp_enqueue_scripts
 	
 	

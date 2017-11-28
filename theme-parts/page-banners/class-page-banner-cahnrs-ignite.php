@@ -34,6 +34,9 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 		
 			switch( $args['type'] ){
 				
+				case 'video-banner':
+					$html .= $this->get_video_banner(  $args, $context, $post_id  );
+					break;
 				case '404':
 					$html .= $this->get_404_banner( $args, $context, $post_id );
 					break;
@@ -198,6 +201,49 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 		return $html; 
 		
 	} // End get_dynamic_scroll 
+	
+	
+	protected function get_video_banner(  $args, $context, $post_id  ){
+		
+		$video_settings = $this->get_video_banner_settings();
+		
+		$video_classes = array();
+		
+		if ( ! empty( $video_settings['height'] ) ) $video_classes[] = $video_settings['height'];
+		
+		if ( ! empty( $video_settings['content-position'] ) ) $video_classes[] = $video_settings['content-position'];
+		
+		ob_start();
+		
+		include ignite_get_theme_path( 'lib/displays/video-banner/video.php' );
+		
+		return ob_get_clean();
+		
+	} // End get_video_banner
+	
+	
+	protected function get_video_banner_settings(){
+		
+		if ( is_front_page() ){
+			
+			$prefix = '_cahnrswp_ignite_fronpage_feature';
+			
+		} else {
+			
+			$prefix = '_cahnrswp_ignite';
+			
+		} // End if
+		
+		$settings = array(
+			'height' 			=> get_theme_mod( $prefix . '_video_height', '' ),
+			'content-position' 	=> get_theme_mod( $prefix . '_video_content_position', 'ignite-content-top' ),
+			'video-id'			=> get_theme_mod( $prefix . '_video_id', '' ),
+			'bg-image'			=> get_theme_mod( $prefix . '_video_bg_image', '' ),
+		);
+		
+		return $settings;
+		
+	} // End get_video_banner_settings
 	
 	
 	protected function get_menu_banner_full( $args, $context, $post_id ) {

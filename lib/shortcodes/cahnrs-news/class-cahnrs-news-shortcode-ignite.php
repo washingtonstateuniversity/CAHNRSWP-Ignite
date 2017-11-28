@@ -71,7 +71,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 		
 		$atts = $this->get_form_overrides( $atts, $tag );
 		
-		$cache_content = $this->get_content_cache( $atts, 'cahnrs_news' );
+		/*$cache_content = $this->get_content_cache( $atts, 'cahnrs_news' );
 		
 		if( isset( $_GET['debug'] )) var_dump( $cache_content ); 
 		
@@ -79,7 +79,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 			
 			return $cache_content;
 			
-		} // End if
+		} // End if*/
 		
 		$query = $this->get_news_query( $atts );
 		
@@ -123,7 +123,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 		
 		$html .= ob_get_clean();
 		
-		$this->set_content_cache( $atts, 'cahnrs_news', $html );
+		//$this->set_content_cache( $atts, 'cahnrs_news', $html );
 		
 		return $html;
 		

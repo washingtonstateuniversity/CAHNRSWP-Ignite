@@ -7,6 +7,7 @@ Banners
 - Static Image Wide
 - Wide Static Slides
 - Banner Slideshow
+- Video Banner
 Colors
 - Full Bleeds
 Content
@@ -642,7 +643,57 @@ figure {
 		top: 85px;
 	}
 }
-
+/* Banners: Video Banner
+--------------------------------------------------------------- */
+.ignite-video-banner .ignite-video-container {
+	padding-bottom: 56.25%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	box-sizing: border-box;
+}
+.ignite-video-banner .ignite-video-container-wrapper {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 600px;
+	overflow: hidden;
+}
+.ignite-video-banner .ignite-video-container-spacer {
+	height: 600px;
+	position: relative;
+	z-index: 2;
+	box-sizing: border-box;
+}
+.ignite-video-banner .ignite-video-container iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+}
+.ignite-video-banner .ignite-video-container-widget-area {
+	display: table;
+	position: relative;
+	width: 100%;
+}
+.ignite-video-banner .ignite-video-container-widget-area-inner {
+	display: table-cell;
+	position: relative;
+}
+.ignite-video-banner.ignite-content-middle .ignite-video-container-widget-area-inner {
+	vertical-align: middle;
+}
+.ignite-video-banner.ignite-content-bottom .ignite-video-container-widget-area-inner {
+	vertical-align: bottom;
+}
 /* Content
 --------------------------------------------------------------- */
 #site-content {

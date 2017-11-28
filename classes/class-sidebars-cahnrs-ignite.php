@@ -84,10 +84,29 @@ class Sidebars_CAHNRS_Ignite {
 			'after_widget'  => '</div>',
 		) );
 		
+		$this->add_banner_sidebars();
+		
 		
 		$this->add_customizer_sidebars();
 		
 	} // end register_sidebars
+	
+	
+	protected function add_banner_sidebars(){
+		
+		if ( 'video-banner' === get_theme_mod( '_cahnrswp_ignite_fronpage_feature', '' ) ){
+			
+			register_sidebar( array(
+				'name' => 'Video Banner Content',
+				'id' => 'video_banner',
+				'description' => 'Widgets in this area will be shown in the front page video.',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</div>',
+			) );
+			
+		} // End if
+		
+	} // End add_banner_sidebars
 	
 	
 	protected function add_customizer_sidebars(){
