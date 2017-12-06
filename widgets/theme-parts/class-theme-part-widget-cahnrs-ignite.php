@@ -55,6 +55,24 @@ class Theme_Part_Widget_CAHNRS_Ignite extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		
+		$args = array(
+			'posts_per_page'   => -1,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'post_type'        => 'theme_part',
+			'post_status'      => 'publish',
+		);
+		
+		$post_options = array();
+		
+		$posts_array = get_posts( $args );
+		
+		foreach( $posts_array as $tp_post ){
+			
+			$post_options[ $tp_post->ID ] = $tp_post->post_title;
+			
+		} // End foreach
+		
 		$part_id = ( ! empty( $instance['part_id'] ) ) ? $instance['part_id'] :'';
 		
 		include locate_template( 'widgets/theme-parts/includes/widget-form.php', false );
