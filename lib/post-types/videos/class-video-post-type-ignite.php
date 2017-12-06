@@ -116,9 +116,13 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 			
 			$post_id = get_the_ID();
 			
-			$video_id = get_post_meta( $post_id, '_video_id', true );
+			$video = $this->get_video( $post_id );
 			
-			$video_id = $this->get_video_id_from_url( $video_id );
+			//$video_id = get_post_meta( $post_id, '_video_id', true );
+			
+			//var_dump( get_post_meta( $post_id ) );
+			
+			$video_id = $this->get_video_id_from_url( $video['id'] );
 			
 			$video_url = 'https://www.youtube.com/embed/' . $video_id;
 			

@@ -397,6 +397,8 @@ class Query_CAHNRS_Ignite {
 			
 		} // End if
 		
+		if ( isset( $_GET['debug'] ) ) var_dump( $request_url );
+		
 		return $request_url;
 		
 	} // End get_article_query

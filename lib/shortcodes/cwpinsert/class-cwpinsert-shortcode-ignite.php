@@ -79,7 +79,7 @@ class CAHNRS_Cwpinsert_Shortcode_Ignite {
 		
 		$rest_post = array();
 		
-		$response = wp_remote_get( $request_url . '?get-post-json=true' );
+		$response = wp_remote_get( $request_url . '?get-post-json=true', array( 'timeout' => 15 ) );
 		
 		$content = wp_remote_retrieve_body( $response );
 		

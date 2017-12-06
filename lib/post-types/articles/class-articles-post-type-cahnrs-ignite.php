@@ -332,7 +332,9 @@ class Articles_Post_Type_CAHNRS_Ignite {
 			
 			$topic_values = sanitize_text_field( $_GET['article_topic'] );
 			
-			$meta_query[] = $this->get_rest_meta_query( '_article_topic', $topic_values );
+			$relation = ( isset( $_GET['topic_relation'] ) )? sanitize_text_field( $_GET['topic_relation'] ) : 'OR';
+			
+			$meta_query[] = $this->get_rest_meta_query( '_article_topic', $topic_values, $relation );
 			
 		} // End if
 		
@@ -343,7 +345,7 @@ class Articles_Post_Type_CAHNRS_Ignite {
 	} // End custom_rest_query_args
 	
 	
-	protected function get_rest_meta_query( $key, $values ){
+	protected function get_rest_meta_query( $key, $values, $relation = 'OR' ){
 		
 		$values = explode( ',', $values );
 		
