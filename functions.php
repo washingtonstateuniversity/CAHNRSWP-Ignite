@@ -109,6 +109,8 @@ class Functions_Ignite {
 		
 		include_once ignite_get_part('lib/post-types/videos/class-video-post-type-ignite.php');
 		
+		include_once ignite_get_part('lib/post-types/degrees/class-degree-post-type-ignite.php');
+		
 	} // End add_post_types
 	
 	

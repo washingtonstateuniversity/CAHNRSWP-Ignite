@@ -244,3 +244,10 @@ function the_ignite_theme_footer( $context = 'single', $args = array(), $echo = 
 	} // End if
 	
 } // End 
+
+
+function ignite_check_active_post_type( $post_type ){
+		
+	return ( get_theme_mod( "_cahnrswp_enable_{$post_type}", false ) ) ? true : false;
+	
+} // End 

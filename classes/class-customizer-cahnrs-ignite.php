@@ -154,6 +154,7 @@ class Customizer_CAHNRS_Ignite {
 			'theme_parts' 	=> "Theme Parts",
 			'slides' 		=> "Slides",
 			'video'			=> "Videos",
+			'degree'		=> "Degrees",
 		);
 		
 		foreach( $post_types as $post_type => $label ){
