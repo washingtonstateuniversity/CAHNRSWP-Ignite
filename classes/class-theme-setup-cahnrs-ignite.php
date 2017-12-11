@@ -11,6 +11,8 @@ class Theme_Setup_CAHNRS_Ignite {
 		
 		add_filter( 'cahnrs_ignite_page_html', array( $this, 'check_cropped_spine' ) );
 		
+		add_filter( 'cahnrs_ignite_page_html', array( $this, 'set_favicon' ) );
+		
 		add_action( 'rest_api_init', array( $this, 'do_register_rest_field' ) );
 		
 		add_action( 'rest_query_vars', array( $this, 'add_custom_query_vars' ) );
@@ -20,6 +22,21 @@ class Theme_Setup_CAHNRS_Ignite {
 		add_action( 'template_include' , array( $this, 'add_templates' ), 9999 );
 		
 	} // End __construct
+	
+	
+	public function set_favicon( $html ){
+		
+		$favicon = get_theme_mod( '_cahnrs_ignite_favicon', '');
+		
+		if ( ! empty( $favicon ) ){
+			
+			$html = str_replace( 'href="https://repo.wsu.edu/spine/1/favicon.ico"', 'href="' . $favicon . '"' , $html ); 
+			
+		} // End if
+		
+		return $html;
+		
+	} // End if
 	
 	
 	public function add_templates( $template ){

@@ -1301,6 +1301,14 @@ class Customizer_CAHNRS_Ignite {
 			) 
 		); // end add_setting
 		
+		$wp_customize->add_setting( 
+			'_cahnrs_ignite_favicon', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
 		// Add section
 		
 		$section_id = '_cahnrswp_theme_options';
@@ -1379,6 +1387,16 @@ class Customizer_CAHNRS_Ignite {
 					2 	=> '2 Levels',
 					3 	=> '3 Levels',
 				),
+			)
+		); // end control
+		
+		$wp_customize->add_control(
+			'_cahnrs_ignite_favicon_control', 
+			array(
+				'label'    => 'Favicon URL',
+				'section'  => $section_id,
+				'settings' => '_cahnrs_ignite_favicon',
+				'type'     => 'text',
 			)
 		); // end control
 		

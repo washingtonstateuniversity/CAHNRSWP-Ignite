@@ -39,17 +39,17 @@ class Functions_Ignite {
 			
 		} // end if
 		
-		include_once ignite_get_part('classes/class-theme-setup-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-theme-setup-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('classes/class-theme-part-ignite.php');
+		include_once ignite_get_theme_path('classes/class-theme-part-ignite.php');
 		
-		include_once ignite_get_part('classes/class-scripts-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-scripts-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('classes/class-customizer-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-customizer-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('classes/class-css-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-css-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('classes/class-post-editor-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-post-editor-cahnrs-ignite.php');
 		
 		$this->add_sidebars();
 		
@@ -72,65 +72,65 @@ class Functions_Ignite {
 	
 	protected function add_shortcodes(){
 		
-		include_once ignite_get_part('lib/shortcodes/class-shortcode-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/class-shortcode-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cahnrs-news/class-cahnrs-news-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cahnrs-news/class-cahnrs-news-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cahnrs-search/class-cahnrs-search-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cahnrs-search/class-cahnrs-search-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/theme-part/class-cahnrs-theme-part-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/theme-part/class-cahnrs-theme-part-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cahnrs-events/class-cahnrs-events-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cahnrs-events/class-cahnrs-events-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cahnrs-publications/class-cahnrs-publications-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cahnrs-publications/class-cahnrs-publications-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cahnrs-posts/class-cahnrs-posts-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cahnrs-posts/class-cahnrs-posts-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cwpinsert/class-cwpinsert-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cwpinsert/class-cwpinsert-shortcode-ignite.php');
 		
-		include_once ignite_get_part('lib/shortcodes/cwpaccordions/class-cwpaccordion-shortcode-ignite.php');
+		include_once ignite_get_theme_path('lib/shortcodes/cwpaccordions/class-cwpaccordion-shortcode-ignite.php');
 		
 	} // End add_shortcodes
 	
 	
 	protected function add_post_types(){
 		
-		include_once ignite_get_part('lib/post-types/class-post-type-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/class-post-type-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/articles/class-articles-post-type-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/articles/class-articles-post-type-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/news-release/class-news-release-post-type-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/news-release/class-news-release-post-type-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/theme-parts/class-theme-part-post-type-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/theme-parts/class-theme-part-post-type-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/publications/class-publications-post-type-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/publications/class-publications-post-type-cahnrs-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/slides/class-slide-post-type-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/slides/class-slide-post-type-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/videos/class-video-post-type-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/videos/class-video-post-type-ignite.php');
 		
-		include_once ignite_get_part('lib/post-types/degrees/class-degree-post-type-ignite.php');
+		include_once ignite_get_theme_path('lib/post-types/degrees/class-degree-post-type-ignite.php');
 		
 	} // End add_post_types
 	
 	
 	protected function add_sidebars(){
 		
-		include_once ignite_get_part('classes/class-sidebars-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-sidebars-cahnrs-ignite.php');
 		
 	} // End add_sidebars
 	
 	
 	protected function add_menus(){
 		
-		include_once ignite_get_part('classes/class-menus-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('classes/class-menus-cahnrs-ignite.php');
 		
 	} // End add_menus
 	
 	
 	public function add_widgets(){
 		
-		include_once ignite_get_part('widgets/theme-parts/class-theme-part-widget-cahnrs-ignite.php');
+		include_once ignite_get_theme_path('widgets/theme-parts/class-theme-part-widget-cahnrs-ignite.php');
 		
 		register_widget( 'Theme_Part_Widget_CAHNRS_Ignite' );
 		

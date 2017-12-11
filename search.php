@@ -1,10 +1,6 @@
 <?php
 
-the_ignite_theme_header('search');
-
-include_once CAHNRSIGNITEPATH . 'theme-parts/headers/class-header-ignite.php';
-$header = new Header_Ignite();
-$header->the_header( 'archive' );
+ignite_get_part('header','search');
 
 include_once CAHNRSIGNITEPATH . 'theme-parts/page-banners/class-page-banner-cahnrs-ignite.php';
 $page_banner = new Page_Banner_CAHNRS_Ignite();
@@ -18,4 +14,4 @@ include_once CAHNRSIGNITEPATH . 'theme-parts/content/class-content-ignite.php';
 $content = new Content_Ignite();
 $content->the_content( 'search' );
 
-the_ignite_theme_footer('search');
+ignite_get_part('footer','search');

@@ -1,5 +1,22 @@
 <?php
 /*
+* ignite_get_post_image( $post_id, $size = 'full' )
+* ignite_get_post_image_array( $post_id )
+* ignite_get_theme_path( $subdirectory = '' )
+* ignite_get_theme_url( $subdirectory = '' )
+* ignite_get_part( $subdirectory )
+* ignite_load_class( $subdirectory, $include_once = false )
+* ignite_get_slides( $args = array() )
+* ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, $include_empty = true )
+* get_after_content_sidebar_ignite()
+* the_ignite_theme_header( $context = 'single', $args = array(), $echo = true )
+* ignite_check_active_post_type( $post_type )
+*
+* -------------- DEPRECATED --------------------
+* the_ignite_theme_footer Use ignite_get_part
+*/
+
+/*
 * Get the image data from a given post id
 * @param int $post_id ID for given post
 * @param string $size Size of image to be used (full,large,medium,small, or custom)
@@ -100,11 +117,39 @@ function ignite_get_theme_url( $subdirectory = '' ){
 * @param string $subdirectory Subdirectory of the class
 * @return string Path to file
 */
-function ignite_get_part( $subdirectory ){
+function ignite_get_part( $part, $context = 'single', $args = array(), $echo = true ){
 	
-	$path = ignite_get_theme_path( $subdirectory );
+	$html = '';
 	
-	return $path;
+	ignite_load_class('classes/class-abstract-theme-part-ignite.php', true );
+	
+	switch ( $part ){
+			
+		case 'header':
+			ignite_load_class('lib/theme-parts/header/class-header-ignite.php', true );
+			$header = new Header_Ignite();
+			$html .= $header->get_part( $context, $args );
+			break;
+			
+		case 'footer':
+			ignite_load_class('lib/theme-parts/footer/class-footer-ignite.php', true );
+			$footer = new Footer_Ignite();
+			$html .= $footer->get_part( $context, $args );
+			break;
+			
+	} // End switch
+	
+	$html = apply_filters( 'cahnrs_ignite_page_html', $html, $part, $context, $args );
+	
+	if ( $echo ){
+		
+		echo $html;
+		
+	} else {
+		
+		return $html;
+		
+	} // End if
 
 } // End ignite_get_class
 
@@ -251,3 +296,37 @@ function ignite_check_active_post_type( $post_type ){
 	return ( get_theme_mod( "_cahnrswp_enable_{$post_type}", false ) ) ? true : false;
 	
 } // End 
+
+
+function ignite_get_widget_area( $sidebar_id, $class, $check_active = true ) {
+	
+	$html = '';
+	
+	$html .= '<div id="' . $class . '-widget-area widget-area-' . $class . '">' . ignite_get_sidebar( $sidebar_id, $check_active )  .'</div>';
+	
+	return $html;
+	
+} // End ignite_get_widget_area
+
+
+function ignite_get_sidebar( $sidebar_id, $check_active = true  ){
+	
+	ob_start();
+	
+	if ( $check_active ){
+		
+		if ( is_active_sidebar( $sidebar_id ) ) {
+			
+			dynamic_sidebar( $sidebar_id );
+			
+		} // Enbd if
+		
+	} else {
+		
+		dynamic_sidebar( $sidebar_id );
+		
+	} // End if
+	
+	return ob_get_clean();
+	
+} // End ignite_get_sidebar
