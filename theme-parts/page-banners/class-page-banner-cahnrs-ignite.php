@@ -142,6 +142,8 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 			
 		} // End foreach
 		
+		shuffle( $slides );
+		
 		$html = '';
 		
 		ob_start();
