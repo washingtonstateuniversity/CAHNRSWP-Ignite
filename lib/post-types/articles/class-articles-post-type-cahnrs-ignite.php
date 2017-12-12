@@ -84,6 +84,12 @@ class Articles_Post_Type_CAHNRS_Ignite {
 			
 			$redirect_url = get_post_meta( $post->ID, '_article_redirect_url', true );
 			
+			if ( empty( $redirect_url ) ){
+				
+				$redirect_url = get_post_meta( $post->ID, '_redirect_url', true );
+				
+			} // End if
+			
 			if ( ! empty( $redirect_url ) ){
 				
 				$template = locate_template( 'lib/theme-templates/redirect.php', false );

@@ -123,14 +123,17 @@ class Theme_Part_Post_Type_CAHNRS_Ignite {
 			
 			if ( ! empty( $redirect ) ){
 				
-				$template = locate_template( 'lib/theme-templates/redirect.php', false );
+				wp_redirect( $redirect );
+				
+				exit;
+				
+				//$template = locate_template( 'lib/theme-templates/redirect.php', false );
 				
 				//wp_redirect( $redirect );
 				
 			} // End if
 			
 		} // End if
-		
 		
 		return $template;
 		
