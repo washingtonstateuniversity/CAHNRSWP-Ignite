@@ -84,6 +84,14 @@ class Sidebars_CAHNRS_Ignite {
 			'after_widget'  => '</div>',
 		) );
 		
+		register_sidebar( array(
+			'name' => 'Header Banner Inner',
+			'id' => 'header_banner_inner',
+			'description' => 'Widgets in this area will be shown after site logo text.',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+		) );
+		
 		$this->add_banner_sidebars();
 		
 		

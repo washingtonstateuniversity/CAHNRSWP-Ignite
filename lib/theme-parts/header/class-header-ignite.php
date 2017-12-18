@@ -232,7 +232,7 @@ class Header_Ignite extends Abstract_Theme_Part {
 			
 			ob_start();
 			
-			include ignite_get_theme_path( 'includes/headers/college/college-banner.php');
+			include ignite_get_theme_path( 'lib/displays/headers/banners/college.php');
 			
 			$html .= ob_get_clean();
 			

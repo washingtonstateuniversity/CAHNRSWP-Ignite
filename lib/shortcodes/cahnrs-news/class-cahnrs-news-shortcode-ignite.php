@@ -48,7 +48,7 @@ class CAHNRS_News_Shortcode_Ignite extends Shortcode_CAHNRS_Ignite {
 			'article_subject' 		=> '',
 			'subject_relation'		=> 'OR',
 			'topic_relation' 		=> 'OR',
-			'article_relation' 		=> 'AND',
+			'article_relation' 		=> 'OR',
 			'sites' 				=> '',
 			'site_relation' 		=> 'OR',
 			'meta_relation' 		=> 'OR',

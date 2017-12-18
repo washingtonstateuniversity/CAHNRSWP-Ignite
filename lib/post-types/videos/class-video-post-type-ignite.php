@@ -203,17 +203,25 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 	*/
 	protected function get_video_id_from_url( $url ){
 		
+		$video_id = $url;
+		
+		if ( strpos( $url,'watch?v=' ) ){
+			
+			$url = explode( 'watch?v=', $url );
+			
+			$video_id = $url[1];
+			
+		} else if ( strpos( $url,'.be/' ) ){ //https://youtu.be/nkXGohB02V0
+			
+			$url = explode( '.be/', $url );
+			
+			$video_id = $url[1];
+			
+		} // End if
+		
 		$url = explode( 'watch?v=' , $url );
 			
-		if ( isset( $url[1] ) ) {
-			
-			return $url[1];
-			
-		} else {
-			
-			return $url[0];
-			
-		} // end if
+		return $video_id;
 		
 	} // end cwp_get_video_id_from_url
 	

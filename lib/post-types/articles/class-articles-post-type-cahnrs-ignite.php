@@ -107,7 +107,9 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		if ( 'article' === $args['post_type'] ){
 			
-			$meta_query = array();
+			$args['meta_relation'] = ( ! empty( $args['meta_relation'] ) ) ? $args['meta_relation'] : 'OR';
+			
+			$meta_query = array('relation' => $args['meta_relation'] );
 			
 			if ( ! empty( $args['article_placement'] ) ){
 				
@@ -188,7 +190,9 @@ class Articles_Post_Type_CAHNRS_Ignite {
 			
 		if ( is_array( $topics ) ){
 			
-			$topics_meta = array();
+			$args['topic_relation'] = ( ! empty( $args['topic_relation'] ) ) ? $args['topic_relation'] : 'OR';
+			
+			$topics_meta = array( 'relation' => $args['topic_relation'] );
 			
 			foreach( $topics as $topic ){
 				
@@ -324,7 +328,9 @@ class Articles_Post_Type_CAHNRS_Ignite {
 	
 	public function custom_rest_query_args( $args, $request ){
 		
-		$meta_query = array( 'relation' => 'AND');
+		$args['meta_relation'] = ( isset( $_GET['meta_relation'] ) )? sanitize_text_field( $_GET['meta_relation'] ) : 'OR';
+		
+		$meta_query = array( 'relation' => $args['meta_relation']);
 		
 		if ( ! empty( $_GET['article_placement'] ) ){
 			
@@ -355,7 +361,7 @@ class Articles_Post_Type_CAHNRS_Ignite {
 		
 		$values = explode( ',', $values );
 		
-		$meta_query = array();
+		$meta_query = array('relation' => $relation );
 		
 		foreach( $values as $value ){
 			

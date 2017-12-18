@@ -4,7 +4,7 @@
 
 $value = get_post_meta( $post->ID, '_sources', true );
 
-var_dump( $value );
+//var_dump( $value );
 		
 //print_r($value);
 

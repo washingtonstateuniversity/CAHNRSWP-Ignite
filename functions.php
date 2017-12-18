@@ -95,6 +95,8 @@ class Functions_Ignite {
 	
 	protected function add_post_types(){
 		
+		add_theme_support( 'post-formats', array( 'aside', 'gallery','link','image','quote','video','audio' ) );
+		
 		include_once ignite_get_theme_path('lib/post-types/class-post-type-ignite.php');
 		
 		include_once ignite_get_theme_path('lib/post-types/articles/class-articles-post-type-cahnrs-ignite.php');
@@ -110,6 +112,8 @@ class Functions_Ignite {
 		include_once ignite_get_theme_path('lib/post-types/videos/class-video-post-type-ignite.php');
 		
 		include_once ignite_get_theme_path('lib/post-types/degrees/class-degree-post-type-ignite.php');
+		
+		include_once ignite_get_theme_path('lib/post-types/indexed-content/class-indexed-content-post-type-ignite.php');
 		
 	} // End add_post_types
 	

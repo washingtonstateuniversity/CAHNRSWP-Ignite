@@ -1,7 +1,7 @@
 <footer id="college-global-footer">
 	<div id="college-global-footer-connect">
 		<nav class="c-soical">
-			<a href="https://www.facebook.com/CAHNRS" class="fb"></a><a href="https://twitter.com/wsucahnrs" class="twitter"></a><a href="https://www.youtube.com/user/WSUCAHNRS" class="youtube"></a>
+			<a href="https://www.facebook.com/CAHNRS" class="fb" style="font-size: 0;">CAHNRS Facebook</a><a href="https://twitter.com/wsucahnrs" class="twitter" style="font-size: 0;">CAHNRS Twitter</a><a href="https://www.youtube.com/user/WSUCAHNRS" class="youtube" style="font-size: 0;">CAHNRS Youtube</a>
 		</nav>
 		<nav class="c-contact">
 			<a href="http://cahnrs.wsu.edu/about/overview/cahnrs-administration/">Contact</a>

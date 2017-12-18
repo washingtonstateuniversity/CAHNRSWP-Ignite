@@ -8,12 +8,15 @@
 * ignite_load_class( $subdirectory, $include_once = false )
 * ignite_get_slides( $args = array() )
 * ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, $include_empty = true )
-* get_after_content_sidebar_ignite()
+* ignite_get_sidebar( $sidebar_id, $args = array() )
 * the_ignite_theme_header( $context = 'single', $args = array(), $echo = true )
 * ignite_check_active_post_type( $post_type )
+* ignite_get_sidebar( $id );
 *
 * -------------- DEPRECATED --------------------
 * the_ignite_theme_footer Use ignite_get_part
+* get_after_content_sidebar_ignite() Use ignite_get_sidebar( $sidebar_id, $args = array() )
+*
 */
 
 /*
@@ -218,19 +221,67 @@ function ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, 
 	
 } // End ignite_get_terms
 
+function ignite_get_sidebar( $sidebar_id, $args = array() ){
+	
+	$default_args = array(
+		'wrap' => 'div',
+		'class' => '',
+		'id'	=> '',
+		'check_active' => true,
+	);
+	
+	$args = array_merge( $default_args, $args );
+	
+	$sidebar_html = '';
+	
+	ob_start();
+	
+	if ( $args['check_active'] ) {
+		
+		if ( is_active_sidebar( $sidebar_id ) ) {
+
+			dynamic_sidebar( $sidebar_id );
+			
+		} // End if
+
+	} else {
+		
+		dynamic_sidebar( $sidebar_id );
+		
+	} // End if
+	
+	$sidebar_html .= ob_get_clean();
+	
+	if ( ! empty( $args['wrap'] ) ){
+		
+		$html = '<' . $args['wrap'] . ' id="' . $args['id'] . '" class="' . $sidebar_id . '-sidebar ' . $args['class'] . '">' . $sidebar_html .'</' . $args['wrap'] . '>';
+		
+	} else {
+		
+		$html = $sidebar_html;
+		
+	}// End if
+	
+	return $html;
+	
+	
+} // End ignite_get_sidebar
+
 function get_after_content_sidebar_ignite(){
 	
 	$html = '';
 	
-	if ( is_active_sidebar( 'content_after' ) ) {
+	$html .= $this->ignite_get_sidebar( 'content_after', array('id' => 'content-after-widget-area' ) );
+	
+	//if ( is_active_sidebar( 'content_after' ) ) {
 
-		ob_start();
+		//ob_start();
 
-		dynamic_sidebar( 'content_after' );
+		//dynamic_sidebar( 'content_after' );
 
-		$html .= '<div id="content-after-widget-area">' . ob_get_clean() .'</div>';
+		//$html .= '<div id="content-after-widget-area">' . ob_get_clean() .'</div>';
 
-	} // End if
+	//} // End if
 	
 	return $html;
 	
@@ -302,31 +353,9 @@ function ignite_get_widget_area( $sidebar_id, $class, $check_active = true ) {
 	
 	$html = '';
 	
-	$html .= '<div id="' . $class . '-widget-area widget-area-' . $class . '">' . ignite_get_sidebar( $sidebar_id, $check_active )  .'</div>';
+	$html .= '<div id="' . $class . '-widget-area widget-area-' . $class . '">' . ignite_get_sidebar( $sidebar_id, array('wrap' => false ) )  .'</div>';
 	
 	return $html;
 	
 } // End ignite_get_widget_area
 
-
-function ignite_get_sidebar( $sidebar_id, $check_active = true  ){
-	
-	ob_start();
-	
-	if ( $check_active ){
-		
-		if ( is_active_sidebar( $sidebar_id ) ) {
-			
-			dynamic_sidebar( $sidebar_id );
-			
-		} // Enbd if
-		
-	} else {
-		
-		dynamic_sidebar( $sidebar_id );
-		
-	} // End if
-	
-	return ob_get_clean();
-	
-} // End ignite_get_sidebar

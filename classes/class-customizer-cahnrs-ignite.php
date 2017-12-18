@@ -150,11 +150,12 @@ class Customizer_CAHNRS_Ignite {
 	private function customize_post_types( $wp_customize, $panel ){
 		
 		$post_types = array(
-			'publication' 	=> "Publications" ,
-			'theme_parts' 	=> "Theme Parts",
-			'slides' 		=> "Slides",
-			'video'			=> "Videos",
-			'degree'		=> "Degrees",
+			'publication' 		=> "Publications" ,
+			'theme_parts' 		=> "Theme Parts",
+			'slides' 			=> "Slides",
+			'video'				=> "Videos",
+			'degree'			=> "Degrees",
+			'indexed_content' 	=> 'Indexed Content',
 		);
 		
 		foreach( $post_types as $post_type => $label ){
