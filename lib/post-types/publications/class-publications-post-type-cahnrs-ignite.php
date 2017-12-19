@@ -174,7 +174,7 @@ class Publications_Post_Type_CAHNRS_Ignite extends Post_Type_Ignite {
 	
 	public function add_edit_form( $post ){
 		
-		if ( 'publication' == $post->post_type ){
+		if ( ( 'publication' == $post->post_type ) && $this->check_enabled('publication')  ){
 			
 			$post_id = get_the_ID();
 			

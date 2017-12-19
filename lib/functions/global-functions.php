@@ -271,7 +271,7 @@ function get_after_content_sidebar_ignite(){
 	
 	$html = '';
 	
-	$html .= $this->ignite_get_sidebar( 'content_after', array('id' => 'content-after-widget-area' ) );
+	$html .= ignite_get_sidebar( 'content_after', array('id' => 'content-after-widget-area' ) );
 	
 	//if ( is_active_sidebar( 'content_after' ) ) {
 
