@@ -161,7 +161,8 @@ class Publications_Post_Type_CAHNRS_Ignite extends Post_Type_Ignite {
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'editor', 'revisions','thumbnail' )
+				'supports'           => array( 'title', 'editor', 'revisions','thumbnail' ),
+				'taxonomies'  => array( 'category','post_tag' ),
 			);
 			
 			register_post_type( 'publication', $args );

@@ -54,7 +54,8 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_position'      => null,
-				'supports'           => array( 'title','editor','thumbnail' )
+				'supports'           => array( 'title','editor','thumbnail' ),
+				'taxonomies'  => array( 'category','post_tag' ),
 			);
 			
 			register_post_type( 'video', $args );

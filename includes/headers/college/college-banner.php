@@ -2,7 +2,7 @@
 	<div id="site-logo">
     	<?php if ( get_theme_mod( '_cahnrswp_header_banner_img', '' ) ):?>
         	<div class="site-logo-image">
-            <a href=""><img src="<?php echo get_theme_mod( '_cahnrswp_header_banner_img', '' );?>" /></a>
+            <a href=""><img src="<?php echo get_theme_mod( '_cahnrswp_header_banner_img', '' );?>" alt="<?php echo get_theme_mod( '_cahnrswp_header_banner_img_alt', '' );?>" /></a>
         </div>
         <?php else:?>
         <div class="site-logo-text">

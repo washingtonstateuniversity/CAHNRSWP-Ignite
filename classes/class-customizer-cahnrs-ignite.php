@@ -1535,6 +1535,15 @@ class Customizer_CAHNRS_Ignite {
 		); // end add_setting
 		
 		$wp_customize->add_setting( 
+			'_cahnrswp_header_banner_img_alt', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		
+		$wp_customize->add_setting( 
 			'_cahnrswp_header_horizontal_nav', 
 			array(
 				'default'   => 0,
@@ -1781,6 +1790,7 @@ class Customizer_CAHNRS_Ignite {
 		   	)
 	   	);
 		
+		
 		$wp_customize->add_control(
 			'_cahnrswp_header_bg_image_size_control', 
 			array(
@@ -1928,6 +1938,16 @@ class Customizer_CAHNRS_Ignite {
 			   	)
 		   	)
 	   	);
+		
+		$wp_customize->add_control(
+			'_cahnrswp_header_banner_img_alt_control',
+			array(
+				'label' => 'Banner Image Alt Text',
+				'section' => $section_id,
+				'type' => 'text',
+				'settings' => '_cahnrswp_header_banner_img_alt',
+			)
+		);
 		
 		$wp_customize->add_control(
 			'_cahnrswp_header_include_search_control', 
