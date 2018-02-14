@@ -191,7 +191,7 @@ function ignite_get_slides( $args = array() ){
 } // End ignite_get_slides
 
 
-function ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true, $include_empty = true ){
+function ignite_get_terms( $taxonomy, $include_empty = true, $as_select = true ){
 	
 	$return_terms = array();
 	

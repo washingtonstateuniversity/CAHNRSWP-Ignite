@@ -123,6 +123,8 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 			
 			//var_dump( get_post_meta( $post_id ) );
 			
+			//var_dump();
+			
 			$video_id = $this->get_video_id_from_url( $video['id'] );
 			
 			$video_url = 'https://www.youtube.com/embed/' . $video_id;
@@ -167,6 +169,8 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 		);
 		
 		$video = $this->get_legacy_support( $video, $post_id );
+		
+		//var_dump( $video );
 		
 		return $video;
 		
@@ -220,7 +224,7 @@ class Video_Post_Type_Ignite extends Post_Type_Ignite {
 			
 		} // End if
 		
-		$url = explode( 'watch?v=' , $url );
+		//$url = explode( 'watch?v=' , $url );
 			
 		return $video_id;
 		
