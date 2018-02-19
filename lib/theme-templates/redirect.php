@@ -16,7 +16,7 @@ $redirect = get_post_meta( $id, '_article_redirect_url', true );
 	function cahnrs_analytics_callback(){
 		
 		// similar behavior as clicking on a link
-		//window.location.href = "<?php echo $redirect;?>";
+		window.location.href = "<?php echo $redirect;?>";
 		
 		return false;
 		
