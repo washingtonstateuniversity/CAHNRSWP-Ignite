@@ -994,6 +994,9 @@ class Customizer_CAHNRS_Ignite {
 		
 		$banners['wide-static-slides'] = 'College Slideshow';
 		$banners['video-banner'] = 'Video Banner';
+		$banners['video-play-banner'] = 'Play Video Banner';
+		
+		$banners = apply_filters('cahnrs_ignite_frontpage_feature_types', $banners );
 		
 		$section_id = '_cahnrswp_frontpage_options';
 		
@@ -1063,6 +1066,12 @@ class Customizer_CAHNRS_Ignite {
 				'panel' 	=> $panel,
 			)
 		); // end add_section
+		
+		do_action( 'cahnrs_ignite_customize_frontpage_feature_options', $wp_customize, $section_id );
+		
+		
+		
+		//$this->customize_banner_play_video( $wp_customize, $section_id );
 		
 		// Currently Selected Banner
 		$current_banner = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
@@ -1258,6 +1267,44 @@ class Customizer_CAHNRS_Ignite {
 		
 		
 	} // end customize_frontpage
+	
+	
+	/*private function customize_banner_play_video( $wp_customize, $section_id ){
+		
+		$wp_customize->add_setting( 
+			'_cahnrswp_ignite_play_video_banner_img', 
+			array(
+				'default'   => '',
+				'transport' => 'refresh',
+			) 
+		); // end add_setting
+		
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'_cahnrswp_ignite_play_video_banner_img_control',
+			   	array(
+				   	'label'      		=> 'Play Video Image',
+				   	'section'    		=> $section_id,
+				   	'settings'   		=> '_cahnrswp_ignite_play_video_banner_img',
+					'active_callback' 	=> function() use ( $wp_customize ){
+						
+						$show_with = array('video-play-banner');
+					
+						$show = false;
+						
+						$type = $wp_customize->get_setting( '_cahnrswp_ignite_fronpage_feature' )->value();
+						
+						$show = ( in_array( $type, $show_with ) ) ? true : false;
+							
+						return $show;
+						
+					}
+			   	)
+		   	)
+	   	);
+		
+	} // End customize_banner_play_video*/
 	
 	
 	private function customize_theme( $wp_customize, $panel ) {

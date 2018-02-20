@@ -8,6 +8,7 @@ Banners
 - Wide Static Slides
 - Banner Slideshow
 - Video Banner
+- Play Video Banner
 Colors
 - Full Bleeds
 Content
@@ -693,6 +694,65 @@ figure {
 }
 .ignite-video-banner.ignite-content-bottom .ignite-video-container-widget-area-inner {
 	vertical-align: bottom;
+}
+/* Banners: Play Video Banner
+--------------------------------------------------------------- */
+#cahnrs-play-video-banner {
+	background-color: #000;
+}
+#cahnrs-play-video-banner .video-wrapper {
+	position: absolute;
+	background-color: #000;
+	background-size: cover;
+	background-position: center;
+	left: 0;
+	right: 0;
+}
+#cahnrs-play-video-banner .video-overlay {
+	position: absolute;
+	background-color: rgba(0,0,0,0.4);
+	/*background-color: #23282b;*/
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display:none;
+}
+#cahnrs-play-video-banner .video-wrapper .video-player {
+	margin: 0 auto;
+	position: relative;
+}
+#cahnrs-play-video-banner .video-wrapper .video-player .video-frame {
+	width: 100%;
+	content: '';
+	display: block;
+	padding-top: 56.25%;
+}
+#cahnrs-play-video-banner .video-spacer iframe {
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 11;
+}
+#cahnrs-play-video-banner .video-spacer {
+	position: relative;
+	z-index: 10;
+	margin: 0 auto;
+}
+
+#cahnrs-play-video-banner .video-spacer > a {
+	width: 100%;
+	content: '';
+	display: block;
+	padding-top: 56.25%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(discover-cahnrs.png);
+	background-size: contain;
+	font-size: 0;
 }
 /* Content
 --------------------------------------------------------------- */

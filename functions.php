@@ -51,6 +51,8 @@ class Functions_Ignite {
 		
 		include_once ignite_get_theme_path('classes/class-post-editor-cahnrs-ignite.php');
 		
+		$this->add_feature_banners();
+		
 		$this->add_sidebars();
 		
 		$this->add_post_types();
@@ -68,6 +70,13 @@ class Functions_Ignite {
 		add_action('widgets_init', array( $this, 'add_widgets' ) );
 		
 	} // end init_theme_functions
+	
+	
+	protected function add_feature_banners(){
+		
+		include_once ignite_get_theme_path('lib/theme-parts/feature-banner/class-feature-banner.php');
+		
+	} // End add_feature_banners
 	
 	
 	protected function add_shortcodes(){

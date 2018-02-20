@@ -30,32 +30,43 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 			
 		} // End if
 		
-		if ( 'none' !== $args['type'] ){
+		$banner_html = apply_filters( 'cahnrs_ignite_theme_part_feature_banner', '', $context, $args, $post_id );
 		
-			switch( $args['type'] ){
-				
-				case 'video-banner':
-					$html .= $this->get_video_banner(  $args, $context, $post_id  );
-					break;
-				case '404':
-					$html .= $this->get_404_banner( $args, $context, $post_id );
-					break;
-				case 'banner-slideshow':
-					include_once ignite_get_theme_path('lib/parts/page-banners/banner-slideshow/class-banner-slideshow-ignite.php');
-					$banner_slideshow = new Banner_Slideshow_Ignite( $args, $context, $post_id );
-					$html = $banner_slideshow->get_banner();
-					break;
-				case 'wide-static-slides':
-					$html .= $this->get_wide_static_slides( $args, $context, $post_id );
-					break;
-				case 'dynamic-scroll':
-				default:
-					$html .= $this->get_dynamic_scroll( $args, $context, $post_id );
-					break;
-				
-			} // End switch
+		if ( empty( $banner_html ) ){
 		
+			if ( 'none' !== $args['type'] ){
+
+				switch( $args['type'] ){
+
+					case 'video-banner':
+						$banner_html .= $this->get_video_banner(  $args, $context, $post_id  );
+						break;
+					case 'video-play-banner':
+						$banner_html .= $this->get_video_play_banner( $args, $context, $post_id );
+						break;
+					case '404':
+						$banner_html .= $this->get_404_banner( $args, $context, $post_id );
+						break;
+					case 'banner-slideshow':
+						include_once ignite_get_theme_path('lib/parts/page-banners/banner-slideshow/class-banner-slideshow-ignite.php');
+						$banner_slideshow = new Banner_Slideshow_Ignite( $args, $context, $post_id );
+						$banner_html = $banner_slideshow->get_banner();
+						break;
+					case 'wide-static-slides':
+						$banner_html .= $this->get_wide_static_slides( $args, $context, $post_id );
+						break;
+					case 'dynamic-scroll':
+					default:
+						$banner_html .= $this->get_dynamic_scroll( $args, $context, $post_id );
+						break;
+
+				} // End switch
+
+			} // End if
+			
 		} // End if
+		
+		$html .= $banner_html;
 		
 		if ( is_active_sidebar( 'banner_after' ) ) {
 			
@@ -70,6 +81,25 @@ class Page_Banner_CAHNRS_Ignite extends Theme_Part_Ignite {
 		echo apply_filters( 'cahnrs_ignite_page_html', $html );
 		
 	} // End the_banner
+	
+	
+	protected function get_video_play_banner( $args, $context, $post_id ){
+		
+		$html = '';
+		
+		$link_image = get_theme_mod( '_cahnrswp_ignite_play_video_banner_img', '' );
+		
+		ob_start();
+		
+		include ignite_get_theme_path('lib/displays/feature-banners/play-video-banner/player.php');
+		
+		include ignite_get_theme_path('lib/displays/feature-banners/play-video-banner/player-js.php');
+		
+		$html .= ob_get_clean();
+		
+		return $html;
+		
+	} // End get_video_play_banner
 	
 	
 	protected function get_banner_type( $args, $context, $post_id ){
