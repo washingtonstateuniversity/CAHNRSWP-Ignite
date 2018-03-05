@@ -23,7 +23,7 @@ class Header_Ignite extends Abstract_Theme_Part {
 		
 		$html = '';
 		
-		$html .= ignite_get_widget_area( 'header_before', 'header-before' );
+		//$html .= ignite_get_widget_area( 'header_before', 'header-before' );
 		
 		$settings = $this->get_settings( $this->ctmzr_fields, $args );
 		

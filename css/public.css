@@ -12,6 +12,7 @@ Banners
 Colors
 - Full Bleeds
 Content
+- Category Page
 - Promo List
 Displays
 
@@ -777,6 +778,10 @@ figure {
 #site-content:after {
 	right: auto;
 	left: 100%;
+}
+/* --- Content: Category Page ---*/
+.cat-desription {
+	padding: 1.5rem 0;
 }
 
 
