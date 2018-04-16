@@ -132,7 +132,11 @@ class Content_Ignite extends Theme_Part_Ignite {
 	
 	protected function get_content_archive( $context, $args ){
 		
-		$html = $this->get_html_promo_list( $context, $args );
+		$html = '';
+		
+		$html .= '<div class="cat-desription">' . do_shortcode( category_description() ) . '</div>';
+		
+		$html .= $this->get_html_promo_list( $context, $args );
 		
 		return $html;
 		
