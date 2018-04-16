@@ -125,7 +125,7 @@ class Header_Ignite extends Abstract_Theme_Part {
 		
 		$html .= $this->get_college_top_bar( $settings );
 		
-		$html .= $this->get_college_global_nav( $settings );
+		$html .= $this->get_college_global_nav( $settings, false, $args );
 		
 		$html .= $this->get_college_header_banner( $settings );
 		
@@ -157,7 +157,7 @@ class Header_Ignite extends Abstract_Theme_Part {
 	} // End get_global_top_bar
 	
 	
-	protected function get_college_top_bar( $settings, $force_display = false ){
+	protected function get_college_top_bar( $settings, $force_display = false, $args = array() ){
 		
 		$html = '';
 		

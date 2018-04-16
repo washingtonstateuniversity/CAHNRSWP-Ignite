@@ -1,4 +1,5 @@
 <?php
+
 $global_nav = array(
 	'home' 		=> array(
 		'label' => '<span>Home</span>',
@@ -331,7 +332,7 @@ $global_nav = array(
 	<nav class="college-global">
 		<ul class="c-menu">
 		<?php foreach( $global_nav as $slug => $nav ):?>
-			<li class="top-menu-item<?php if ( ! empty( $nav['sub-menu'] ) ) echo ' has-drop-down';?><?php if ( $slug === $args['active'] ) echo ' active';?>">
+			<li class="top-menu-item<?php if ( ! empty( $nav['sub-menu'] ) ) echo ' has-drop-down';?><?php if ( ! empty( $args['active'] ) && ( $slug === $args['active'] ) ) echo ' active';?>">
 			<a href="<?php echo $nav['url'];?>"><?php echo $nav['label'];?></a>
 			<?php if ( ! empty( $nav['sub-menu'] ) ):?><ul class="drop-down-menu">
 				<?php foreach( $nav['sub-menu'] as $sub_menu_set ):?>
