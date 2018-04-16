@@ -4,7 +4,11 @@ if ( function_exists( 'spine_get_option' ) && ( true === spine_get_option( 'crop
 	
 	$is_cropped = ' is-cropped-spine';
 	
-} // End if
+} else {
+
+	$is_cropped = '';
+
+}// End if
 		
 ?>		
 <main id="wsuwp-main" class="spine-page-default<?php echo $is_cropped ?>">
